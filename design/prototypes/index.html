@@ -9,7 +9,7 @@
     --obsidian:#0a0b0e; --carbon:#121319; --carbon-2:#181b22; --panel:#1c2028;
     --white:#f4f5f7; --mist:#b9bec7; --muted:#868d99; --line:rgba(255,255,255,.09);
     --ember:#ff5a36; --ember-lt:#ff7a45; --ember-dim:rgba(255,90,54,.14);
-    --maxw:1240px;
+    --maxw:1240px; --ease:cubic-bezier(.16,.8,.3,1);
     --f-disp:'Barlow Condensed',sans-serif; --f-body:'Barlow',system-ui,sans-serif;
   }
   *{box-sizing:border-box}
@@ -22,11 +22,27 @@
   .eyebrow{font-family:var(--f-body); font-weight:600; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--ember-lt)}
   .display{font-family:var(--f-disp); font-weight:700; text-transform:uppercase; line-height:.9; letter-spacing:.005em}
   .btn{display:inline-flex; align-items:center; gap:10px; font-family:var(--f-body); font-weight:700; letter-spacing:.02em;
-    font-size:14px; padding:14px 26px; border-radius:9px; cursor:pointer; border:1px solid transparent; transition:transform .15s ease, background .2s ease, border-color .2s}
+    font-size:14px; padding:14px 26px; border-radius:9px; cursor:pointer; border:1px solid transparent; transition:transform .15s var(--ease), background .2s, border-color .2s}
   .btn-ember{background:var(--ember); color:#160b07}
   .btn-ember:hover{background:var(--ember-lt); transform:translateY(-2px)}
   .btn-ghost{background:transparent; color:var(--white); border-color:rgba(255,255,255,.22)}
   .btn-ghost:hover{border-color:var(--ember); color:var(--ember-lt)}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  [data-reveal]{opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+  [data-reveal].in{opacity:1; transform:none}
+  [data-stagger] > *{opacity:0; transform:translateY(26px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  [data-stagger].in > *{opacity:1; transform:none}
+  [data-stagger].in > *:nth-child(1){transition-delay:.00s}
+  [data-stagger].in > *:nth-child(2){transition-delay:.07s}
+  [data-stagger].in > *:nth-child(3){transition-delay:.14s}
+  [data-stagger].in > *:nth-child(4){transition-delay:.21s}
+  [data-stagger].in > *:nth-child(5){transition-delay:.28s}
+  [data-stagger].in > *:nth-child(6){transition-delay:.35s}
+  /* heading clip-reveal */
+  .reveal-head{display:inline-block; overflow:hidden; vertical-align:bottom}
+  .reveal-head > span{display:inline-block; transform:translateY(110%); transition:transform .9s var(--ease)}
+  .in .reveal-head > span, .reveal-head.in > span{transform:none}
 
   /* ---------------- HEADER ---------------- */
   .hdr{position:absolute; inset:0 0 auto 0; z-index:20; padding:22px 0}
@@ -52,8 +68,19 @@
                linear-gradient(90deg, var(--obsidian) 12%, rgba(10,11,14,.5) 55%, rgba(10,11,14,.2) 100%),
                linear-gradient(0deg, var(--obsidian), transparent 30%)}
   .hero .container{position:relative; z-index:3; width:100%; padding-top:90px}
-  .hero .eyebrow{margin-bottom:20px}
+  /* load-in animation for hero pieces */
+  .hero .rise{opacity:0; transform:translateY(24px); animation:rise .9s var(--ease) forwards}
+  .hero .eyebrow{margin-bottom:20px; animation-delay:.15s}
+  .hero .lead{animation-delay:.72s}
+  .hero .cta-row{animation-delay:.85s}
+  .hero .stats{animation-delay:.98s}
+  @keyframes rise{to{opacity:1; transform:none}}
   .hero h1{margin:0; font-size:clamp(52px,10vw,128px)}
+  .hero h1 .ln{display:block; overflow:hidden}
+  .hero h1 .ln > span{display:inline-block; transform:translateY(105%); animation:lineUp 1s var(--ease) forwards}
+  .hero h1 .ln:nth-child(1) > span{animation-delay:.28s}
+  .hero h1 .ln:nth-child(2) > span{animation-delay:.42s}
+  @keyframes lineUp{to{transform:none}}
   .hero h1 .em{color:var(--ember)}
   .hero p.lead{max-width:38ch; color:var(--mist); font-size:clamp(16px,1.5vw,19px); line-height:1.55; margin:24px 0 34px}
   .hero .cta-row{display:flex; gap:14px; flex-wrap:wrap}
@@ -61,13 +88,13 @@
   .hero .stat b{font-family:var(--f-disp); font-weight:700; font-size:40px; line-height:1; display:block}
   .hero .stat span{font-size:11px; text-transform:uppercase; letter-spacing:.16em; color:var(--muted)}
   .scrollcue{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; color:var(--muted);
-    font-size:10px; letter-spacing:.24em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:8px}
+    font-size:10px; letter-spacing:.24em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:rise .8s var(--ease) 1.3s forwards}
   .scrollcue .ln{width:1px; height:34px; background:linear-gradient(var(--ember),transparent); animation:cue 2s ease-in-out infinite}
   @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 
   /* marquee band */
   .marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--carbon); overflow:hidden; padding:16px 0}
-  .marquee .track{display:flex; gap:52px; white-space:nowrap; animation:scrollx 26s linear infinite; font-family:var(--f-disp); text-transform:uppercase; font-weight:700; font-size:19px; letter-spacing:.04em; color:#3a3f49}
+  .marquee .track{display:flex; gap:52px; white-space:nowrap; animation:scrollx 32s linear infinite; font-family:var(--f-disp); text-transform:uppercase; font-weight:700; font-size:19px; letter-spacing:.04em; color:#3a3f49}
   .marquee .track span{display:inline-flex; align-items:center; gap:52px}
   .marquee .track b{color:var(--mist); font-weight:700}
   .marquee .track i{color:var(--ember); font-style:normal}
@@ -80,19 +107,29 @@
   .sechead h2 .em{color:var(--ember)}
   .sechead p{color:var(--mist); max-width:42ch; margin:0; font-size:15.5px; line-height:1.6}
 
-  /* ---------------- PRODUCT GRID ---------------- */
+  /* ---------------- PRODUCT GRID (3D pedestal covers) ---------------- */
   .prodgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
   @media(max-width:900px){ .prodgrid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:600px){ .prodgrid{grid-template-columns:1fr} }
   .card{position:relative; background:var(--carbon); border:1px solid var(--line); border-radius:16px; overflow:hidden;
-    transition:transform .25s ease, border-color .25s; display:flex; flex-direction:column}
-  .card:hover{transform:translateY(-5px); border-color:rgba(255,90,54,.4)}
-  .card .art{aspect-ratio:4/3.2; position:relative; display:grid; place-items:center; overflow:hidden}
-  .card .art svg.pi{width:52%; height:52%; position:relative; z-index:2; color:var(--white)}
-  .card .art .blob{position:absolute; width:120%; aspect-ratio:1; border-radius:50%; filter:blur(30px); opacity:.5}
-  .card:hover .art .blob{opacity:.75}
+    transition:transform .3s var(--ease), border-color .3s; display:flex; flex-direction:column}
+  .card:hover{border-color:rgba(255,90,54,.4)}
+  .card .art{aspect-ratio:4/3.2; position:relative; overflow:hidden; perspective:900px;
+    background:radial-gradient(80% 70% at 50% 38%, #21242c 0%, #14161c 45%, #0b0c10 100%)}
+  .card .art .floor{position:absolute; left:50%; top:64%; width:74%; height:26%; transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(255,122,69,.28), transparent 78%); filter:blur(6px)}
+  .card .art .contact{position:absolute; left:50%; top:78%; width:52%; height:9%; transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(0,0,0,.7), transparent 75%); filter:blur(4px)}
+  .card .art .prod{position:absolute; inset:0; display:grid; place-items:center; transform-style:preserve-3d;
+    transition:transform .35s var(--ease); will-change:transform}
+  .card .art .prod svg{width:56%; height:56%; filter:drop-shadow(0 18px 22px rgba(0,0,0,.55))}
+  .card .art .prod .rim{animation:float3d 6s ease-in-out infinite}
+  @keyframes float3d{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
   .card .tag{position:absolute; top:12px; left:12px; z-index:3; font-size:10px; font-weight:700; text-transform:uppercase;
     letter-spacing:.12em; padding:5px 9px; border-radius:6px; background:rgba(10,11,14,.55); backdrop-filter:blur(6px); color:var(--ember-lt); border:1px solid rgba(255,90,54,.3)}
+  .card .spin-hint{position:absolute; bottom:10px; left:50%; transform:translateX(-50%); z-index:3; font-size:9.5px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:6px; opacity:0; transition:opacity .3s}
+  .card:hover .spin-hint{opacity:1}
   .card .body{padding:18px 18px 20px; display:flex; flex-direction:column; gap:6px; flex:1}
   .card .cat{font-size:10.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--muted)}
   .card h3{font-family:var(--f-disp); font-weight:700; text-transform:uppercase; font-size:22px; line-height:1; margin:2px 0 0}
@@ -115,19 +152,42 @@
   .ben h4{font-family:var(--f-disp); font-weight:700; text-transform:uppercase; font-size:21px; margin:0 0 9px}
   .ben p{color:var(--mist); font-size:14px; line-height:1.6; margin:0}
 
-  /* ---------------- SPOTLIGHT ---------------- */
+  /* ---------------- SPOTLIGHT (interactive 3D) ---------------- */
   .spot{position:relative; overflow:hidden}
   .spot .grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center}
   @media(max-width:880px){ .spot .grid{grid-template-columns:1fr; gap:36px} }
   .spot .stage{position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden; border:1px solid var(--line);
-    background:radial-gradient(90% 90% at 50% 45%, #23262f, #101116 60%, #0a0b0e)}
-  .spot .stage .ring{position:absolute; inset:0; margin:auto; border-radius:50%; border:1.5px solid rgba(255,90,54,.5)}
-  .spot .stage .r1{width:60%; aspect-ratio:1; animation:sppulse 3.4s ease-out infinite}
-  .spot .stage .r2{width:60%; aspect-ratio:1; animation:sppulse 3.4s ease-out infinite 1.7s}
-  @keyframes sppulse{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.7);opacity:0}}
-  .spot .stage .device{position:absolute; inset:0; margin:auto; width:34%; height:34%; color:var(--white)}
-  .spot .stage .glow{position:absolute; inset:0; margin:auto; width:44%; aspect-ratio:1; border-radius:50%;
-    background:radial-gradient(circle,var(--ember),transparent 65%); filter:blur(24px); opacity:.55}
+    background:radial-gradient(90% 90% at 50% 42%, #23262f, #101116 62%, #0a0b0e)}
+  .spot .stage.grabbing{cursor:grabbing}
+  .spot .stage .glow{position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:52%; aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle,var(--ember),transparent 62%); filter:blur(30px); opacity:.5}
+  .spot .stage .floorline{position:absolute; left:50%; top:72%; width:66%; height:14%; transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(0,0,0,.75), transparent 76%); filter:blur(6px)}
+  .spot .scene{position:absolute; inset:0; margin:auto; transform-style:preserve-3d}
+  .spot .obj{position:absolute; left:50%; top:50%; transform-style:preserve-3d; transform:translate(-50%,-50%) rotateX(-10deg) rotateY(0deg)}
+  .spot .obj .seg{position:absolute; left:50%; top:50%;
+    background:linear-gradient(180deg,#2b2f39 0%,#1a1d24 46%,#0d0e12 100%);
+    box-shadow:inset 0 0 14px rgba(0,0,0,.55)}
+  .spot .obj .head{position:absolute; left:50%; top:50%; width:96px; height:96px; border-radius:50%;
+    transform:translate(-50%,-50%) translateY(-120px);
+    background:radial-gradient(35% 35% at 38% 32%, #3a3f4a, #171a21 70%); box-shadow:inset -8px -10px 22px rgba(0,0,0,.6), 0 0 0 2px rgba(255,90,54,.35)}
+  .spot .obj .tip{position:absolute; left:50%; top:50%; width:44px; height:44px; border-radius:50%;
+    transform:translate(-50%,-50%) translateY(-160px); background:radial-gradient(circle at 40% 35%, #ffb199, var(--ember) 55%, #b83417);
+    box-shadow:0 0 26px rgba(255,90,54,.7)}
+  .spot .obj .ring{position:absolute; left:50%; top:50%; width:150px; height:150px; border-radius:50%;
+    transform:translate(-50%,-50%) rotateX(78deg); border:2px solid rgba(255,90,54,.4)}
+  .spot .badge360{position:absolute; top:14px; right:14px; z-index:5; display:flex; align-items:center; gap:7px;
+    font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mist);
+    background:rgba(10,11,14,.5); border:1px solid var(--line); padding:7px 11px; border-radius:999px; backdrop-filter:blur(6px)}
+  .spot .badge360 svg{width:14px;height:14px; color:var(--ember)}
+  .spot .drag-note{position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:5; font-size:10px;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+  .spot .pring{position:absolute; left:50%; top:47%; width:56%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; border:1.5px solid rgba(255,90,54,.5)}
+  .spot .pring.r1{animation:sppulse 3.8s ease-out infinite}
+  .spot .pring.r2{animation:sppulse 3.8s ease-out infinite 1.9s}
+  @keyframes sppulse{0%{transform:translate(-50%,-50%) scale(.62);opacity:.9}100%{transform:translate(-50%,-50%) scale(1.28);opacity:0}}
+  .spot .spot-device{position:absolute; inset:0; display:grid; place-items:center}
+  .spot .spot-device svg{width:42%; filter:drop-shadow(0 20px 26px rgba(0,0,0,.6)); animation:float3d 6s ease-in-out infinite}
   .spot h2{font-size:clamp(34px,5vw,58px); margin:14px 0 0}
   .spot h2 .em{color:var(--ember)}
   .spot p{color:var(--mist); font-size:16px; line-height:1.65; margin:20px 0 26px; max-width:44ch}
@@ -181,6 +241,9 @@
 
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; scroll-behavior:auto !important}
+    [data-reveal],[data-stagger] > *{opacity:1 !important; transform:none !important}
+    .hero .rise,.hero h1 .ln > span,.scrollcue{opacity:1 !important; transform:none !important}
+    .reveal-head > span{transform:none !important}
   }
 </style>
 
@@ -223,14 +286,17 @@
     <canvas id="pulse"></canvas>
     <div class="veil"></div>
     <div class="container">
-      <div class="eyebrow">Professional-grade recovery</div>
-      <h1 class="display">Recover<br>like you <span class="em">train.</span></h1>
-      <p class="lead">Percussion, decompression and alignment tools engineered for the hours after the work — so you show up stronger tomorrow.</p>
-      <div class="cta-row">
+      <div class="eyebrow rise">Professional-grade recovery</div>
+      <h1 class="display">
+        <span class="ln"><span>Recover</span></span>
+        <span class="ln"><span>like you <span class="em">train.</span></span></span>
+      </h1>
+      <p class="lead rise">Percussion, decompression and alignment tools engineered for the hours after the work — so you show up stronger tomorrow.</p>
+      <div class="cta-row rise">
         <a class="btn btn-ember" href="#shop">Shop the range →</a>
         <a class="btn btn-ghost" href="#recovery">How it works</a>
       </div>
-      <div class="stats">
+      <div class="stats rise">
         <div class="stat"><b>3,200</b><span>PPM percussion</span></div>
         <div class="stat"><b>10k+</b><span>Bodies recovered</span></div>
         <div class="stat"><b>4.9★</b><span>Avg. rating</span></div>
@@ -250,18 +316,31 @@
   <!-- ============ PRODUCTS ============ -->
   <section class="blk" id="shop">
     <div class="container">
-      <div class="sechead">
+      <div class="sechead" data-reveal>
         <div>
           <div class="eyebrow">The range</div>
           <h2 class="display">Built to <span class="em">bounce back.</span></h2>
         </div>
         <p>Five tools that target the places training, sitting and stress hit hardest — neck, spine, lower back and muscle.</p>
       </div>
-      <div class="prodgrid">
+      <div class="prodgrid" data-reveal data-stagger>
         <!-- Massage Gun -->
         <a class="card" href="#">
-          <div class="art"><div class="blob" style="background:#ff5a36"></div>
-            <svg class="pi" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="8" width="12" height="22" rx="4"/><path d="M32 30v10"/><rect x="24" y="40" width="16" height="16" rx="4"/><path d="M40 46h8M40 50h6"/><circle cx="32" cy="16" r="3"/></svg>
+          <div class="art tilt">
+            <div class="floor"></div><div class="contact"></div>
+            <div class="prod"><div class="rim">
+              <svg viewBox="0 0 120 120" fill="none">
+                <defs>
+                  <linearGradient id="mg-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3f4a"/><stop offset="1" stop-color="#14161c"/></linearGradient>
+                  <radialGradient id="mg-h" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#ff9c7d"/><stop offset="55%" stop-color="#ff5a36"/><stop offset="100%" stop-color="#a52e16"/></radialGradient>
+                </defs>
+                <rect x="48" y="30" width="24" height="44" rx="11" fill="url(#mg-b)" stroke="rgba(255,255,255,.08)"/>
+                <rect x="54" y="70" width="12" height="26" rx="6" fill="#1a1d24"/>
+                <rect x="44" y="92" width="32" height="20" rx="8" fill="url(#mg-b)" stroke="rgba(255,255,255,.08)"/>
+                <circle cx="60" cy="20" r="12" fill="url(#mg-h)"/>
+                <rect x="52" y="36" width="6" height="16" rx="3" fill="rgba(255,255,255,.14)"/>
+              </svg>
+            </div></div>
           </div>
           <span class="tag">Bestseller</span>
           <div class="body">
@@ -272,8 +351,16 @@
         </a>
         <!-- Neck Pillow -->
         <a class="card" href="#">
-          <div class="art"><div class="blob" style="background:#3aa0ff"></div>
-            <svg class="pi" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 44c0-14 8-24 16-24s16 10 16 24"/><path d="M12 44h40"/><path d="M22 44v6M42 44v6"/></svg>
+          <div class="art tilt">
+            <div class="floor"></div><div class="contact"></div>
+            <div class="prod"><div class="rim">
+              <svg viewBox="0 0 120 120" fill="none">
+                <defs><linearGradient id="np" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5058"/><stop offset="1" stop-color="#191c22"/></linearGradient></defs>
+                <path d="M30 84 C30 44 44 30 60 30 C76 30 90 44 90 84 L74 84 C74 54 68 46 60 46 C52 46 46 54 46 84 Z" fill="url(#np)" stroke="rgba(255,255,255,.08)"/>
+                <ellipse cx="60" cy="86" rx="34" ry="7" fill="#0d0e12"/>
+                <path d="M40 60 C46 52 74 52 80 60" stroke="rgba(255,122,69,.4)" stroke-width="2" fill="none"/>
+              </svg>
+            </div></div>
           </div>
           <div class="body">
             <span class="cat">Neck decompression</span>
@@ -283,8 +370,17 @@
         </a>
         <!-- Posture Corrector -->
         <a class="card" href="#">
-          <div class="art"><div class="blob" style="background:#7a5cff"></div>
-            <svg class="pi" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="14" r="6"/><path d="M32 20v22"/><path d="M20 26l12 6 12-6M20 42l12-6 12 6"/><path d="M24 42v8M40 42v8"/></svg>
+          <div class="art tilt">
+            <div class="floor"></div><div class="contact"></div>
+            <div class="prod"><div class="rim">
+              <svg viewBox="0 0 120 120" fill="none">
+                <defs><linearGradient id="pc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#40454f"/><stop offset="1" stop-color="#15171d"/></linearGradient></defs>
+                <path d="M46 34 h28 l-6 16 h-16 z" fill="url(#pc)"/>
+                <path d="M40 50 c20 -6 40 -6 40 0 l-6 40 c-14 6 -14 6 -28 0 z" fill="url(#pc)" stroke="rgba(255,255,255,.07)"/>
+                <path d="M50 52 l20 34 M70 52 l-20 34" stroke="rgba(255,122,69,.5)" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="60" cy="96" rx="26" ry="6" fill="#0d0e12"/>
+              </svg>
+            </div></div>
           </div>
           <span class="tag">Posture</span>
           <div class="body">
@@ -295,8 +391,16 @@
         </a>
         <!-- Lumbar Cushion -->
         <a class="card" href="#">
-          <div class="art"><div class="blob" style="background:#25c9a0"></div>
-            <svg class="pi" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20c14-6 28-6 28 8 0 16-14 18-28 12z"/><path d="M18 20v20"/></svg>
+          <div class="art tilt">
+            <div class="floor"></div><div class="contact"></div>
+            <div class="prod"><div class="rim">
+              <svg viewBox="0 0 120 120" fill="none">
+                <defs><linearGradient id="lc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#454b53"/><stop offset="1" stop-color="#181b21"/></linearGradient></defs>
+                <path d="M32 46 C56 34 88 36 90 60 C92 84 64 92 40 82 C30 78 28 54 32 46 Z" fill="url(#lc)" stroke="rgba(255,255,255,.08)"/>
+                <path d="M40 50 C58 44 78 46 82 62" stroke="rgba(255,255,255,.12)" stroke-width="2" fill="none"/>
+                <ellipse cx="58" cy="90" rx="30" ry="6" fill="#0d0e12"/>
+              </svg>
+            </div></div>
           </div>
           <div class="body">
             <span class="cat">Lumbar support</span>
@@ -306,8 +410,17 @@
         </a>
         <!-- Lumbar Massager -->
         <a class="card" href="#">
-          <div class="art"><div class="blob" style="background:#ff8a3a"></div>
-            <svg class="pi" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="18" width="32" height="28" rx="10"/><path d="M24 32c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/></svg>
+          <div class="art tilt">
+            <div class="floor"></div><div class="contact"></div>
+            <div class="prod"><div class="rim">
+              <svg viewBox="0 0 120 120" fill="none">
+                <defs><linearGradient id="lm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#43484f"/><stop offset="1" stop-color="#15171d"/></linearGradient></defs>
+                <rect x="30" y="38" width="60" height="48" rx="18" fill="url(#lm)" stroke="rgba(255,255,255,.08)"/>
+                <circle cx="47" cy="58" r="7" fill="url(#mg-h)"/><circle cx="73" cy="58" r="7" fill="url(#mg-h)"/>
+                <path d="M40 74 c6 -6 10 -6 16 0 s10 6 16 0" stroke="rgba(255,122,69,.5)" stroke-width="2.5" fill="none"/>
+                <ellipse cx="60" cy="92" rx="30" ry="6" fill="#0d0e12"/>
+              </svg>
+            </div></div>
           </div>
           <span class="tag">Massage</span>
           <div class="body">
@@ -331,7 +444,7 @@
   <!-- ============ BENEFITS ============ -->
   <section class="benefits" id="recovery">
     <div class="container" style="padding-top:0;padding-bottom:0">
-      <div class="bengrid">
+      <div class="bengrid" data-reveal data-stagger>
         <div class="ben">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>
           <h4>Percussive relief</h4>
@@ -356,16 +469,25 @@
     </div>
   </section>
 
-  <!-- ============ SPOTLIGHT ============ -->
+  <!-- ============ SPOTLIGHT (interactive 3D) ============ -->
   <section class="blk spot" id="posture">
     <div class="container">
       <div class="grid">
-        <div class="stage">
+        <div class="stage" data-reveal>
           <div class="glow"></div>
-          <div class="ring r1"></div><div class="ring r2"></div>
-          <svg class="device" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="6" width="12" height="24" rx="4"/><path d="M32 30v9"/><rect x="23" y="39" width="18" height="18" rx="5"/><circle cx="32" cy="15" r="3.2"/></svg>
+          <div class="floorline"></div>
+          <div class="pring r1"></div><div class="pring r2"></div>
+          <div class="spot-device">
+            <svg viewBox="0 0 120 120" fill="none">
+              <rect x="48" y="30" width="24" height="44" rx="11" fill="url(#mg-b)" stroke="rgba(255,255,255,.08)"/>
+              <rect x="54" y="70" width="12" height="26" rx="6" fill="#1a1d24"/>
+              <rect x="44" y="92" width="32" height="20" rx="8" fill="url(#mg-b)" stroke="rgba(255,255,255,.08)"/>
+              <circle cx="60" cy="20" r="12" fill="url(#mg-h)"/>
+              <rect x="52" y="36" width="6" height="16" rx="3" fill="rgba(255,255,255,.14)"/>
+            </svg>
+          </div>
         </div>
-        <div>
+        <div data-reveal>
           <div class="eyebrow">Spotlight · Recovery</div>
           <h2 class="display">Pro percussion, <span class="em">pocket-sized.</span></h2>
           <p>The VertaFit Mini Massage Gun packs professional-grade percussive therapy into a travel-ready body — six speeds, four heads, and a quiet brushless motor with an LCD read-out.</p>
@@ -374,7 +496,7 @@
             <div class="s"><b>4</b><span>Massage heads</span></div>
             <div class="s"><b>&lt;45dB</b><span>Whisper quiet</span></div>
           </div>
-          <div class="cta-row"><a class="btn btn-ember" href="#">Add to cart — $95.99</a><a class="btn btn-ghost" href="#">Details</a></div>
+          <div class="cta-row" style="display:flex;gap:14px;flex-wrap:wrap"><a class="btn btn-ember" href="#">Add to cart — $95.99</a><a class="btn btn-ghost" href="#">Details</a></div>
         </div>
       </div>
     </div>
@@ -383,11 +505,11 @@
   <!-- ============ STEPS ============ -->
   <section class="blk" id="about" style="padding-top:0">
     <div class="container">
-      <div class="sechead">
+      <div class="sechead" data-reveal>
         <div><div class="eyebrow">The Verta method</div><h2 class="display">Three steps to <span class="em">standing taller.</span></h2></div>
         <p>Recovery isn't a luxury — it's the work between the work. Here's how the range fits together.</p>
       </div>
-      <div class="steps">
+      <div class="steps" data-reveal data-stagger>
         <div class="step"><div class="n">STEP 01</div><h4>Release</h4><p>Melt away built-up tension with percussive therapy and heated massage after training or a long day.</p></div>
         <div class="step"><div class="n">STEP 02</div><h4>Decompress</h4><p>Lengthen the neck and lower spine to undo the compression of hours spent sitting and screen-bound.</p></div>
         <div class="step"><div class="n">STEP 03</div><h4>Realign</h4><p>Retrain posture with daily support so better alignment becomes second nature, not a constant correction.</p></div>
@@ -398,10 +520,10 @@
   <!-- ============ REVIEWS ============ -->
   <section class="blk reviews">
     <div class="container">
-      <div class="sechead">
+      <div class="sechead" data-reveal>
         <div><div class="eyebrow">4.9 out of 5 · 2,400+ reviews</div><h2 class="display">People stand <span class="em">taller.</span></h2></div>
       </div>
-      <div class="revgrid">
+      <div class="revgrid" data-reveal data-stagger>
         <div class="rev"><div class="stars">★★★★★</div><p>"The neck stretcher fixed the tension headaches I'd had for years. Ten minutes a day and they're just… gone."</p><div class="who"><div class="av">SR</div><div><b>Sarah R.</b><span>Melbourne, VIC</span></div></div></div>
         <div class="rev"><div class="stars">★★★★★</div><p>"Massage gun is unreal for the price. Quiet, punchy, and the battery lasts. My legs recover twice as fast."</p><div class="who"><div class="av">DL</div><div><b>Daniel L.</b><span>Perth, WA</span></div></div></div>
         <div class="rev"><div class="stars">★★★★★</div><p>"Wore the posture corrector for a month — I actually catch myself sitting up straight now without thinking."</p><div class="who"><div class="av">MT</div><div><b>Mia T.</b><span>Sydney, NSW</span></div></div></div>
@@ -412,7 +534,7 @@
   <!-- ============ CTA BAND ============ -->
   <section class="ctaband">
     <div class="glow"></div>
-    <div class="container">
+    <div class="container" data-reveal>
       <h2 class="display">Stand taller.<br><span class="em">Feel stronger.</span></h2>
       <p>Join thousands of Australians recovering smarter. Free shipping on orders over $75 and a 30-day comfort guarantee.</p>
       <div class="cta-row"><a class="btn btn-ember" href="#shop">Shop recovery →</a><a class="btn btn-ghost" href="#">Take the quiz</a></div>
@@ -445,62 +567,59 @@
 
 <script>
 (function(){
-  var c = document.getElementById('pulse');
-  if(!c) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ctx = c.getContext('2d'), W, H, dpr;
-  function size(){ dpr = Math.min(window.devicePixelRatio||1, 2); W = c.clientWidth; H = c.clientHeight; c.width = W*dpr; c.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
-  size(); window.addEventListener('resize', size);
 
-  // faint particle field
-  var pts = [];
-  for(var i=0;i<46;i++){ pts.push({x:Math.random(),y:Math.random(),s:Math.random()*1.6+.3,vy:(Math.random()*.02+.01)}); }
-
-  // heartbeat waveform value at position p (0..1 across a repeating cell)
-  function beat(p){
-    // baseline flat with a QRS spike centered at 0.5
-    var d = p-0.5;
-    if(Math.abs(d)>0.16) return 0;
-    var x = d/0.16; // -1..1
-    // P-ish small bump then big spike then dip
-    return Math.exp(-Math.pow((x+0.4)*6,2))*0.12      // small pre-bump
-         - Math.exp(-Math.pow((x+0.12)*10,2))*0.16     // q dip
-         + Math.exp(-Math.pow((x)*7,2))*1.0            // R spike
-         - Math.exp(-Math.pow((x-0.14)*9,2))*0.42;     // s dip
-  }
-
-  var t=0;
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    // particles
-    for(var i=0;i<pts.length;i++){ var pt=pts[i]; if(!reduce){ pt.y-=pt.vy/60; if(pt.y<0)pt.y=1; }
-      ctx.beginPath(); ctx.arc(pt.x*W, pt.y*H, pt.s, 0, 6.283);
-      ctx.fillStyle='rgba(255,122,69,'+(0.06+pt.s*0.05)+')'; ctx.fill(); }
-
-    // pulse line
-    var midY = H*0.52, amp = Math.min(H*0.26, 190), speed = reduce?0:t*0.10;
-    ctx.beginPath();
-    for(var px=0; px<=W; px+=2){
-      var p = (px/Math.max(W,1))*2.2 + speed;   // 2.2 beats across
-      var cell = p - Math.floor(p);
-      var y = midY - beat(cell)*amp;
-      if(px===0) ctx.moveTo(px,y); else ctx.lineTo(px,y);
+  /* ---------- HERO PULSE CANVAS (slower) ---------- */
+  (function(){
+    var c = document.getElementById('pulse'); if(!c) return;
+    var ctx = c.getContext('2d'), W, H, dpr;
+    function size(){ dpr = Math.min(window.devicePixelRatio||1, 2); W = c.clientWidth; H = c.clientHeight; c.width = W*dpr; c.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+    size(); window.addEventListener('resize', size);
+    var pts = []; for(var i=0;i<46;i++){ pts.push({x:Math.random(),y:Math.random(),s:Math.random()*1.6+.3,vy:(Math.random()*.02+.01)}); }
+    function beat(p){ var d=p-0.5; if(Math.abs(d)>0.16) return 0; var x=d/0.16;
+      return Math.exp(-Math.pow((x+0.4)*6,2))*0.12 - Math.exp(-Math.pow((x+0.12)*10,2))*0.16
+           + Math.exp(-Math.pow((x)*7,2))*1.0 - Math.exp(-Math.pow((x-0.14)*9,2))*0.42; }
+    var t=0;
+    function frame(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<pts.length;i++){ var pt=pts[i]; if(!reduce){ pt.y-=pt.vy/60; if(pt.y<0)pt.y=1; }
+        ctx.beginPath(); ctx.arc(pt.x*W, pt.y*H, pt.s, 0, 6.283);
+        ctx.fillStyle='rgba(255,122,69,'+(0.06+pt.s*0.05)+')'; ctx.fill(); }
+      var midY=H*0.52, amp=Math.min(H*0.26,190), speed = reduce?0.5:t*0.045;   /* slowed from 0.10 */
+      ctx.beginPath();
+      for(var px=0; px<=W; px+=2){ var p=(px/Math.max(W,1))*2.2+speed; var cell=p-Math.floor(p);
+        var y=midY-beat(cell)*amp; if(px===0)ctx.moveTo(px,y); else ctx.lineTo(px,y); }
+      var g=ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'rgba(255,90,54,0)'); g.addColorStop(0.25,'rgba(255,90,54,.9)');
+      g.addColorStop(0.75,'rgba(255,122,69,1)'); g.addColorStop(1,'rgba(255,90,54,0)');
+      ctx.strokeStyle=g; ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.shadowColor='rgba(255,90,54,.8)'; ctx.shadowBlur=16; ctx.stroke(); ctx.shadowBlur=0;
+      t+=1; if(!reduce) requestAnimationFrame(frame);
     }
-    var grad = ctx.createLinearGradient(0,0,W,0);
-    grad.addColorStop(0,'rgba(255,90,54,0)'); grad.addColorStop(0.25,'rgba(255,90,54,.9)');
-    grad.addColorStop(0.75,'rgba(255,122,69,1)'); grad.addColorStop(1,'rgba(255,90,54,0)');
-    ctx.strokeStyle=grad; ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.shadowColor='rgba(255,90,54,.8)'; ctx.shadowBlur=16; ctx.stroke();
-    ctx.shadowBlur=0;
+    frame();
+  })();
 
-    // glowing lead dot riding the wave
-    if(!reduce){
-      var lp = (0.5 + (speed%1)); var lead = lp - Math.floor(lp);
-      var lx = ((lead)/2.2)*W;  // approximate
-      var ly = midY - beat((lx/Math.max(W,1))*2.2 + speed - Math.floor((lx/Math.max(W,1))*2.2 + speed))*amp;
-    }
-    t+=1; requestAnimationFrame(frame);
-  }
-  frame();
+  /* ---------- SCROLL REVEAL ---------- */
+  (function(){
+    var els = document.querySelectorAll('[data-reveal]');
+    if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold:.16, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  /* ---------- PRODUCT CARD POINTER TILT ---------- */
+  (function(){
+    if(reduce) return;
+    document.querySelectorAll('.card .art.tilt').forEach(function(art){
+      var prod = art.querySelector('.prod');
+      art.addEventListener('mousemove', function(e){
+        var r=art.getBoundingClientRect(); var x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+        prod.style.transform='rotateY('+(x*24)+'deg) rotateX('+(-y*18)+'deg)';
+      });
+      art.addEventListener('mouseleave', function(){ prod.style.transform='rotateY(0) rotateX(0)'; });
+    });
+  })();
 })();
 </script>
 </body></html>
