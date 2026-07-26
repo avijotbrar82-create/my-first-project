@@ -421,16 +421,18 @@
     </div>
   </footer>
 </div>
-<script><script>
+<script>
 (function(){
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els = document.querySelectorAll('[data-reveal]');
-  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold:.14, rootMargin:'0px 0px -8% 0px' });
-  els.forEach(function(e){ io.observe(e); });
+  var els=[].slice.call(document.querySelectorAll('[data-reveal]'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(e){e.classList.add('in');}
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(show);return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){show(x.target);io.unobserve(x.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e);});
+  var h=window.innerHeight||800;
+  els.forEach(function(e){if(e.getBoundingClientRect().top<h*0.95)show(e);});
+  setTimeout(function(){els.forEach(show);},1600);
 })();
-</script></script>
+</script>
 
 </body></html>
