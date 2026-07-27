@@ -1,0 +1,166 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+-%}
+<section class="blk" style="padding-top:20px" id="ProductSection-{{ section.id }}" data-product-section>
+  <div class="container">
+    <div class="pagetop" style="padding:0 0 20px">
+      <div class="crumb">
+        <a href="{{ routes.root_url }}">Home</a> /
+        <a href="{{ routes.all_products_collection_url }}">Shop</a> /
+        {{ product.title }}
+      </div>
+    </div>
+
+    <div class="pdp">
+      {%- comment -%} ---------- Gallery ---------- {%- endcomment -%}
+      <div class="gallery" data-reveal>
+        <div class="pdp-main">
+          {%- if product.featured_media -%}
+            <img id="pdp-main-img" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.featured_media.alt | escape | default: product.title }}" width="1000" height="1000">
+          {%- else -%}
+            {{ 'product-apparel-1' | placeholder_svg_tag: 'pimg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="thumbs">
+            {%- for media in product.media limit: 6 -%}
+              <button type="button" class="thumb{% if forloop.first %} active{% endif %}" data-src="{{ media | image_url: width: 1000 }}" aria-label="View image {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 200 }}" alt="" width="200" height="200" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- Info ---------- {%- endcomment -%}
+      <div class="pdp-info" data-reveal>
+        {%- if product.type != blank -%}<div class="eyebrow">{{ product.type }}</div>{%- endif -%}
+        <h1 class="serif">{{ product.title }}</h1>
+
+        {%- if section.settings.show_rating -%}
+          <div class="rating">★★★★★ <span>{{ section.settings.rating_text }}</span></div>
+        {%- endif -%}
+
+        <div class="pdp-price" id="pdp-price" data-price>
+          {{ current.price | money }} <small>{{ cart.currency.iso_code }}</small>
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="pdp-desc">{{ product.description | strip_html | truncatewords: 40 }}</div>
+        {%- endif -%}
+
+        {%- form 'product', product, class: 'pdp-form', id: 'product-form' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="opt">
+                <label class="opt-label" for="Option-{{ option.name | handle }}">{{ option.name }}</label>
+                <select id="Option-{{ option.name | handle }}" data-option-index="{{ forloop.index0 }}" data-product-option>
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" id="pdp-variant-id" value="{{ current.id }}">
+
+          <div class="buyrow">
+            <div class="qty" data-qty>
+              <button type="button" data-qty-minus aria-label="Decrease quantity">&minus;</button>
+              <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" name="add" class="btn btn-honey" id="pdp-add" data-add-btn{% unless current.available %} disabled{% endunless %}>
+              <span data-add-text>{% if current.available %}Add to cart{% else %}Sold out{% endif %}</span>
+            </button>
+          </div>
+
+          {%- if product.selected_or_first_available_variant.available == false -%}
+            <p class="pdp-unavailable">This variant is currently unavailable.</p>
+          {%- endif -%}
+        {%- endform -%}
+
+        <ul class="trustpts">
+          <li>{% render 'icon', name: 'check', class: '' %} Free shipping on every order</li>
+          <li>{% render 'icon', name: 'check', class: '' %} 30-day easy returns</li>
+          <li>{% render 'icon', name: 'check', class: '' %} Ships in 1–3 business days from Australia</li>
+        </ul>
+
+        <div class="acc">
+          {%- if product.description != blank -%}
+            <details open><summary>Details</summary><div class="body-acc">{{ product.description }}</div></details>
+          {%- endif -%}
+          <details><summary>Shipping &amp; returns</summary><div class="body-acc">{{ section.settings.shipping_text }}</div></details>
+          {%- if section.settings.extra_note != blank -%}
+            <details><summary>Good to know</summary><div class="body-acc">{{ section.settings.extra_note }}</div></details>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-variants>
+    {{ product.variants | json }}
+  </script>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-product-section]');
+  if(!root) return;
+  var variants = JSON.parse(root.querySelector('[data-variants]').textContent);
+  var idInput = root.querySelector('#pdp-variant-id');
+  var priceEl = root.querySelector('[data-price]');
+  var addBtn = root.querySelector('[data-add-btn]');
+  var addText = root.querySelector('[data-add-text]');
+  var selects = [].slice.call(root.querySelectorAll('[data-product-option]'));
+  var iso = '{{ cart.currency.iso_code }}';
+
+  function money(cents){
+    return '$' + (cents/100).toFixed(2);
+  }
+  function currentOptions(){ return selects.map(function(s){ return s.value; }); }
+  function findVariant(opts){
+    return variants.find(function(v){
+      return (v.options || []).every(function(o,i){ return o === opts[i]; });
+    });
+  }
+  function update(){
+    if(!selects.length){ return; }
+    var v = findVariant(currentOptions());
+    if(!v){
+      addBtn.disabled = true; if(addText) addText.textContent = 'Unavailable'; return;
+    }
+    idInput.value = v.id;
+    if(priceEl) priceEl.innerHTML = money(v.price) + ' <small>' + iso + '</small>';
+    if(v.available){ addBtn.disabled = false; if(addText) addText.textContent = 'Add to cart'; }
+    else { addBtn.disabled = true; if(addText) addText.textContent = 'Sold out'; }
+  }
+  selects.forEach(function(s){ s.addEventListener('change', update); });
+
+  // gallery thumbnails
+  var mainImg = root.querySelector('#pdp-main-img');
+  root.querySelectorAll('.thumb').forEach(function(t){
+    t.addEventListener('click', function(){
+      root.querySelectorAll('.thumb').forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      if(mainImg && t.dataset.src) mainImg.src = t.dataset.src;
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating line", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 2,400+ reviews" },
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text",
+      "default": "<p>Free shipping on every order. Orders are processed within 1–3 business days; Australian delivery in 7–14 business days with tracking emailed on dispatch. 30-day returns on unused items in original packaging.</p>" },
+    { "type": "richtext", "id": "extra_note", "label": "Good to know",
+      "default": "<p><em>Not intended to diagnose or treat medical conditions. Consult a physician if you have chronic pain or an existing injury.</em></p>" }
+  ]
+}
+{% endschema %}

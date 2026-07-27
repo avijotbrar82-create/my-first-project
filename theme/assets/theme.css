@@ -336,3 +336,28 @@ main{display:block}
 :root.nav-open body{overflow:hidden}
 @media(max-width:860px){ .nav .links{display:none} .nav-toggle{display:inline-flex} }
 .pay .payicon,.pay svg{height:24px;width:auto;border-radius:4px}
+
+/* ===== Product page controls ===== */
+.opt select{width:100%;max-width:360px;font-family:var(--f-body);font-weight:600;font-size:14.5px;color:var(--espresso);
+  background-color:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 40px 12px 15px;cursor:pointer;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a6f62' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.opt select:focus{outline:none;border-color:var(--honey)}
+.opt + .opt{margin-top:18px}
+.qty input{width:42px;text-align:center;border:0;background:none;font-weight:700;font-family:var(--f-body);font-size:15px;color:var(--espresso);-moz-appearance:textfield}
+.qty input::-webkit-outer-spin-button,.qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.pdp-form{margin:0}
+.pdp-unavailable{margin-top:14px;color:var(--taupe);font-size:14px}
+.related{margin-top:20px}
+
+/* ===== Collection ===== */
+.sortform{margin:0}
+select.sortsel{appearance:none;-webkit-appearance:none;padding-right:34px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233b322a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+.pagination{display:flex;justify-content:center;gap:10px;margin:56px 0 0}
+.pagination a,.pagination span{min-width:42px;height:42px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);
+  font-weight:700;font-size:14px;color:var(--espresso);background:var(--panel);text-decoration:none}
+.pagination a:hover{border-color:var(--honey);color:var(--honey)}
+.pagination .current{background:var(--honey);color:#fdf8ef;border-color:var(--honey)}
+.pagination .disabled{opacity:.4}
+.empty-state{text-align:center;padding:60px 0;color:var(--taupe)}
+.empty-state h2{font-family:var(--f-disp);color:var(--espresso);margin:0 0 12px}
