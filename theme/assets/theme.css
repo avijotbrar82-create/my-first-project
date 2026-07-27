@@ -318,3 +318,21 @@
   .tstep p{font-size:12.5px;color:var(--taupe);line-height:1.5;margin:0}
   .note{text-align:center; color:var(--taupe); font-size:14px; margin:34px auto 0; max-width:52ch; line-height:1.6}
   .note a{color:var(--honey)}
+
+/* ===== Theme additions (header/nav/utility) ===== */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:var(--espresso);color:#fff;padding:10px 14px;border-radius:8px}
+.skip-link:focus{left:12px;top:12px}
+main{display:block}
+.nav .links{display:flex;align-items:center;gap:34px}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;color:var(--espresso);padding:6px;margin-left:4px}
+.nav-toggle svg{width:24px;height:24px;display:block}
+.nav-drawer{position:fixed;inset:0 0 0 auto;width:min(84vw,340px);background:var(--cream);z-index:60;transform:translateX(100%);
+  transition:transform .35s var(--ease);padding:24px 26px 32px;display:flex;flex-direction:column;box-shadow:-24px 0 60px -34px rgba(59,50,42,.55)}
+.nav-drawer .close{align-self:flex-end;background:none;border:0;cursor:pointer;color:var(--taupe);font-size:26px;line-height:1;margin-bottom:10px}
+.nav-drawer a{padding:15px 2px;font-family:var(--f-disp);font-weight:600;font-size:22px;color:var(--espresso);border-bottom:1px solid var(--line)}
+.nav-overlay{position:fixed;inset:0;background:rgba(59,50,42,.42);z-index:55;opacity:0;pointer-events:none;transition:opacity .3s}
+:root.nav-open .nav-drawer{transform:none}
+:root.nav-open .nav-overlay{opacity:1;pointer-events:auto}
+:root.nav-open body{overflow:hidden}
+@media(max-width:860px){ .nav .links{display:none} .nav-toggle{display:inline-flex} }
+.pay .payicon,.pay svg{height:24px;width:auto;border-radius:4px}

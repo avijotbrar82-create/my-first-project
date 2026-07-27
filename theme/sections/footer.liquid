@@ -1,0 +1,68 @@
+<footer>
+  <div class="container">
+    <div class="fgrid">
+      <div class="brand">
+        <span class="wm"><span class="w serif" style="font-size:26px">Verta <b>Fit</b></span></span>
+        <p class="about">{{ section.settings.about_text }}</p>
+      </div>
+
+      <div>
+        <h5>{{ section.settings.col1_title }}</h5>
+        <ul>
+          <li><a href="{{ routes.all_products_collection_url }}">All recovery</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">Massage &amp; percussion</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">Posture &amp; support</a></li>
+          <li><a href="/pages/about-us">Our story</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>{{ section.settings.col2_title }}</h5>
+        <ul>
+          <li><a href="/pages/track-order">Track my order</a></li>
+          <li><a href="/pages/contact">Contact us</a></li>
+          {%- if shop.shipping_policy != blank %}<li><a href="{{ shop.shipping_policy.url }}">Shipping policy</a></li>{% endif -%}
+          {%- if shop.refund_policy != blank %}<li><a href="{{ shop.refund_policy.url }}">Returns</a></li>{% endif -%}
+          <li><a href="/pages/faqs">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>{{ section.settings.col3_title }}</h5>
+        <ul>
+          {%- if shop.terms_of_service != blank %}<li><a href="{{ shop.terms_of_service.url }}">Terms of service</a></li>{% endif -%}
+          {%- if shop.privacy_policy != blank %}<li><a href="{{ shop.privacy_policy.url }}">Privacy policy</a></li>{% endif -%}
+          {%- if section.settings.social_instagram != blank or settings.social_instagram != blank %}<li><a href="{{ section.settings.social_instagram | default: settings.social_instagram }}">Instagram</a></li>{% endif -%}
+          {%- if settings.social_tiktok != blank %}<li><a href="{{ settings.social_tiktok }}">TikTok</a></li>{% endif -%}
+        </ul>
+      </div>
+    </div>
+
+    <div class="fbot">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+      <div class="pay">
+        {%- if shop.enabled_payment_types.size > 0 -%}
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payicon' }}
+          {%- endfor -%}
+        {%- else -%}
+          <i>VISA</i><i>MC</i><i>AMEX</i><i>PAY</i><i>GPAY</i>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "about_text", "label": "About blurb",
+      "default": "Professional-grade recovery, posture and mobility tools — thoughtfully made in Australia for the quiet work of feeling better." },
+    { "type": "text", "id": "col1_title", "label": "Column 1 title", "default": "Shop" },
+    { "type": "text", "id": "col2_title", "label": "Column 2 title", "default": "Support" },
+    { "type": "text", "id": "col3_title", "label": "Column 3 title", "default": "Verta Fit" },
+    { "type": "text", "id": "social_instagram", "label": "Instagram URL (overrides theme setting)" }
+  ]
+}
+{% endschema %}

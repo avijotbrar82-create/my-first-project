@@ -1,0 +1,45 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Verta Fit — Soft",
+    "theme_version": "1.0.0",
+    "theme_author": "Verta Fit",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "mailto:avijotbrar82@gmail.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image (optional — leave blank to use the wordmark)" },
+      { "type": "range", "id": "logo_width", "min": 80, "max": 260, "step": 10, "unit": "px", "label": "Logo width", "default": 150 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      { "type": "header", "content": "Palette" },
+      { "type": "color", "id": "color_honey", "label": "Accent (honey)", "default": "#b0732e" },
+      { "type": "color", "id": "color_honey_lt", "label": "Accent hover", "default": "#c58a3d" },
+      { "type": "color", "id": "color_cream", "label": "Background (cream)", "default": "#f4efe6" },
+      { "type": "color", "id": "color_oat", "label": "Section band (oat)", "default": "#eae2d3" },
+      { "type": "color", "id": "color_espresso", "label": "Text (espresso)", "default": "#3b322a" },
+      { "type": "color", "id": "color_taupe", "label": "Muted text (taupe)", "default": "#7a6f62" }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "text", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "text", "id": "social_tiktok", "label": "TikTok URL" },
+      { "type": "text", "id": "social_facebook", "label": "Facebook URL" }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      { "type": "checkbox", "id": "card_show_vendor", "label": "Show product type as label", "default": true },
+      { "type": "checkbox", "id": "card_show_description", "label": "Show short description", "default": true }
+    ]
+  }
+]

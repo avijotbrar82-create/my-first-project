@@ -26,6 +26,16 @@
   </style>
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <style>
+    :root{
+      {%- if settings.color_honey %}--honey:{{ settings.color_honey }};{% endif -%}
+      {%- if settings.color_honey_lt %}--honey-lt:{{ settings.color_honey_lt }};{% endif -%}
+      {%- if settings.color_cream %}--cream:{{ settings.color_cream }};{% endif -%}
+      {%- if settings.color_oat %}--oat:{{ settings.color_oat }};{% endif -%}
+      {%- if settings.color_espresso %}--espresso:{{ settings.color_espresso }};{% endif -%}
+      {%- if settings.color_taupe %}--taupe:{{ settings.color_taupe }};{% endif -%}
+    }
+  </style>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
   {{ content_for_header }}
@@ -35,7 +45,6 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="site">
     <a class="skip-link" href="#MainContent">Skip to content</a>
-    {% section 'announcement' %}
     {% section 'header' %}
     <main id="MainContent" role="main">
       {{ content_for_layout }}
