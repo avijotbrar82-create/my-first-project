@@ -1,0 +1,56 @@
+<section class="blk reviews" id="reviews">
+  <div class="container">
+    <div class="sechead" data-reveal>
+      <div class="row">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+          <h2 class="serif">{{ section.settings.heading }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="revgrid" data-reveal data-stagger>
+      {%- for block in section.blocks -%}
+        <div class="rev" {{ block.shopify_attributes }}>
+          <div class="stars">{%- for i in (1..block.settings.stars) -%}★{%- endfor -%}</div>
+          <p>"{{ block.settings.quote }}"</p>
+          <div class="who">
+            <div class="av">{{ block.settings.initials }}</div>
+            <div><b>{{ block.settings.name }}</b><span>{{ block.settings.location }}</span></div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "4.9 out of 5 · 2,400+ reviews" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "People feel <em>lighter.</em>" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "stars", "min": 1, "max": 5, "step": 1, "label": "Stars", "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The neck stretcher quietly fixed the tension headaches I'd had for years." },
+        { "type": "text", "id": "initials", "label": "Initials", "default": "SR" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Sarah R." },
+        { "type": "text", "id": "location", "label": "Location", "default": "Melbourne, VIC" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{
+    "name": "Reviews",
+    "blocks": [
+      { "type": "review", "settings": { "quote": "The neck stretcher quietly fixed the tension headaches I'd had for years. Ten calm minutes a day.", "initials": "SR", "name": "Sarah R.", "location": "Melbourne, VIC" } },
+      { "type": "review", "settings": { "quote": "The massage gun is beautiful and near-silent. My legs recover so much faster after a run.", "initials": "DL", "name": "Daniel L.", "location": "Perth, WA" } },
+      { "type": "review", "settings": { "quote": "A month with the posture corrector and I catch myself sitting tall without even thinking.", "initials": "MT", "name": "Mia T.", "location": "Sydney, NSW" } }
+    ]
+  }]
+}
+{% endschema %}

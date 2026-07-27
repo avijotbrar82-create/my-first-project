@@ -1,0 +1,90 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Professional-grade recovery",
+        "heading": "Recovery,<br><em>unhurried.</em>",
+        "subheading": "Percussion, decompression and posture support — thoughtfully made for the quiet work of feeling better, one calm day at a time.",
+        "button1_label": "Shop the range",
+        "button2_label": "How it works",
+        "show_stats": true
+      }
+    },
+    "trust": {
+      "type": "trust-row",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "shipping", "text": "Free shipping on every order" } },
+        "t2": { "type": "item", "settings": { "icon": "guarantee", "text": "30-day comfort guarantee" } },
+        "t3": { "type": "item", "settings": { "icon": "star", "text": "Loved by 10,000+ Australians" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The range",
+        "heading": "Kind tools for <em>tired bodies.</em>",
+        "subtext": "Five considered pieces for the places sitting, training and stress settle in — neck, spine, lower back and muscle.",
+        "products_to_show": 5,
+        "show_bundle_card": true,
+        "bundle_title": "Build your bundle",
+        "bundle_text": "Pair any three tools and save 15% on your recovery kit.",
+        "bundle_cta": "Start building"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "percussion", "heading": "Percussive relief", "text": "Up to 3,200 pulses a minute coax tension from tired muscle and ease post-training soreness." } },
+        "b2": { "type": "benefit", "settings": { "icon": "spine", "heading": "Spinal decompression", "text": "Gently lengthen the neck and lower back to undo the compression of desk-bound days." } },
+        "b3": { "type": "benefit", "settings": { "icon": "posture", "heading": "Better posture", "text": "Retrain your body's natural alignment so standing tall becomes the default, not the effort." } },
+        "b4": { "type": "benefit", "settings": { "icon": "support", "heading": "All-day support", "text": "Ergonomic cushions that cradle the spine's curve — comfort for every hour you sit." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "spotlight": {
+      "type": "product-spotlight",
+      "settings": {
+        "product": "professional-mini-muscle-massage-gun-with-lcd-screen",
+        "eyebrow": "Spotlight · Recovery",
+        "heading": "Pro percussion, <em>pocket-sized.</em>",
+        "text": "The Verta Fit Mini Massage Gun folds professional-grade percussive therapy into a calm, travel-ready body — six speeds, four heads, and a quiet brushless motor with an LCD read-out."
+      },
+      "blocks": {
+        "s1": { "type": "spec", "settings": { "value": "6", "label": "Speed gears" } },
+        "s2": { "type": "spec", "settings": { "value": "4", "label": "Massage heads" } },
+        "s3": { "type": "spec", "settings": { "value": "<45dB", "label": "Whisper quiet" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "method": {
+      "type": "method-steps",
+      "blocks": {
+        "m1": { "type": "step", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussive therapy and warm massage at the end of the day." } },
+        "m2": { "type": "step", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
+        "m3": { "type": "step", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "stars": 5, "quote": "The neck stretcher quietly fixed the tension headaches I'd had for years. Ten calm minutes a day.", "initials": "SR", "name": "Sarah R.", "location": "Melbourne, VIC" } },
+        "r2": { "type": "review", "settings": { "stars": 5, "quote": "The massage gun is beautiful and near-silent. My legs recover so much faster after a run.", "initials": "DL", "name": "Daniel L.", "location": "Perth, WA" } },
+        "r3": { "type": "review", "settings": { "stars": 5, "quote": "A month with the posture corrector and I catch myself sitting tall without even thinking.", "initials": "MT", "name": "Mia T.", "location": "Sydney, NSW" } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "heading": "Stand taller. <em>Feel lighter.</em>",
+        "text": "Join thousands of Australians recovering gently. Free shipping on every order and a 30-day comfort guarantee.",
+        "button1_label": "Shop recovery",
+        "button2_label": "Take the quiz"
+      }
+    }
+  },
+  "order": ["hero", "trust", "featured", "benefits", "spotlight", "method", "reviews", "cta"]
+}

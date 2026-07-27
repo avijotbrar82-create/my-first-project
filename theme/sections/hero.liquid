@@ -1,0 +1,60 @@
+{%- liquid
+  assign img = section.settings.image
+-%}
+<section class="hero">
+  <div class="hero-media">
+    {%- if img != blank -%}
+      <img class="hero-img" src="{{ img | image_url: width: 1600 }}" alt="{{ img.alt | escape | default: section.settings.heading }}" width="1600" height="1280">
+    {%- else -%}
+      <img class="hero-img" src="{{ 'hero-massage-guns.webp' | asset_url }}" alt="{{ section.settings.heading }}" width="1402" height="1122">
+    {%- endif -%}
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="container">
+    <div class="hero-copy">
+      {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h1 class="serif">{{ section.settings.heading }}</h1>
+      {%- if section.settings.subheading != blank -%}<p class="lead">{{ section.settings.subheading }}</p>{%- endif -%}
+      <div class="cta-row">
+        {%- if section.settings.button1_label != blank -%}
+          <a class="btn btn-honey" href="{{ section.settings.button1_link | default: routes.all_products_collection_url }}">{{ section.settings.button1_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a class="btn btn-ghost" href="{{ section.settings.button2_link | default: '#' }}">{{ section.settings.button2_label }}</a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.show_stats -%}
+        <div class="stats">
+          <div class="stat"><b>{{ section.settings.stat1_value }}</b><span>{{ section.settings.stat1_label }}</span></div>
+          <div class="stat"><b>{{ section.settings.stat2_value }}</b><span>{{ section.settings.stat2_label }}</span></div>
+          <div class="stat"><b>{{ section.settings.stat3_value }}</b><span>{{ section.settings.stat3_label }}</span></div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image (defaults to the packaged hero)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Professional-grade recovery" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Recovery,<br><em>unhurried.</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Percussion, decompression and posture support — thoughtfully made for the quiet work of feeling better, one calm day at a time." },
+    { "type": "text", "id": "button1_label", "label": "Primary button", "default": "Shop the range" },
+    { "type": "url", "id": "button1_link", "label": "Primary link" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "How it works" },
+    { "type": "url", "id": "button2_link", "label": "Secondary link" },
+    { "type": "header", "content": "Trust stats" },
+    { "type": "checkbox", "id": "show_stats", "label": "Show stats", "default": true },
+    { "type": "text", "id": "stat1_value", "label": "Stat 1 value", "default": "4.9★" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "2,400+ reviews" },
+    { "type": "text", "id": "stat2_value", "label": "Stat 2 value", "default": "10k+" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Bodies at ease" },
+    { "type": "text", "id": "stat3_value", "label": "Stat 3 value", "default": "30-day" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Comfort guarantee" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

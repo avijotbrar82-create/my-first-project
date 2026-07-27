@@ -1,0 +1,46 @@
+<section class="benefits" id="recovery">
+  <div class="container" style="padding:0">
+    <div class="bengrid" data-reveal data-stagger>
+      {%- for block in section.blocks -%}
+        <div class="ben" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, class: 'ic' %}
+          <h4>{{ block.settings.heading }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits",
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "percussion",
+          "options": [
+            { "value": "percussion", "label": "Percussion" },
+            { "value": "spine", "label": "Spine" },
+            { "value": "posture", "label": "Posture" },
+            { "value": "support", "label": "Support" }
+          ] },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Percussive relief" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Up to 3,200 pulses a minute coax tension from tired muscle and ease post-training soreness." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Benefits",
+    "blocks": [
+      { "type": "benefit", "settings": { "icon": "percussion", "heading": "Percussive relief", "text": "Up to 3,200 pulses a minute coax tension from tired muscle and ease post-training soreness." } },
+      { "type": "benefit", "settings": { "icon": "spine", "heading": "Spinal decompression", "text": "Gently lengthen the neck and lower back to undo the compression of desk-bound days." } },
+      { "type": "benefit", "settings": { "icon": "posture", "heading": "Better posture", "text": "Retrain your body's natural alignment so standing tall becomes the default, not the effort." } },
+      { "type": "benefit", "settings": { "icon": "support", "heading": "All-day support", "text": "Ergonomic cushions that cradle the spine's curve — comfort for every hour you sit." } }
+    ]
+  }]
+}
+{% endschema %}

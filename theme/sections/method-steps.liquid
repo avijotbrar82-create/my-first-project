@@ -1,0 +1,53 @@
+<section class="blk" id="about" style="padding-top:0">
+  <div class="container">
+    <div class="sechead" data-reveal>
+      <div class="row">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+          <h2 class="serif">{{ section.settings.heading }}</h2>
+        </div>
+        {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+      </div>
+    </div>
+    <div class="steps" data-reveal data-stagger>
+      {%- for block in section.blocks -%}
+        <div class="step" {{ block.shopify_attributes }}>
+          <div class="n">{{ block.settings.numeral }}</div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Method steps",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Verta method" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Three gentle steps to <em>standing taller.</em>" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Recovery isn't a luxury — it's the quiet work between the work. Here's how the range fits together." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "numeral", "label": "Numeral", "default": "i." },
+        { "type": "text", "id": "title", "label": "Title", "default": "Release" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Ease built-up tension with percussive therapy and warm massage at the end of the day." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Method steps",
+    "blocks": [
+      { "type": "step", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussive therapy and warm massage at the end of the day." } },
+      { "type": "step", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
+      { "type": "step", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
+    ]
+  }]
+}
+{% endschema %}
