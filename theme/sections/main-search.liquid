@@ -1,0 +1,32 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Search</div>
+    <h1 class="pagetitle serif">Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="margin-top:20px;max-width:520px;display:flex;gap:10px">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products…"
+        style="flex:1;font-family:var(--f-body);font-size:15px;color:var(--espresso);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px">
+      <button class="btn btn-honey" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+
+<section class="blk" style="padding-top:30px">
+  <div class="container">
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="pagelead" style="margin:0 0 30px">{{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for &ldquo;{{ search.terms | escape }}&rdquo;</p>
+        <div class="prodgrid" data-reveal data-stagger>
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="empty-state"><h2 class="serif">No results.</h2><p>Try a different search, or browse the full range.</p>
+          <p style="margin-top:18px"><a class="btn btn-honey" href="{{ routes.all_products_collection_url }}">Shop all recovery</a></p></div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

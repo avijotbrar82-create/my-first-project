@@ -1,0 +1,17 @@
+<section class="blk" style="padding-top:70px">
+  <div class="container" style="max-width:520px;text-align:center">
+    <div class="eyebrow">{{ shop.name }} gift card</div>
+    <h1 class="serif" style="font-size:clamp(40px,7vw,64px);margin:12px 0 6px">{{ gift_card.balance | money }}</h1>
+    {%- if gift_card.expired -%}
+      <p class="form-error">This gift card has expired.</p>
+    {%- else -%}
+      <p style="color:var(--taupe);margin:0 0 24px">Use the code below at checkout.</p>
+    {%- endif -%}
+    <div class="info-card">
+      <div class="info-row" style="justify-content:center;text-align:center">
+        <div style="width:100%"><b>Your code</b><span style="font-size:22px;letter-spacing:3px;font-family:var(--f-disp)">{{ gift_card.code | format_code }}</span></div>
+      </div>
+    </div>
+    <p style="margin-top:26px"><a class="btn btn-honey" href="{{ shop.url }}">Shop now</a></p>
+  </div>
+</section>

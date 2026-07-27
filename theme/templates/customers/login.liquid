@@ -1,0 +1,25 @@
+<section class="blk" style="padding-top:70px">
+  <div class="container">
+    <div class="auth" id="login">
+      <h1 class="pagetitle serif" style="text-align:center;margin-bottom:24px">Log in</h1>
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}<div class="form-error">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="field"><label for="cl-email">Email</label><input type="email" id="cl-email" name="customer[email]" autocomplete="email" required></div>
+        <div class="field"><label for="cl-pass">Password</label><input type="password" id="cl-pass" name="customer[password]" autocomplete="current-password" required></div>
+        <button class="btn btn-honey" type="submit" style="width:100%;justify-content:center">Log in</button>
+      {%- endform -%}
+      <p class="contact-note" style="text-align:center;margin-top:18px">
+        <a href="#recover">Forgot your password?</a> &middot; <a href="{{ routes.account_register_url }}">Create account</a>
+      </p>
+    </div>
+
+    <div class="auth" id="recover" style="margin-top:40px">
+      <h2 class="serif" style="text-align:center;font-size:26px;margin-bottom:18px">Reset password</h2>
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}<div class="form-success">We've sent you an email with a link to reset your password.</div>{%- endif -%}
+        <div class="field"><label for="rec-email">Email</label><input type="email" id="rec-email" name="email" required></div>
+        <button class="btn btn-ghost" type="submit" style="width:100%;justify-content:center">Send reset link</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

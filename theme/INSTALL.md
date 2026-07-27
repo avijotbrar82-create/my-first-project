@@ -1,0 +1,70 @@
+# Verta Fit — Soft theme · Install guide
+
+A complete Shopify **Online Store 2.0** theme built from the approved Soft designs.
+Product data, prices, images, cart and checkout all come live from your Shopify store.
+
+> ⚠️ This theme was authored offline and hasn't been rendered against a live Shopify
+> store. **Install it as a new/unpublished theme and Preview it first** — don't publish
+> over your live theme until you've clicked through it.
+
+---
+
+## Option A — Upload via Shopify admin (no tools needed)
+
+1. Grab the packaged file **`verta-fit-soft-theme.zip`** from the repo root
+   (or zip the **contents** of the `theme/` folder yourself — `layout/`, `sections/`,
+   `templates/`, etc. must sit at the **root** of the zip, not inside a `theme/` folder).
+2. Shopify admin → **Online Store → Themes → Add theme → Upload zip file**.
+3. On the new theme, click **⋯ → Preview** (or **Customize**) to review it.
+4. When happy: **⋯ → Publish**.
+
+## Option B — Shopify CLI (recommended for iterating)
+
+```bash
+cd theme
+shopify theme dev      # live local preview against your store
+# or
+shopify theme push --unpublished   # upload as a new unpublished theme
+```
+
+---
+
+## Post-install setup (5 minutes)
+
+1. **Navigation menu.** Online Store → Navigation → make sure `main-menu` has:
+   - Shop → `/collections/all`
+   - About → `/pages/about-us`
+   - Contact → `/pages/contact`
+   (The header falls back to sensible links if the menu is empty, but setting it is best.)
+
+2. **Assign page templates.** Online Store → Pages, and set each page's **Theme template**:
+   - **About Us** → `page.about`
+   - **Contact** → `page.contact`
+   - **Track Order** → `page.track-order`
+   - FAQs / policies → default `page`
+   These pages already exist in your store with the right content.
+
+3. **Featured collection.** In the theme editor, open the homepage **Featured collection**
+   section and pick a collection (e.g. create one called *Recovery* with all 5 products).
+   If left blank it automatically shows your first products.
+
+4. **Product spotlight.** The homepage spotlight defaults to the Mini Massage Gun handle.
+   If your handle differs, pick the product in the **Product spotlight** section.
+
+5. **Branding (optional).** Theme settings → upload a logo + favicon, or tweak the
+   palette (honey / cream / espresso). Leave the logo blank to use the built-in wordmark.
+
+That's it — product pages, collections, cart and checkout work out of the box.
+
+---
+
+## What's included
+- **Homepage** — hero (image reveal → text), trust row, product grid, benefits,
+  product spotlight, method steps, reviews, CTA.
+- **Product** — media gallery + thumbnails, variant picker with live price/stock,
+  add-to-cart, details accordion, related products.
+- **Collection** — sortable, paginated product grid.
+- **Pages** — About, Contact (working Shopify contact form), Track Order.
+- **Cart**, search, collections list, blog/article, 404, gift card, password page,
+  and full customer account templates (login, register, account, orders, addresses).
+- Self-hosted fonts (Fraunces + Nunito Sans), warm honey palette, calm scroll animations.

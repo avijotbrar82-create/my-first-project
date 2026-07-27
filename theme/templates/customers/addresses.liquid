@@ -1,0 +1,42 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.account_url }}">Account</a> / Addresses</div>
+    <h1 class="pagetitle serif">Your addresses</h1>
+  </div>
+</section>
+<section class="blk" style="padding-top:24px">
+  <div class="container cart-wrap">
+    <details class="acc" style="margin-bottom:20px" open>
+      <summary>Add a new address</summary>
+      <div class="body-acc">
+        {%- form 'customer_address', customer.new_address -%}
+          <div class="frow"><div class="field"><label>First name</label><input type="text" name="address[first_name]"></div>
+            <div class="field"><label>Last name</label><input type="text" name="address[last_name]"></div></div>
+          <div class="field"><label>Address</label><input type="text" name="address[address1]"></div>
+          <div class="frow"><div class="field"><label>City</label><input type="text" name="address[city]"></div>
+            <div class="field"><label>Postcode</label><input type="text" name="address[zip]"></div></div>
+          <div class="frow"><div class="field"><label>Country</label><input type="text" name="address[country]"></div>
+            <div class="field"><label>Phone</label><input type="tel" name="address[phone]"></div></div>
+          <button class="btn btn-honey" type="submit" style="margin-top:8px">Save address</button>
+        {%- endform -%}
+      </div>
+    </details>
+
+    {%- for address in customer.addresses -%}
+      <div class="info-card" style="margin-bottom:14px">
+        <div class="info-row">
+          <div>
+            <b>{{ address.first_name }} {{ address.last_name }}{% if address == customer.default_address %} · Default{% endif %}</b>
+            <span>{{ address | format_address }}</span>
+          </div>
+        </div>
+        <div style="padding:0 0 16px">
+          {%- form 'customer_address', address -%}{%- endform -%}
+          <a class="remove" href="#" data-address-delete="{{ address.url }}" onclick="if(confirm('Delete this address?')){var f=document.createElement('form');f.method='post';f.action='{{ address.url }}';f.innerHTML='&lt;input type=hidden name=_method value=delete&gt;';document.body.appendChild(f);f.submit();}return false;">Remove</a>
+        </div>
+      </div>
+    {%- endfor -%}
+
+    <p style="margin-top:20px"><a class="btn btn-ghost" href="{{ routes.account_url }}">&#8592; Back to account</a></p>
+  </div>
+</section>

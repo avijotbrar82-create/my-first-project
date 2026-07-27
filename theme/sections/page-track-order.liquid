@@ -1,0 +1,75 @@
+<section class="pagetop">
+  <div class="container" style="text-align:center">
+    <div class="crumb" style="text-align:left"><a href="{{ routes.root_url }}">Home</a> / Track order</div>
+    <h1 class="pagetitle serif" data-reveal>{{ section.settings.heading }}</h1>
+    {%- if section.settings.lead != blank -%}<p class="pagelead" data-reveal style="margin-left:auto;margin-right:auto">{{ section.settings.lead }}</p>{%- endif -%}
+  </div>
+</section>
+
+<section class="blk" style="padding-top:20px">
+  <div class="container">
+    <div class="track-box" data-reveal>
+      <form class="form" method="get" action="{{ section.settings.tracking_url | default: '/account' }}">
+        <div class="field"><label for="t-order">Order number</label><input id="t-order" type="text" name="order" placeholder="#1024"></div>
+        <div class="field"><label for="t-email">Email used at checkout</label><input id="t-email" type="email" name="email" placeholder="you@email.com"></div>
+        <button class="btn btn-honey" type="submit" style="justify-content:center">Track order</button>
+      </form>
+    </div>
+    <p class="note">Haven't received tracking within 3 business days of your confirmation email? Email <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a> and we'll chase it up with the carrier.</p>
+  </div>
+</section>
+
+<section class="blk reviews" style="padding-top:80px">
+  <div class="container">
+    <div class="sechead" data-reveal>
+      <div class="row"><div>
+        {%- if section.settings.steps_eyebrow != blank -%}<div class="eyebrow">{{ section.settings.steps_eyebrow }}</div>{%- endif -%}
+        <h2 class="serif">{{ section.settings.steps_heading }}</h2>
+      </div></div>
+    </div>
+    <div class="track-steps" data-reveal data-stagger>
+      {%- for block in section.blocks -%}
+        <div class="tstep" {{ block.shopify_attributes }}>
+          <div class="num">{{ forloop.index }}</div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Track order",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Track your <em>order.</em>" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Enter your order number and email to see the latest status. You'll also receive a tracking link by email once your order ships." },
+    { "type": "url", "id": "tracking_url", "label": "Tracking form action (defaults to account)" },
+    { "type": "text", "id": "support_email", "label": "Support email", "default": "avijotbrar82@gmail.com" },
+    { "type": "header", "content": "Steps" },
+    { "type": "text", "id": "steps_eyebrow", "label": "Eyebrow", "default": "What to expect" },
+    { "type": "html", "id": "steps_heading", "label": "Heading", "default": "From checkout to <em>doorstep.</em>" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Order placed" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "You'll get a confirmation email right after checkout." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{
+    "name": "Track order",
+    "blocks": [
+      { "type": "step", "settings": { "title": "Order placed", "text": "You'll get a confirmation email right after checkout." } },
+      { "type": "step", "settings": { "title": "Processing", "text": "We prepare and pack your order within 1–3 business days." } },
+      { "type": "step", "settings": { "title": "Shipped", "text": "A tracking link is emailed on dispatch; allow 24–48h to update." } },
+      { "type": "step", "settings": { "title": "Delivered", "text": "Australia 7–14 business days · International 10–20." } }
+    ]
+  }]
+}
+{% endschema %}
