@@ -68,3 +68,26 @@ That's it — product pages, collections, cart and checkout work out of the box.
 - **Cart**, search, collections list, blog/article, 404, gift card, password page,
   and full customer account templates (login, register, account, orders, addresses).
 - Self-hosted fonts (Fraunces + Nunito Sans), warm honey palette, calm scroll animations.
+
+---
+
+## Launch sale + signup offer (added)
+
+**What's already set up:**
+- **Scrolling announcement bar** — "15% OFF SITEWIDE LAUNCH SALE · FREE SHIPPING · SIGN UP FOR YOUR 15% CODE" (edit text in theme editor → Announcement bar).
+- **Signup popup** — collects name + email, creates a customer, and reveals the **WELCOME15** code (also on exit-intent; shows once per visitor). Edit in theme editor → Signup popup.
+- **`WELCOME15`** discount code (15% off everything) — already created in your Shopify Discounts.
+- **Bundle "Buy 1–5" selector** on product pages (10% / 10% / 15% / 20% at qty 2/3/4/5), with live prices.
+
+**2 things you need to do in Shopify:**
+
+1. **Enforce the Buy 2/3/4/5 discounts** (the on-page selector is UI only — Shopify needs an engine to actually charge the tier price):
+   - Install a **free quantity-breaks / volume-discount app** (e.g. search the Shopify App Store for "quantity breaks", "volume discount"). Set tiers: **2 → 10%, 3 → 10%, 4 → 15%, 5 → 20%**, applied to **all products**.
+   - Or, for a code-free native version, tell me and I'll create automatic discounts (note Shopify only applies one tier at a time natively).
+
+2. **(Optional) Email the WELCOME15 code automatically** on signup:
+   - Shopify admin → **Marketing → Automations → "Welcome new subscribers"** → add the discount code to the email. Until you do, customers still get the code instantly in the popup.
+
+> Note: `WELCOME15` (signup 15%) and the bundle tier discounts are separate. Shopify generally
+> doesn't stack two automatic/product discounts, so a customer typically uses one or the other —
+> the bigger saving wins. If you want them to stack, that needs a Shopify Function (ask me).

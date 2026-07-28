@@ -45,11 +45,13 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="site">
     <a class="skip-link" href="#MainContent">Skip to content</a>
+    {% section 'announcement' %}
     {% section 'header' %}
     <main id="MainContent" role="main">
       {{ content_for_layout }}
     </main>
     {% section 'footer' %}
+    {% section 'newsletter-popup' %}
   </div>
 </body>
 </html>

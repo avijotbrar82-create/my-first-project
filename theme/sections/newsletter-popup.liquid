@@ -1,0 +1,76 @@
+{%- if section.settings.enabled -%}
+<div class="vf-pop-overlay" data-pop-close></div>
+<aside class="vf-pop" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | strip_html }}">
+  <button class="close" type="button" data-pop-close aria-label="Close">&times;</button>
+
+  {%- form 'customer', id: 'vf-popup-form' -%}
+    {%- if form.posted_successfully? -%}
+      <span class="eyebrow">You're in ✦</span>
+      <h3 class="serif">{{ section.settings.success_heading }}</h3>
+      <p>{{ section.settings.success_text }}</p>
+      <div class="vf-code" data-copy-code title="Click to copy">{{ section.settings.code }}</div>
+      <p class="fine">{{ section.settings.success_fine }}</p>
+      <button type="button" class="btn btn-honey" data-pop-close style="margin-top:14px">Start shopping</button>
+      <script>document.documentElement.classList.add('pop-open');try{localStorage.setItem('vf_pop','done')}catch(e){}</script>
+    {%- else -%}
+      {%- if form.errors -%}<div class="form-error" style="text-align:left">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h3 class="serif">{{ section.settings.heading }}</h3>
+      <p>{{ section.settings.text }}</p>
+      <input type="hidden" name="contact[tags]" value="launch-signup,newsletter">
+      <div class="field"><input type="text" name="contact[first_name]" placeholder="First name" autocomplete="given-name"></div>
+      <div class="field"><input type="email" name="contact[email]" placeholder="Email address" autocomplete="email" required></div>
+      <button type="submit" class="btn btn-honey">{{ section.settings.button }}</button>
+      <p class="fine">{{ section.settings.fine_print }}</p>
+    {%- endif -%}
+  {%- endform -%}
+</aside>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var KEY = 'vf_pop';
+  var delay = {{ section.settings.delay | default: 6 }} * 1000;
+  function seen(){ try{ return localStorage.getItem(KEY); }catch(e){ return false; } }
+  function mark(){ try{ localStorage.setItem(KEY,'done'); }catch(e){} }
+  function open(){ root.classList.add('pop-open'); }
+  function close(){ root.classList.remove('pop-open'); mark(); }
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest('[data-pop-close]')) close();
+    var code = e.target.closest('[data-copy-code]');
+    if(code){ var t=code.textContent.trim(); if(navigator.clipboard){navigator.clipboard.writeText(t);} code.textContent='Copied!'; setTimeout(function(){code.textContent=t;},1200); }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+
+  // Already open (success state injected inline) — don't auto-schedule.
+  if(root.classList.contains('pop-open')) return;
+  if(seen()) return;
+  var fired=false;
+  function fire(){ if(fired) return; fired=true; open(); }
+  setTimeout(fire, delay);
+  // exit-intent on desktop
+  document.addEventListener('mouseout', function(e){ if(!e.relatedTarget && e.clientY <= 0) fire(); });
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Signup popup",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable popup", "default": true },
+    { "type": "range", "id": "delay", "min": 0, "max": 30, "step": 1, "unit": "s", "label": "Show after", "default": 6 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Launch offer" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "15% off, <em>on the house.</em>" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Join Verta Fit and we'll send your 15% sitewide code — plus early access to new drops and calm recovery tips." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Get my 15% code" },
+    { "type": "text", "id": "code", "label": "Discount code to reveal", "default": "WELCOME15" },
+    { "type": "html", "id": "success_heading", "label": "Success heading", "default": "Here's your <em>15% off.</em>" },
+    { "type": "text", "id": "success_text", "label": "Success text", "default": "Use this code at checkout — it's yours sitewide." },
+    { "type": "text", "id": "success_fine", "label": "Success fine print", "default": "Tap the code to copy it. Apply at checkout — it's yours to keep." },
+    { "type": "textarea", "id": "fine_print", "label": "Fine print", "default": "By signing up you agree to receive marketing emails. Unsubscribe any time." }
+  ],
+  "presets": [{ "name": "Signup popup" }]
+}
+{% endschema %}

@@ -44,6 +44,7 @@
         <div class="pdp-price" id="pdp-price" data-price>
           {{ current.price | money }} <small>{{ cart.currency.iso_code }}</small>
         </div>
+        <div class="pdp-launch">&#10022; Extra 15% off sitewide with code <strong style="margin-left:5px;letter-spacing:1px">WELCOME15</strong></div>
 
         {%- if product.description != blank -%}
           <div class="pdp-desc">{{ product.description | strip_html | truncatewords: 40 }}</div>
@@ -64,6 +65,26 @@
           {%- endunless -%}
 
           <input type="hidden" name="id" id="pdp-variant-id" value="{{ current.id }}">
+
+          {%- if section.settings.show_bundle -%}
+            <div class="bundle" data-bundle>
+              <div class="bhead">Bundle &amp; save</div>
+              {%- assign discs = '0,10,10,15,20' | split: ',' -%}
+              {%- for n in (1..5) -%}
+                {%- assign d = discs[forloop.index0] -%}
+                <label class="btier{% if forloop.first %} sel{% endif %}" data-qty-tier="{{ n }}" data-disc="{{ d }}">
+                  <input type="radio" name="bundle_tier"{% if forloop.first %} checked{% endif %}>
+                  <div class="bt-main">
+                    <div class="bt-title">Buy {{ n }}</div>
+                    <div class="bt-save" data-bt-save></div>
+                  </div>
+                  <div class="bt-price"><span class="bt-was" data-bt-was></span><span data-bt-now></span></div>
+                  {%- if n == 4 -%}<span class="pop-tag">Most popular</span>{%- endif -%}
+                </label>
+              {%- endfor -%}
+              <p class="bundle-note">Volume discount applied automatically at checkout.</p>
+            </div>
+          {%- endif -%}
 
           <div class="buyrow">
             <div class="qty" data-qty>
@@ -115,6 +136,8 @@
   var addBtn = root.querySelector('[data-add-btn]');
   var addText = root.querySelector('[data-add-text]');
   var selects = [].slice.call(root.querySelectorAll('[data-product-option]'));
+  var qtyInput = root.querySelector('.qty input');
+  var tiers = [].slice.call(root.querySelectorAll('[data-qty-tier]'));
   var iso = '{{ cart.currency.iso_code }}';
 
   function money(cents){
@@ -126,18 +149,44 @@
       return (v.options || []).every(function(o,i){ return o === opts[i]; });
     });
   }
+  function currentVariant(){ return selects.length ? findVariant(currentOptions()) : variants[0]; }
+
+  function renderTiers(){
+    var v = currentVariant(); if(!v) return;
+    tiers.forEach(function(t){
+      var n = parseInt(t.getAttribute('data-qty-tier'), 10);
+      var disc = parseInt(t.getAttribute('data-disc'), 10) || 0;
+      var full = v.price * n;
+      var now = Math.round(full * (100 - disc) / 100);
+      var nowEl = t.querySelector('[data-bt-now]'), wasEl = t.querySelector('[data-bt-was]'), saveEl = t.querySelector('[data-bt-save]');
+      if(nowEl) nowEl.textContent = money(now);
+      if(wasEl) wasEl.textContent = disc > 0 ? money(full) : '';
+      if(saveEl) saveEl.textContent = disc > 0 ? ('Save ' + disc + '%') : 'Single item';
+    });
+  }
+
   function update(){
-    if(!selects.length){ return; }
-    var v = findVariant(currentOptions());
-    if(!v){
-      addBtn.disabled = true; if(addText) addText.textContent = 'Unavailable'; return;
-    }
+    var v = currentVariant();
+    if(!v){ addBtn.disabled = true; if(addText) addText.textContent = 'Unavailable'; return; }
     idInput.value = v.id;
     if(priceEl) priceEl.innerHTML = money(v.price) + ' <small>' + iso + '</small>';
     if(v.available){ addBtn.disabled = false; if(addText) addText.textContent = 'Add to cart'; }
     else { addBtn.disabled = true; if(addText) addText.textContent = 'Sold out'; }
+    renderTiers();
   }
   selects.forEach(function(s){ s.addEventListener('change', update); });
+
+  // bundle tiers -> set the quantity to add
+  tiers.forEach(function(t){
+    t.addEventListener('click', function(){
+      var n = parseInt(t.getAttribute('data-qty-tier'), 10);
+      tiers.forEach(function(x){ x.classList.remove('sel'); });
+      t.classList.add('sel');
+      var radio = t.querySelector('input[type=radio]'); if(radio) radio.checked = true;
+      if(qtyInput) qtyInput.value = n;
+    });
+  });
+  renderTiers();
 
   // gallery thumbnails
   var mainImg = root.querySelector('#pdp-main-img');
@@ -155,6 +204,7 @@
 {
   "name": "Product",
   "settings": [
+    { "type": "checkbox", "id": "show_bundle", "label": "Show bundle / quantity deals", "default": true },
     { "type": "checkbox", "id": "show_rating", "label": "Show rating line", "default": true },
     { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 2,400+ reviews" },
     { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text",
