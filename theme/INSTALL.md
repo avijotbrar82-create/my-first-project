@@ -54,6 +54,13 @@ shopify theme push --unpublished   # upload as a new unpublished theme
 5. **Branding (optional).** Theme settings → upload a logo + favicon, or tweak the
    palette (honey / cream / espresso). Leave the logo blank to use the built-in wordmark.
 
+6. **Demo video (Massage Gun).** The **Mini Massage Gun** page shows a *"See it in action"*
+   video band using the built-in clip (`assets/massage-gun-demo.mp4`), auto-scoped to that
+   product's handle. To change it: theme editor → open the **Product** section → **Demo video**
+   → either edit the handle list, or pick your own video from Shopify Files (that video then
+   shows on every product using this template). Toggle it off there too. The clip is muted,
+   loops, and only plays while on screen; it's paused for visitors with reduced-motion on.
+
 That's it — product pages, collections, cart and checkout work out of the box.
 
 ---
@@ -62,7 +69,7 @@ That's it — product pages, collections, cart and checkout work out of the box.
 - **Homepage** — hero (image reveal → text), trust row, product grid, benefits,
   product spotlight, method steps, reviews, CTA.
 - **Product** — media gallery + thumbnails, variant picker with live price/stock,
-  add-to-cart, details accordion, related products.
+  add-to-cart, details accordion, **"See it in action" demo video**, related products.
 - **Collection** — sortable, paginated product grid.
 - **Pages** — About, Contact (working Shopify contact form), Track Order.
 - **Cart**, search, collections list, blog/article, 404, gift card, password page,

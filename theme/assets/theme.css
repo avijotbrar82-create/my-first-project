@@ -460,3 +460,17 @@ select.sortsel{appearance:none;-webkit-appearance:none;padding-right:34px;
 .btier .pop-tag{position:absolute;top:-9px;right:14px;background:var(--espresso);color:#fdf8ef;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
 .bundle-note{font-size:12px;color:var(--taupe);margin:10px 2px 0}
 .pdp-launch{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:700;color:var(--honey);background:#fff5e6;border:1px solid rgba(176,115,46,.25);padding:8px 14px;border-radius:999px}
+
+/* ===== Demo video ("See it in action") ===== */
+.demo-video{background:var(--oat);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.demo-video .dv-head{text-align:center;max-width:52ch;margin:0 auto 34px}
+.demo-video .dv-head .eyebrow{color:var(--clay)}
+.demo-video .dv-head h2{font-size:clamp(26px,3.4vw,40px);margin:14px 0 0;color:var(--espresso)}
+.demo-video .dv-head p{color:var(--taupe);font-size:16px;line-height:1.65;margin:16px auto 0}
+.demo-video .dv-frame{max-width:780px;margin:0 auto;border-radius:22px;overflow:hidden;position:relative;
+  background:#100d0b;border:1px solid var(--line);box-shadow:0 30px 70px -40px rgba(59,50,42,.5);
+  display:flex;align-items:center;justify-content:center}
+/* keep the clip's native aspect ratio (no cropping) whatever its orientation */
+.demo-video .dv-el,.demo-video .dv-frame video{display:block;max-width:100%;max-height:78vh;width:auto;height:auto}
+.demo-video .dv-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+@media(max-width:640px){ .demo-video .dv-frame{border-radius:16px} }
