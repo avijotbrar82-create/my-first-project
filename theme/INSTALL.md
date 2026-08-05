@@ -87,12 +87,12 @@ That's it — product pages, collections, cart and checkout work out of the box.
 - **Bundle "Buy 1–5" selector** on product pages (10% / 10% / 15% / 20% at qty 2/3/4/5), with live prices.
 - **"Build your bundle" builder** — the *Build your bundle* card in the homepage product grid now opens
   a picker: the customer chooses any 3 products (with variant/colour), sees their live saving, and taps
-  **Add bundle & save 15%**. It adds all three to the cart and auto-applies the **`BUNDLE15`** code.
-  - **`BUNDLE15`** (15% off when the cart has 3+ items, non-stacking) is **already created** in your
+  **Add bundle & save 20%**. It adds all three to the cart and auto-applies the **`BUNDLE20`** code.
+  - **`BUNDLE20`** (20% off when the cart has 3+ items, non-stacking) is **already created** in your
     Shopify Discounts, so this works out of the box.
   - Tune it in the theme editor → **Bundle builder** (products offered, items required, %, code, copy).
-  - Because `BUNDLE15` just needs 3+ items, a shopper buying 3 of anything can also earn it — that's the
-    same "pick 3, save 15%" promise, so it's intended. It won't stack with `WELCOME15` or the volume-app
+  - Because `BUNDLE20` just needs 3+ items, a shopper buying 3 of anything can also earn it — that's the
+    same "pick 3, save 20%" promise, so it's intended. It won't stack with `WELCOME15` or the volume-app
     tiers (Shopify applies one discount; the bigger saving wins).
 
 **2 things you need to do in Shopify:**
