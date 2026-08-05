@@ -25,7 +25,7 @@
       {%- endif -%}
 
       {%- if section.settings.show_bundle_card -%}
-        <a class="card viewall" href="{{ section.settings.bundle_link | default: routes.all_products_collection_url }}">
+        <a class="card viewall" href="{{ section.settings.bundle_link | default: routes.all_products_collection_url }}" data-bundle-open>
           <div class="body" style="align-items:center; gap:14px; text-align:center; justify-content:center">
             {% render 'icon', name: 'bundle', class: '' %}
             <h3 style="font-size:23px">{{ section.settings.bundle_title }}</h3>
