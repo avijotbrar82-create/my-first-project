@@ -1,4 +1,4 @@
-/* Verta Fit — Soft theme */
+/* Verta Relief — Soft theme */
 (function () {
   'use strict';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

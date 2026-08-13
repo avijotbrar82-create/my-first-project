@@ -26,6 +26,7 @@
         "eyebrow": "The range",
         "heading": "Kind tools for <em>tired bodies.</em>",
         "subtext": "Five considered pieces for the places sitting, training and stress settle in — neck, spine, lower back and muscle.",
+        "collection": "featured",
         "products_to_show": 5,
         "show_bundle_card": true,
         "bundle_title": "Build your bundle",
@@ -49,7 +50,7 @@
         "product": "professional-mini-muscle-massage-gun-with-lcd-screen",
         "eyebrow": "Spotlight · Recovery",
         "heading": "Pro percussion, <em>pocket-sized.</em>",
-        "text": "The Verta Fit Mini Massage Gun folds professional-grade percussive therapy into a calm, travel-ready body — six speeds, four heads, and a quiet brushless motor with an LCD read-out."
+        "text": "The Verta Relief Mini Massage Gun folds professional-grade percussive therapy into a calm, travel-ready body — six speeds, four heads, and a quiet brushless motor with an LCD read-out."
       },
       "blocks": {
         "s1": { "type": "spec", "settings": { "value": "6", "label": "Speed gears" } },

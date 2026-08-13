@@ -1,4 +1,4 @@
-# Verta Fit — Shopify Liquid theme (Soft) · COMPLETE
+# Verta Relief — Shopify Liquid theme (Soft) · COMPLETE
 
 Full Online Store 2.0 theme ported from the approved Soft prototypes.
 See INSTALL.md for upload + setup steps. Packaged as `verta-fit-soft-theme.zip` (repo root).

@@ -1,4 +1,4 @@
-/* Verta Fit — Soft theme design system */
+/* Verta Relief — Soft theme design system */
 :root{
     --cream:#f4efe6; --oat:#eae2d3; --greige:#cfc6b6; --panel:#fbf8f1;
     --honey:#b0732e; --honey-lt:#c58a3d; --clay:#9c6b4e;
@@ -50,7 +50,8 @@
   .brand .wm{display:flex; flex-direction:column; gap:3px; line-height:1}
   .brand .wm .w{font-family:var(--f-disp); font-weight:600; font-size:26px; letter-spacing:-.01em}
   .brand .wm .w b{color:var(--honey); font-weight:600}
-  .brand .wm .t{font-family:var(--f-body); font-weight:700; text-transform:uppercase; letter-spacing:.24em; font-size:8px; color:var(--taupe)}
+  .brand .wm .t{font-family:var(--f-disp); font-style:italic; font-weight:500; letter-spacing:.005em; font-size:11px; color:var(--taupe); white-space:nowrap}
+  @media(max-width:760px){ .brand .wm .t{display:none} }
   .nav{display:flex; align-items:center; gap:34px}
   .nav a{font-size:14px; font-weight:600; color:var(--espresso); transition:color .2s}
   .nav a:hover{color:var(--honey)}
@@ -593,3 +594,7 @@ select.sortsel{appearance:none;-webkit-appearance:none;padding-right:34px;
   .bb-status{text-align:center}
   .bb-go{width:100%;justify-content:center}
 }
+
+/* footer brand slogan */
+.brand-slogan{font-family:var(--f-disp);font-style:italic;font-weight:500;font-size:15px;color:#f6efe2;margin:14px 0 0;max-width:30ch;line-height:1.35}
+footer .brand .about{margin-top:10px}

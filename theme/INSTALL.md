@@ -1,4 +1,4 @@
-# Verta Fit — Soft theme · Install guide
+# Verta Relief — Soft theme · Install guide
 
 A complete Shopify **Online Store 2.0** theme built from the approved Soft designs.
 Product data, prices, images, cart and checkout all come live from your Shopify store.

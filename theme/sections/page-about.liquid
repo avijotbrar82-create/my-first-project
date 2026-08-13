@@ -7,7 +7,7 @@
   {%- if section.settings.image != blank -%}
     <div class="about-hero-img" data-reveal><img src="{{ section.settings.image | image_url: width: 1400 }}" alt="{{ section.settings.heading | strip_html }}" width="1400" height="700"></div>
   {%- else -%}
-    <div class="about-hero-img" data-reveal><img src="{{ 'hero-massage-guns.webp' | asset_url }}" alt="Verta Fit recovery range" width="1402" height="1122"></div>
+    <div class="about-hero-img" data-reveal><img src="{{ 'hero-massage-guns.webp' | asset_url }}" alt="Verta Relief recovery range" width="1402" height="1122"></div>
   {%- endif -%}
 </section>
 
@@ -51,12 +51,12 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
     { "type": "html", "id": "heading", "label": "Heading", "default": "Relief. Recovery. <em>Balance.</em>" },
-    { "type": "textarea", "id": "lead", "label": "Lead", "default": "At Verta Fit, we believe everyday relief shouldn't be complicated — or expensive. We design and curate recovery and wellness products that help real people move better, sit better, and feel better, one small habit at a time." },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "At Verta Relief, we believe everyday relief shouldn't be complicated — or expensive. We design and curate recovery and wellness products that help real people move better, sit better, and feel better, one small habit at a time." },
     { "type": "image_picker", "id": "image", "label": "Hero image (defaults to packaged hero)" },
     { "type": "header", "content": "Story" },
     { "type": "text", "id": "story_eyebrow", "label": "Eyebrow", "default": "Why we started" },
     { "type": "html", "id": "story_heading", "label": "Heading", "default": "Built for the <em>hours after.</em>" },
-    { "type": "richtext", "id": "story_text", "label": "Text", "default": "<p>Most of us spend our days hunched over desks, phones and steering wheels — and our bodies pay for it. Stiff necks, tight shoulders and aching lower backs have become the norm instead of the exception. Verta Fit was built to change that.</p><p>We didn't want to sell one-size-fits-all gadgets that end up in a drawer after a week. So every product we offer is chosen and refined with one question in mind: will this actually make someone's day-to-day life more comfortable?</p>" },
+    { "type": "richtext", "id": "story_text", "label": "Text", "default": "<p>Most of us spend our days hunched over desks, phones and steering wheels — and our bodies pay for it. Stiff necks, tight shoulders and aching lower backs have become the norm instead of the exception. Verta Relief was built to change that.</p><p>We didn't want to sell one-size-fits-all gadgets that end up in a drawer after a week. So every product we offer is chosen and refined with one question in mind: will this actually make someone's day-to-day life more comfortable?</p>" },
     { "type": "header", "content": "Differentiators" },
     { "type": "text", "id": "diffs_eyebrow", "label": "Eyebrow", "default": "What makes us different" },
     { "type": "html", "id": "diffs_heading", "label": "Heading", "default": "Small brand, <em>serious care.</em>" }

@@ -1,4 +1,4 @@
-# Verta Fit — Soft design tokens
+# Verta Relief — Soft design tokens
 
 A warm, editorial, boutique-wellness alternative to the Kinetic theme.
 Palette derived from the reference gift-box photo: cream/oat/greige neutrals + a single honey accent.
