@@ -231,8 +231,8 @@
   /* ---- pdp ---- */
   .pdp{display:grid; grid-template-columns:1.02fr .98fr; gap:54px; align-items:start}
   @media(max-width:900px){.pdp{grid-template-columns:1fr; gap:30px}}
-  .pdp-main{aspect-ratio:1/1; border-radius:22px; overflow:hidden; background:var(--oat)}
-  .pdp-main img{width:100%; height:100%; object-fit:cover; object-position:center 58%}
+  .pdp-main{aspect-ratio:1/1; border-radius:22px; overflow:hidden; background:var(--panel)}
+  .pdp-main img{width:100%; height:100%; object-fit:contain}
   .thumbs{display:flex; gap:12px; margin-top:14px}
   .thumb{width:84px; height:84px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--oat); cursor:pointer; padding:0}
   .thumb img{width:100%; height:100%; object-fit:cover}
@@ -619,4 +619,37 @@ footer .brand .about{margin-top:10px}
   .hero.banner .hero-banner-wrap{clip-path:none !important;animation:none !important}
   .hero.banner .hero-banner-img{transform:none !important;animation:none !important}
   .hero.banner .hero-banner-cta{opacity:1 !important;transform:translateX(-50%) !important;animation:none !important}
+}
+
+/* ============ MOBILE — product page (PDP) ============ */
+@media(max-width:600px){
+  .pdp{gap:18px}
+  .pdp-main{border-radius:16px; max-height:74vh}
+  .thumbs{gap:8px; margin-top:10px}
+  .thumb{width:60px; height:60px; border-radius:10px}
+  .pdp-info h1{font-size:22px; margin-top:6px}
+  .rating{font-size:13px; margin-top:10px}
+  .pdp-price{font-size:23px; margin-top:10px}
+  .pdp-price small{font-size:12px}
+  .pdp-launch{font-size:11.5px; padding:7px 12px; margin-top:12px}
+  .pdp-desc{font-size:13.5px; line-height:1.6; margin-top:12px}
+  .opt{margin-top:18px}
+  .buyrow{margin-top:18px; gap:10px}
+  .buyrow .btn-honey{min-width:0}
+  .qty button{width:38px; height:44px}
+  .trustpts{margin-top:18px; gap:8px}
+  .trustpts li{font-size:12.5px}
+  .acc{margin-top:20px}
+  .acc summary{font-size:15px; padding:13px 0}
+  .acc details .body-acc{font-size:13px; line-height:1.6}
+  .bundle{margin-top:20px}
+  .bundle .bhead{font-size:15px; padding:10px}
+  .btier{padding:12px 14px; gap:10px}
+  .btier .bt-title{font-size:13.5px}
+  .btier .bt-price{font-size:16px}
+  .crumb{font-size:12px}
+  .demo-video .dv-head h2{font-size:22px}
+  /* hero banner button — smaller on phones */
+  .hero.banner .hero-banner-cta{bottom:20%}
+  .hero.banner .hero-banner-cta .btn{font-size:11px; padding:9px 17px; box-shadow:0 10px 24px -10px rgba(40,28,16,.6)}
 }

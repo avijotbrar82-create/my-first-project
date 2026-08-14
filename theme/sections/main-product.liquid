@@ -110,7 +110,7 @@
 
         <div class="acc">
           {%- if product.description != blank -%}
-            <details open><summary>Details</summary><div class="body-acc">{{ product.description }}</div></details>
+            <details><summary>Details</summary><div class="body-acc">{{ product.description }}</div></details>
           {%- endif -%}
           <details><summary>Shipping &amp; returns</summary><div class="body-acc">{{ section.settings.shipping_text }}</div></details>
           {%- if section.settings.extra_note != blank -%}
