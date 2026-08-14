@@ -1,0 +1,278 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+-%}
+<section class="blk" style="padding-top:20px" id="ProductSection-{{ section.id }}" data-product-section>
+  <div class="container">
+    <div class="pagetop" style="padding:0 0 20px">
+      <div class="crumb">
+        <a href="{{ routes.root_url }}">Home</a> /
+        <a href="{{ routes.all_products_collection_url }}">Shop</a> /
+        {{ product.title }}
+      </div>
+    </div>
+
+    <div class="pdp">
+      {%- comment -%} ---------- Gallery ---------- {%- endcomment -%}
+      <div class="gallery" data-reveal>
+        <div class="pdp-main">
+          {%- if product.featured_media -%}
+            <img id="pdp-main-img" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.featured_media.alt | escape | default: product.title }}" width="1000" height="1000">
+          {%- else -%}
+            {{ 'product-apparel-1' | placeholder_svg_tag: 'pimg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="thumbs">
+            {%- for media in product.media limit: 6 -%}
+              <button type="button" class="thumb{% if forloop.first %} active{% endif %}" data-src="{{ media | image_url: width: 1000 }}" aria-label="View image {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 200 }}" alt="" width="200" height="200" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- Info ---------- {%- endcomment -%}
+      <div class="pdp-info" data-reveal>
+        {%- if product.type != blank -%}<div class="eyebrow">{{ product.type }}</div>{%- endif -%}
+        <h1 class="serif">{{ product.title }}</h1>
+
+        {%- if section.settings.show_rating -%}
+          <a class="rating" href="#reviews">★★★★★ <span data-vr-rating data-handle="{{ product.handle }}">{{ section.settings.rating_text }}</span></a>
+        {%- endif -%}
+
+        <div class="pdp-price" id="pdp-price" data-price>
+          {{ current.price | money }} <small>{{ cart.currency.iso_code }}</small>
+        </div>
+        <div class="pdp-launch">&#10022; Extra 15% off sitewide with code <strong style="margin-left:5px;letter-spacing:1px">WELCOME15</strong></div>
+
+        {%- if product.description != blank -%}
+          <div class="pdp-desc">{{ product.description | strip_html | truncatewords: 40 }}</div>
+        {%- endif -%}
+
+        {%- form 'product', product, class: 'pdp-form', id: 'product-form' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="opt">
+                <label class="opt-label" for="Option-{{ option.name | handle }}">{{ option.name }}</label>
+                <select id="Option-{{ option.name | handle }}" data-option-index="{{ forloop.index0 }}" data-product-option>
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" id="pdp-variant-id" value="{{ current.id }}">
+
+          {%- if section.settings.show_bundle -%}
+            <div class="bundle" data-bundle>
+              <div class="bhead">Bundle &amp; save</div>
+              {%- assign discs = '0,10,10,15,20' | split: ',' -%}
+              {%- for n in (1..5) -%}
+                {%- assign d = discs[forloop.index0] -%}
+                <label class="btier{% if forloop.first %} sel{% endif %}" data-qty-tier="{{ n }}" data-disc="{{ d }}">
+                  <input type="radio" name="bundle_tier"{% if forloop.first %} checked{% endif %}>
+                  <div class="bt-main">
+                    <div class="bt-title">Buy {{ n }}{%- if n == 4 -%} <span class="pop-tag">Most popular</span>{%- endif -%}</div>
+                    <div class="bt-save" data-bt-save></div>
+                  </div>
+                  <div class="bt-price"><span class="bt-was" data-bt-was></span><span data-bt-now></span></div>
+                </label>
+              {%- endfor -%}
+              <p class="bundle-note">Volume discount applied automatically at checkout.</p>
+            </div>
+          {%- endif -%}
+
+          <div class="buyrow">
+            <div class="qty" data-qty>
+              <button type="button" data-qty-minus aria-label="Decrease quantity">&minus;</button>
+              <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" name="add" class="btn btn-honey" id="pdp-add" data-add-btn{% unless current.available %} disabled{% endunless %}>
+              <span data-add-text>{% if current.available %}Add to cart{% else %}Sold out{% endif %}</span>
+            </button>
+          </div>
+
+          {%- if product.selected_or_first_available_variant.available == false -%}
+            <p class="pdp-unavailable">This variant is currently unavailable.</p>
+          {%- endif -%}
+        {%- endform -%}
+
+        <ul class="trustpts">
+          <li>{% render 'icon', name: 'check', class: '' %} Free shipping on every order</li>
+          <li>{% render 'icon', name: 'check', class: '' %} 30-day easy returns</li>
+          <li>{% render 'icon', name: 'check', class: '' %} Ships in 1–3 business days from Australia</li>
+        </ul>
+
+        <div class="acc">
+          {%- if product.description != blank -%}
+            <details><summary>Details</summary><div class="body-acc">{{ product.description }}</div></details>
+          {%- endif -%}
+          <details><summary>Shipping &amp; returns</summary><div class="body-acc">{{ section.settings.shipping_text }}</div></details>
+          {%- if section.settings.extra_note != blank -%}
+            <details><summary>Good to know</summary><div class="body-acc">{{ section.settings.extra_note }}</div></details>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-variants>
+    {{ product.variants | json }}
+  </script>
+</section>
+
+{%- comment -%} ---------- Demo video ("See it in action") ---------- {%- endcomment -%}
+{%- liquid
+  assign demo_handles = section.settings.demo_video_handles | default: 'professional-mini-muscle-massage-gun-with-lcd-screen'
+  assign show_demo = false
+  if section.settings.show_demo_video
+    if section.settings.demo_video != blank
+      assign show_demo = true
+    elsif demo_handles contains product.handle
+      assign show_demo = true
+    endif
+  endif
+-%}
+{%- if show_demo -%}
+  <section class="blk demo-video" data-demo-video>
+    <div class="container">
+      <div class="dv-head" data-reveal>
+        <span class="eyebrow">{{ section.settings.demo_eyebrow }}</span>
+        <h2 class="serif">{{ section.settings.demo_heading }}</h2>
+        {%- if section.settings.demo_text != blank -%}<p>{{ section.settings.demo_text }}</p>{%- endif -%}
+      </div>
+      <div class="dv-frame" data-reveal>
+        {%- if section.settings.demo_video != blank -%}
+          {{ section.settings.demo_video | video_tag: image_size: '1200x', autoplay: false, loop: true, muted: true, controls: true, playsinline: true, class: 'dv-el' }}
+        {%- else -%}
+          <video class="dv-el" playsinline muted loop preload="metadata" controls
+                 poster="{{ product.featured_image | image_url: width: 1200 }}"
+                 {% if section.settings.demo_autoplay %}data-autoplay{% endif %}>
+            <source src="{{ 'massage-gun-demo.mp4' | asset_url }}" type="video/mp4">
+          </video>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  <script>
+  (function(){
+    var band = document.querySelector('[data-demo-video]');
+    if(!band) return;
+    var v = band.querySelector('video.dv-el');
+    if(!v) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var wantAuto = v.hasAttribute('data-autoplay') && !reduce;
+    if(!wantAuto) return;
+    if(!('IntersectionObserver' in window)){ v.play&&v.play().catch(function(){}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ v.play && v.play().catch(function(){}); }
+        else { v.pause && v.pause(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(v);
+  })();
+  </script>
+{%- endif -%}
+
+<script>
+(function(){
+  var root = document.querySelector('[data-product-section]');
+  if(!root) return;
+  var variants = JSON.parse(root.querySelector('[data-variants]').textContent);
+  var idInput = root.querySelector('#pdp-variant-id');
+  var priceEl = root.querySelector('[data-price]');
+  var addBtn = root.querySelector('[data-add-btn]');
+  var addText = root.querySelector('[data-add-text]');
+  var selects = [].slice.call(root.querySelectorAll('[data-product-option]'));
+  var qtyInput = root.querySelector('.qty input');
+  var tiers = [].slice.call(root.querySelectorAll('[data-qty-tier]'));
+  var iso = '{{ cart.currency.iso_code }}';
+
+  function money(cents){
+    return '$' + (cents/100).toFixed(2);
+  }
+  function currentOptions(){ return selects.map(function(s){ return s.value; }); }
+  function findVariant(opts){
+    return variants.find(function(v){
+      return (v.options || []).every(function(o,i){ return o === opts[i]; });
+    });
+  }
+  function currentVariant(){ return selects.length ? findVariant(currentOptions()) : variants[0]; }
+
+  function renderTiers(){
+    var v = currentVariant(); if(!v) return;
+    tiers.forEach(function(t){
+      var n = parseInt(t.getAttribute('data-qty-tier'), 10);
+      var disc = parseInt(t.getAttribute('data-disc'), 10) || 0;
+      var full = v.price * n;
+      var now = Math.round(full * (100 - disc) / 100);
+      var nowEl = t.querySelector('[data-bt-now]'), wasEl = t.querySelector('[data-bt-was]'), saveEl = t.querySelector('[data-bt-save]');
+      if(nowEl) nowEl.textContent = money(now);
+      if(wasEl) wasEl.textContent = disc > 0 ? money(full) : '';
+      if(saveEl) saveEl.textContent = disc > 0 ? ('Save ' + disc + '%') : 'Single item';
+    });
+  }
+
+  function update(){
+    var v = currentVariant();
+    if(!v){ addBtn.disabled = true; if(addText) addText.textContent = 'Unavailable'; return; }
+    idInput.value = v.id;
+    if(priceEl) priceEl.innerHTML = money(v.price) + ' <small>' + iso + '</small>';
+    if(v.available){ addBtn.disabled = false; if(addText) addText.textContent = 'Add to cart'; }
+    else { addBtn.disabled = true; if(addText) addText.textContent = 'Sold out'; }
+    renderTiers();
+  }
+  selects.forEach(function(s){ s.addEventListener('change', update); });
+
+  // bundle tiers -> set the quantity to add
+  tiers.forEach(function(t){
+    t.addEventListener('click', function(){
+      var n = parseInt(t.getAttribute('data-qty-tier'), 10);
+      tiers.forEach(function(x){ x.classList.remove('sel'); });
+      t.classList.add('sel');
+      var radio = t.querySelector('input[type=radio]'); if(radio) radio.checked = true;
+      if(qtyInput) qtyInput.value = n;
+    });
+  });
+  renderTiers();
+
+  // gallery thumbnails
+  var mainImg = root.querySelector('#pdp-main-img');
+  root.querySelectorAll('.thumb').forEach(function(t){
+    t.addEventListener('click', function(){
+      root.querySelectorAll('.thumb').forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      if(mainImg && t.dataset.src) mainImg.src = t.dataset.src;
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "checkbox", "id": "show_bundle", "label": "Show bundle / quantity deals", "default": true },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating line", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 · 2,400+ reviews" },
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text",
+      "default": "<p>Free shipping on every order. Orders are processed within 1–3 business days; Australian delivery in 7–14 business days with tracking emailed on dispatch. 30-day returns on unused items in original packaging.</p>" },
+    { "type": "richtext", "id": "extra_note", "label": "Good to know",
+      "default": "<p><em>Not intended to diagnose or treat medical conditions. Consult a physician if you have chronic pain or an existing injury.</em></p>" },
+
+    { "type": "header", "content": "Demo video" },
+    { "type": "checkbox", "id": "show_demo_video", "label": "Show \"See it in action\" video", "default": true },
+    { "type": "text", "id": "demo_video_handles", "label": "Only show the built-in clip on these product handles", "default": "professional-mini-muscle-massage-gun-with-lcd-screen", "info": "Comma-separated product handles. Keeps the built-in Massage Gun clip on the right product(s) only. Ignored when you pick a Video below (that shows on every product using this template)." },
+    { "type": "video", "id": "demo_video", "label": "Video (optional)", "info": "Pick a video from Shopify Files to override the built-in clip. Leave blank to use the bundled Massage Gun demo." },
+    { "type": "checkbox", "id": "demo_autoplay", "label": "Autoplay muted (built-in clip)", "default": true },
+    { "type": "text", "id": "demo_eyebrow", "label": "Eyebrow", "default": "See it in action" },
+    { "type": "text", "id": "demo_heading", "label": "Heading", "default": "Percussive relief, in the palm of your hand" },
+    { "type": "textarea", "id": "demo_text", "label": "Subtext", "default": "Compact, quiet, and travel-ready — watch the Mini Massage Gun work through a tight muscle in seconds." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_honey": "#b0732e",
+    "color_honey_lt": "#c58a3d",
+    "color_cream": "#f4efe6",
+    "color_oat": "#eae2d3",
+    "color_espresso": "#3b322a",
+    "color_taupe": "#7a6f62",
+    "card_show_vendor": true,
+    "card_show_description": true
+  },
+  "presets": {
+    "Verta Relief — Soft": {
+      "color_honey": "#b0732e",
+      "color_cream": "#f4efe6",
+      "color_espresso": "#3b322a"
+    }
+  }
+}

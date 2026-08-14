@@ -1,0 +1,24 @@
+{%- comment -%} Callixe/Derila-style product card: image + discount badge, review count, title, price. {%- endcomment -%}
+{%- liquid
+  assign onsale = false
+  if product.compare_at_price > product.price
+    assign onsale = true
+    assign off = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+<a class="cx-card" href="{{ product.url }}">
+  <div class="cx-card-art">
+    {%- if onsale -%}<span class="cx-off">{{ off }}% OFF</span>{%- endif -%}
+    {%- if product.featured_media -%}
+      <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="600" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="cx-card-body">
+    <span class="cx-card-reviews" data-vr-rating-mini data-handle="{{ product.handle }}"></span>
+    <h3 class="serif">{{ product.title }}</h3>
+    <div class="cx-card-price">
+      <span class="cx-now">{{ product.price | money }}</span>
+      {%- if onsale -%}<span class="cx-was">{{ product.compare_at_price | money }}</span>{%- endif -%}
+    </div>
+  </div>
+</a>

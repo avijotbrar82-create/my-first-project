@@ -1,0 +1,50 @@
+<section class="pagetop">
+  <div class="container"><div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Cart</div>
+    <h1 class="pagetitle serif">Your cart</h1></div>
+</section>
+
+<section class="blk" style="padding-top:24px">
+  <div class="container">
+    {%- if cart.item_count == 0 -%}
+      <div class="empty-state">
+        <h2 class="serif">Your cart is empty.</h2>
+        <p>Time to find your calm.</p>
+        <p style="margin-top:18px"><a class="btn btn-honey" href="{{ routes.all_products_collection_url }}">Shop all recovery</a></p>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-wrap">
+        {%- for item in cart.items -%}
+          <div class="cart-line">
+            <a class="thumb-img" href="{{ item.url }}">
+              {%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="96" height="96">{%- endif -%}
+            </a>
+            <div>
+              <h3><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+              {%- unless item.variant.title contains 'Default' -%}<div class="vopt">{{ item.variant.title }}</div>{%- endunless -%}
+              <div class="qty" data-qty style="margin-top:12px">
+                <button type="button" data-qty-minus aria-label="Decrease">&minus;</button>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity" onchange="this.form.submit()">
+                <button type="button" data-qty-plus aria-label="Increase">+</button>
+              </div>
+              <a class="remove" href="{{ item.url_to_remove }}">Remove</a>
+            </div>
+            <div class="lineprice">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+
+        <div class="cart-foot">
+          <div class="subtotal">{{ cart.total_price | money }} <small>Subtotal · taxes &amp; shipping at checkout</small></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button type="submit" name="update" class="btn btn-ghost">Update</button>
+            <button type="submit" name="checkout" class="btn btn-honey">Checkout</button>
+          </div>
+        </div>
+      </form>
+      <p class="contact-note" style="margin-top:20px">Free shipping on every order · 30-day comfort guarantee</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

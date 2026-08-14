@@ -1,0 +1,30 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.account_url }}">Account</a> / {{ order.name }}</div>
+    <h1 class="pagetitle serif">Order {{ order.name }}</h1>
+    <p class="pagelead">Placed {{ order.created_at | date: '%d %B %Y' }} · {{ order.financial_status_label }}{% if order.fulfillment_status_label %} · {{ order.fulfillment_status_label }}{% endif %}</p>
+  </div>
+</section>
+<section class="blk" style="padding-top:24px">
+  <div class="container cart-wrap">
+    <table class="acct-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody>
+        {%- for line in order.line_items -%}
+          <tr>
+            <td><b>{{ line.title }}</b></td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    <div class="cart-foot">
+      <div></div>
+      <div class="subtotal">{{ order.total_price | money }} <small>Total</small></div>
+    </div>
+    {%- if order.shipping_address -%}
+      <div class="info-card" style="margin-top:24px"><div class="info-row"><div><b>Shipping to</b><span>{{ order.shipping_address | format_address }}</span></div></div></div>
+    {%- endif -%}
+  </div>
+</section>

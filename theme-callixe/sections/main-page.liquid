@@ -1,0 +1,20 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ page.title }}</div>
+    <h1 class="pagetitle serif">{{ page.title }}</h1>
+  </div>
+</section>
+<section class="blk" style="padding-top:24px">
+  <div class="container">
+    <div class="rte" data-reveal>
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "menu": "Menu",
+      "cart": "Cart"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "Search products…"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "newsletter": {
+      "email": "Email",
+      "subscribe": "Subscribe",
+      "success": "Thanks for subscribing."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "from_price": "From",
+      "quantity": "Quantity"
+    },
+    "facets": {
+      "sort_by_label": "Sort by",
+      "all": "All"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "continue_shopping": "Continue shopping"
+    }
+  },
+  "templates": {
+    "contact": {
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send message",
+        "post_success": "Thanks — we'll be in touch within 24–48 hours."
+      }
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for doesn't exist."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Collections</div>
+    <h1 class="pagetitle serif">Collections</h1>
+  </div>
+</section>
+<section class="blk" style="padding-top:26px">
+  <div class="container">
+    <div class="prodgrid" data-reveal data-stagger>
+      {%- for collection in collections -%}
+        <a class="card" href="{{ collection.url }}">
+          <div class="art">
+            {%- if collection.featured_image -%}
+              <img class="pimg" src="{{ collection.featured_image | image_url: width: 700 }}" alt="{{ collection.title | escape }}" width="700" height="700" loading="lazy">
+            {%- elsif collection.products.first.featured_media -%}
+              <img class="pimg" src="{{ collection.products.first.featured_media | image_url: width: 700 }}" alt="{{ collection.title | escape }}" width="700" height="700" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="body">
+            <h3>{{ collection.title }}</h3>
+            <p class="desc">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</p>
+            <div class="foot"><span class="add" style="border-color:var(--honey);color:var(--honey)">Shop &#8594;</span></div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

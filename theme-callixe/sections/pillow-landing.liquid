@@ -1,0 +1,290 @@
+{%- liquid
+  assign p = section.settings.product
+  assign imgs = p.images
+  assign price = p.price | money
+  assign purl = p.url | default: '#'
+  assign cta = section.settings.cta_label | default: 'Shop the Butterfly Pillow'
+  assign hero_img = section.settings.hero_image
+  if hero_img == blank
+    assign hero_img = p.featured_image
+  endif
+-%}
+
+<div class="plp">
+
+  {%- comment -%} ============ HERO ============ {%- endcomment -%}
+  <section class="plp-hero">
+    <div class="container plp-hero-grid">
+      <div class="plp-hero-copy" data-reveal>
+        {%- if section.settings.discount_label != blank -%}<span class="plp-pill">{{ section.settings.discount_label }}</span>{%- endif -%}
+        <h1 class="serif">{{ section.settings.heading }}</h1>
+        <p class="plp-lead">{{ section.settings.subheading }}</p>
+        <ul class="plp-checks">
+          <li>{% render 'icon', name: 'check' %} {{ section.settings.bullet1 }}</li>
+          <li>{% render 'icon', name: 'check' %} {{ section.settings.bullet2 }}</li>
+          <li>{% render 'icon', name: 'check' %} {{ section.settings.bullet3 }}</li>
+        </ul>
+        <a class="btn btn-honey plp-cta" href="{{ purl }}">{{ cta }}</a>
+        <div class="plp-hero-note">{% render 'icon', name: 'guarantee' %} 30-day comfort guarantee · Free AU shipping</div>
+      </div>
+      <div class="plp-hero-media" data-reveal>
+        {%- if hero_img != blank -%}
+          <img src="{{ hero_img | image_url: width: 900 }}" alt="{{ p.title | escape }}" width="900" height="900" fetchpriority="high">
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ TRUST STRIP ============ {%- endcomment -%}
+  <section class="plp-press">
+    <div class="container">
+      <p>{{ section.settings.press_text }}</p>
+      <div class="plp-press-row">
+        <span>{% render 'icon', name: 'shipping' %} Fast Australian delivery</span>
+        <span>{% render 'icon', name: 'guarantee' %} Secure checkout</span>
+        <span>{% render 'icon', name: 'star' %} Loved by 12,000+</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ YOU DESERVE BETTER + 4 benefit cards ============ {%- endcomment -%}
+  <section class="blk plp-deserve">
+    <div class="container">
+      <div class="sechead center" data-reveal>
+        <h2 class="serif">{{ section.settings.deserve_heading }}</h2>
+        <p>{{ section.settings.deserve_text }}</p>
+      </div>
+      {%- if imgs[0] != blank -%}
+        <div class="plp-deserve-img" data-reveal><img src="{{ imgs[0] | image_url: width: 900 }}" alt="{{ p.title | escape }}" width="900" height="900" loading="lazy"></div>
+      {%- endif -%}
+      <div class="plp-icards" data-reveal data-stagger>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'spine' %}</div><b>Supports the neck</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'support' %}</div><b>Relieves facial pressure</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'posture' %}</div><b>Aligns the shoulders</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'star' %}</div><b>Enhances sleep quality</b></div>
+      </div>
+      <div class="center"><a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a></div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ PRODUCT HIGHLIGHT ============ {%- endcomment -%}
+  <section class="blk plp-highlight-wrap">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.highlight_heading }}</h2></div>
+      <div class="plp-highlight" data-reveal>
+        <div class="plp-hl-media">
+          <span class="plp-tag">New</span>
+          {%- if imgs[1] != blank -%}<img src="{{ imgs[1] | image_url: width: 800 }}" alt="{{ p.title | escape }}" width="800" height="800" loading="lazy">
+          {%- elsif hero_img != blank -%}<img src="{{ hero_img | image_url: width: 800 }}" alt="{{ p.title | escape }}" width="800" height="800" loading="lazy">{%- endif -%}
+        </div>
+        <div class="plp-hl-info">
+          <h3 class="serif">{{ p.title }}</h3>
+          <div class="plp-hl-price">{{ price }} <small>{{ cart.currency.iso_code }}</small></div>
+          <ul class="plp-ticks">
+            <li>{% render 'icon', name: 'check' %} Ergonomic butterfly design</li>
+            <li>{% render 'icon', name: 'check' %} Breathable, high-density memory foam</li>
+            <li>{% render 'icon', name: 'check' %} Relieves neck &amp; shoulder pain</li>
+            <li>{% render 'icon', name: 'check' %} Adapts to every sleeping position</li>
+          </ul>
+          <a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ SPLIT — pain-free mornings ============ {%- endcomment -%}
+  <section class="blk plp-split-wrap">
+    <div class="container plp-split">
+      <div class="plp-split-media" data-reveal>
+        {%- if imgs[2] != blank -%}<img src="{{ imgs[2] | image_url: width: 800 }}" alt="{{ p.title | escape }}" width="800" height="800" loading="lazy">
+        {%- elsif imgs[0] != blank -%}<img src="{{ imgs[0] | image_url: width: 800 }}" alt="{{ p.title | escape }}" width="800" height="800" loading="lazy">{%- endif -%}
+      </div>
+      <div class="plp-split-copy" data-reveal>
+        <h2 class="serif">{{ section.settings.split_heading }}</h2>
+        <p class="plp-lead">{{ section.settings.split_text }}</p>
+        <ul class="plp-feats">
+          <li><span class="ic">{% render 'icon', name: 'support' %}</span><div><b>High-density memory foam</b> that cradles your head and neck.</div></li>
+          <li><span class="ic">{% render 'icon', name: 'spine' %}</span><div><b>Ergonomic butterfly shape</b> that lets you rest your arms naturally.</div></li>
+          <li><span class="ic">{% render 'icon', name: 'guarantee' %}</span><div><b>Breathable cover</b> that stays cool through the night.</div></li>
+        </ul>
+        <a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ ANY SLEEPING POSITION ============ {%- endcomment -%}
+  <section class="blk plp-positions-wrap">
+    <div class="container plp-positions">
+      <div class="plp-pos-copy" data-reveal>
+        <h2 class="serif">{{ section.settings.positions_heading }}</h2>
+        <p class="plp-lead">{{ section.settings.positions_text }}</p>
+        <a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a>
+      </div>
+      <div class="plp-pos-grid" data-reveal data-stagger>
+        {%- assign poslabels = 'On your back,On your side,On your stomach,Any position' | split: ',' -%}
+        {%- for i in (0..3) -%}
+          {%- assign pi = i | plus: 3 -%}
+          <figure class="plp-pos-card">
+            {%- if imgs[pi] != blank -%}<img src="{{ imgs[pi] | image_url: width: 500 }}" alt="{{ poslabels[i] }}" width="500" height="500" loading="lazy">
+            {%- elsif imgs[i] != blank -%}<img src="{{ imgs[i] | image_url: width: 500 }}" alt="{{ poslabels[i] }}" width="500" height="500" loading="lazy">{%- endif -%}
+            <figcaption>{% render 'icon', name: 'check' %} {{ poslabels[i] }}</figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ SUPPORT ZONES (image + accordion) ============ {%- endcomment -%}
+  <section class="blk plp-support">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.support_heading }}</h2></div>
+      <div class="plp-support-grid">
+        <div class="plp-support-img" data-reveal>
+          {%- if imgs[0] != blank -%}<img src="{{ imgs[0] | image_url: width: 800 }}" alt="{{ p.title | escape }} support zones" width="800" height="800" loading="lazy">{%- endif -%}
+        </div>
+        <div class="plp-zones acc" data-reveal>
+          <details open><summary>Neck support zone</summary><div class="body-acc">Cradles the natural curve of your neck to keep your spine aligned all night.</div></details>
+          <details><summary>Head cradle</summary><div class="body-acc">A gentle central dip keeps your head centred and takes pressure off your face.</div></details>
+          <details><summary>Shoulder relief</summary><div class="body-acc">Contoured wings make room for your shoulders so they settle without strain.</div></details>
+          <details><summary>Breathable cooling</summary><div class="body-acc">An open-cell memory foam and breathable cover promote airflow and reduce heat.</div></details>
+        </div>
+      </div>
+      <div class="center"><a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a></div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ COMPARISON ============ {%- endcomment -%}
+  <section class="blk plp-compare-wrap">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.compare_heading }}</h2><p>See how the Butterfly Pillow compares to an ordinary pillow.</p></div>
+      <div class="plp-compare" data-reveal>
+        <div class="plp-crow plp-chead">
+          <div class="plp-cfeat"></div>
+          <div class="plp-cours">Butterfly Pillow</div>
+          <div class="plp-cstd">Standard pillow</div>
+        </div>
+        {%- assign feats = 'Supports natural spinal alignment,Reduces neck &amp; shoulder tension,Promotes airflow &amp; reduces snoring,Works for every sleep position,Holds its shape over time,Ergonomic butterfly arm rest,Breathable, cooling cover' | split: ',' -%}
+        {%- for f in feats -%}
+          <div class="plp-crow">
+            <div class="plp-cfeat">{{ f }}</div>
+            <div class="plp-cours"><span class="yes">{% render 'icon', name: 'check' %}</span></div>
+            <div class="plp-cstd"><span class="no">&times;</span></div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="center"><a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a></div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ TRUST BADGES ============ {%- endcomment -%}
+  <section class="plp-badges">
+    <div class="container">
+      <span>{% render 'icon', name: 'shipping' %} Free shipping across Australia</span>
+      <span>{% render 'icon', name: 'guarantee' %} Easy 30-day returns</span>
+      <span>{% render 'icon', name: 'star' %} 12,000+ happy sleepers</span>
+    </div>
+  </section>
+
+  {%- comment -%} ============ REVIEWS ============ {%- endcomment -%}
+  <section class="blk plp-reviews">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.reviews_heading }}</h2></div>
+      <div class="plp-rev-grid" data-reveal data-stagger>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <figure class="plp-rev" {{ block.shopify_attributes }}>
+              <div class="stars">★★★★★</div>
+              <blockquote>{{ block.settings.quote }}</blockquote>
+              <figcaption><b>{{ block.settings.name }}</b>{% if block.settings.location != blank %} · <span>{{ block.settings.location }}</span>{% endif %} <span class="verified">{% render 'icon', name: 'check' %} Verified buyer</span></figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ MARQUEE ============ {%- endcomment -%}
+  <div class="plp-marquee"><div class="track"><span>{% render 'icon', name: 'shipping' %} Free Australian shipping&nbsp;&nbsp;✦&nbsp;&nbsp;{% render 'icon', name: 'guarantee' %} 30-day comfort guarantee&nbsp;&nbsp;✦&nbsp;&nbsp;{% render 'icon', name: 'star' %} Loved by 12,000+&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span aria-hidden="true">{% render 'icon', name: 'shipping' %} Free Australian shipping&nbsp;&nbsp;✦&nbsp;&nbsp;{% render 'icon', name: 'guarantee' %} 30-day comfort guarantee&nbsp;&nbsp;✦&nbsp;&nbsp;{% render 'icon', name: 'star' %} Loved by 12,000+&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div></div>
+
+  {%- comment -%} ============ FAQ ============ {%- endcomment -%}
+  <section class="blk plp-faq">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">Frequently asked questions</h2></div>
+      <div class="acc plp-faq-acc" data-reveal>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <details {{ block.shopify_attributes }}><summary>{{ block.settings.q }}</summary><div class="body-acc">{{ block.settings.a }}</div></details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ GALLERY ============ {%- endcomment -%}
+  <section class="blk plp-gallery-wrap">
+    <div class="container"><div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.gallery_heading }}</h2></div></div>
+    <div class="plp-gallery" data-reveal>
+      {%- for i in (0..5) -%}
+        {%- assign gi = i | plus: 1 -%}
+        {%- if imgs[gi] != blank -%}<div class="plp-gitem"><img src="{{ imgs[gi] | image_url: width: 500 }}" alt="{{ p.title | escape }}" width="500" height="500" loading="lazy"></div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="container center" style="margin-top:34px"><a class="btn btn-honey" href="{{ purl }}">{{ cta }}</a></div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Pillow landing",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Featured product" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (defaults to product image)" },
+    { "type": "text", "id": "discount_label", "label": "Discount pill", "default": "Launch offer · save 20%" },
+    { "type": "html", "id": "heading", "label": "Hero heading", "default": "Wake up <em>without the neck pain.</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Hero subheading", "default": "Ergonomic butterfly support, breathable memory foam, and calm, pain-free mornings — designed for the way you actually sleep." },
+    { "type": "text", "id": "bullet1", "label": "Bullet 1", "default": "Supports the neck" },
+    { "type": "text", "id": "bullet2", "label": "Bullet 2", "default": "Eases tension" },
+    { "type": "text", "id": "bullet3", "label": "Bullet 3", "default": "Improves sleep" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop the Butterfly Pillow" },
+    { "type": "text", "id": "press_text", "label": "Trust strip text", "default": "A smooth, secure checkout and fast Australian delivery — from a brand built around everyday relief." },
+    { "type": "header", "content": "Section headings" },
+    { "type": "text", "id": "deserve_heading", "label": "\"You deserve\" heading", "default": "You deserve better mornings." },
+    { "type": "textarea", "id": "deserve_text", "label": "\"You deserve\" text", "default": "You spend a third of your life sleeping — so why settle for a pillow that leaves you stiff? The Butterfly Pillow is built to help you sleep deeper and wake up refreshed." },
+    { "type": "text", "id": "highlight_heading", "label": "Highlight heading", "default": "Meet the Butterfly Memory Neck Pillow" },
+    { "type": "text", "id": "split_heading", "label": "Split heading", "default": "Finally — pain-free mornings, every day." },
+    { "type": "textarea", "id": "split_text", "label": "Split text", "default": "Tired of waking up sore and stiff? The Butterfly Pillow keeps your head and neck naturally supported all night, so you wake up feeling refreshed." },
+    { "type": "text", "id": "positions_heading", "label": "Positions heading", "default": "Perfect comfort in any sleeping position" },
+    { "type": "textarea", "id": "positions_text", "label": "Positions text", "default": "However you sleep, the butterfly shape adapts to you — keeping you comfortable until morning." },
+    { "type": "text", "id": "support_heading", "label": "Support zones heading", "default": "Designed for total neck support" },
+    { "type": "text", "id": "compare_heading", "label": "Comparison heading", "default": "Why choose the Butterfly Pillow" },
+    { "type": "text", "id": "reviews_heading", "label": "Reviews heading", "default": "Loved by Australians" },
+    { "type": "text", "id": "gallery_heading", "label": "Gallery heading", "default": "See it in real homes" }
+  ],
+  "blocks": [
+    { "type": "review", "name": "Review", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote", "default": "Quietly fixed the neck tension I'd had for years. Ten calm minutes and I'm out." },
+      { "type": "text", "id": "name", "label": "Name", "default": "Sarah R." },
+      { "type": "text", "id": "location", "label": "Location", "default": "Melbourne, VIC" }
+    ]},
+    { "type": "faq", "name": "FAQ", "settings": [
+      { "type": "text", "id": "q", "label": "Question", "default": "How is this different from a standard pillow?" },
+      { "type": "textarea", "id": "a", "label": "Answer", "default": "The butterfly shape supports your neck and shoulders instead of just propping up your head, keeping your spine aligned in any position." }
+    ]}
+  ],
+  "presets": [{
+    "name": "Pillow landing",
+    "blocks": [
+      { "type": "review", "settings": { "quote": "Quietly fixed the neck tension I'd had for years. I wake up without a stiff neck now.", "name": "Sarah R.", "location": "Melbourne, VIC" } },
+      { "type": "review", "settings": { "quote": "The butterfly shape is genuinely clever — my shoulders finally have somewhere to go.", "name": "Daniel L.", "location": "Perth, WA" } },
+      { "type": "review", "settings": { "quote": "Cool all night and so supportive. Best sleep I've had in years.", "name": "Mia T.", "location": "Sydney, NSW" } },
+      { "type": "review", "settings": { "quote": "I'm a side sleeper and it fits perfectly. No more waking up sore.", "name": "Priya N.", "location": "Brisbane, QLD" } },
+      { "type": "faq", "settings": { "q": "How is this different from a standard pillow?", "a": "The butterfly shape supports your neck and shoulders instead of just propping up your head, keeping your spine aligned in any position." } },
+      { "type": "faq", "settings": { "q": "Will it help with neck and shoulder pain?", "a": "It's designed to cradle the neck's natural curve and relieve pressure, which many people find eases morning stiffness. It supports posture and is not a medical device." } },
+      { "type": "faq", "settings": { "q": "Is it suitable for all sleeping positions?", "a": "Yes — back, side and stomach. The contoured wings adapt to how you move through the night." } },
+      { "type": "faq", "settings": { "q": "Does it come with a washable cover?", "a": "Yes, the outer cover is removable and machine-washable. Air-dry the memory foam core." } },
+      { "type": "faq", "settings": { "q": "What is the return policy?", "a": "Every order is backed by a 30-day comfort guarantee. If it's not right for you, return it for a refund." } }
+    ]
+  }]
+}
+{% endschema %}

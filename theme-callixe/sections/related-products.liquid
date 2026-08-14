@@ -1,0 +1,38 @@
+{%- liquid
+  assign limit = section.settings.products_to_show | default: 4
+  assign source = product.collections.first.products | default: collections.all.products
+-%}
+<section class="blk">
+  <div class="container">
+    <div class="sechead" data-reveal>
+      <div class="row">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+          <h2 class="serif">{{ section.settings.heading }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="prodgrid" data-reveal data-stagger>
+      {%- assign shown = 0 -%}
+      {%- for p in source -%}
+        {%- unless p.id == product.id -%}
+          {%- if shown < limit -%}
+            {% render 'product-card', product: p %}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "You may also like" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Complete the <em>ritual.</em>" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "label": "Products to show", "default": 4 }
+  ]
+}
+{% endschema %}

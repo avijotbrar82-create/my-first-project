@@ -1,0 +1,155 @@
+{%- if section.settings.enabled -%}
+{%- liquid
+  assign bcoll = collections[section.settings.collection]
+  if bcoll == blank or bcoll.products.size == 0
+    assign bproducts = collections.all.products
+  else
+    assign bproducts = bcoll.products
+  endif
+-%}
+<div class="bb-overlay" data-bb-close></div>
+<aside class="bb" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | strip_html | escape }}" data-bb
+       data-min="{{ section.settings.min_items }}" data-disc="{{ section.settings.discount_pct }}" data-code="{{ section.settings.discount_code | strip_html }}">
+  <div class="bb-head">
+    <div class="bb-head-txt">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h3 class="serif">{{ section.settings.heading }}</h3>
+      {%- if section.settings.text != blank -%}<p class="bb-sub">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <button class="bb-x" type="button" data-bb-close aria-label="Close">&times;</button>
+  </div>
+
+  <div class="bb-list">
+    {%- for product in bproducts -%}
+      {%- assign v = product.selected_or_first_available_variant -%}
+      <div class="bb-item{% unless product.available %} soldout{% endunless %}" data-bb-item>
+        <div class="bb-thumb">
+          {%- if product.featured_media -%}
+            <img src="{{ product.featured_media | image_url: width: 160 }}" alt="{{ product.title | escape }}" width="80" height="80" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="bb-meta">
+          <div class="bb-title">{{ product.title }}</div>
+          {%- if product.variants.size > 1 -%}
+            <select class="bb-variant" data-bb-variant aria-label="Choose an option for {{ product.title | escape }}">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" data-price="{{ variant.price }}"{% unless variant.available %} disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}</option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <div class="bb-price">{{ v.price | money }}</div>
+            <input type="hidden" data-bb-variant value="{{ v.id }}" data-price="{{ v.price }}">
+          {%- endif -%}
+        </div>
+        <button type="button" class="bb-toggle" data-bb-toggle{% unless product.available %} disabled{% endunless %} aria-pressed="false">
+          <span class="bb-add-l">Add</span><span class="bb-added-l">&#10003; Added</span>
+        </button>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="bb-foot">
+    <div class="bb-status">
+      <strong data-bb-count>0</strong> of {{ section.settings.min_items }} chosen<span class="bb-save" data-bb-save></span>
+    </div>
+    <button type="button" class="btn btn-honey bb-go" data-bb-go disabled>{{ section.settings.button }}</button>
+  </div>
+</aside>
+
+<script>
+(function(){
+  var bb = document.querySelector('[data-bb]');
+  if(!bb) return;
+  var root = document.documentElement;
+  var min  = parseInt(bb.dataset.min,10) || 3;
+  var disc = parseFloat(bb.dataset.disc) || 0;
+  var code = (bb.dataset.code || '').trim();
+  var items = [].slice.call(bb.querySelectorAll('[data-bb-item]'));
+  var countEl = bb.querySelector('[data-bb-count]');
+  var saveEl  = bb.querySelector('[data-bb-save]');
+  var goBtn   = bb.querySelector('[data-bb-go]');
+  var goLabel = goBtn.textContent;
+  var selected = [];
+
+  function openBB(){ root.classList.add('bb-open'); }
+  function closeBB(){ root.classList.remove('bb-open'); }
+  function variantEl(item){ return item.querySelector('[data-bb-variant]'); }
+  function priceOf(item){
+    var el = variantEl(item);
+    if(el.tagName === 'SELECT'){ var o = el.selectedOptions[0]; return o ? (parseInt(o.dataset.price,10)||0) : 0; }
+    return parseInt(el.dataset.price,10) || 0;
+  }
+  function money(c){ return '$' + (c/100).toFixed(2); }
+
+  function refresh(){
+    var n = selected.length;
+    countEl.textContent = n;
+    var enough = n >= min;
+    goBtn.disabled = !enough;
+    if(enough && disc > 0){
+      var total = 0; selected.forEach(function(it){ total += priceOf(it); });
+      saveEl.textContent = ' · you save ' + money(Math.round(total * disc / 100));
+    } else { saveEl.textContent = ''; }
+  }
+
+  items.forEach(function(item){
+    var btn = item.querySelector('[data-bb-toggle]');
+    if(btn){
+      btn.addEventListener('click', function(){
+        if(item.classList.contains('soldout')) return;
+        var on = item.classList.toggle('on');
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var i = selected.indexOf(item);
+        if(on && i < 0) selected.push(item);
+        else if(!on && i >= 0) selected.splice(i,1);
+        refresh();
+      });
+    }
+    var sel = item.querySelector('select[data-bb-variant]');
+    if(sel) sel.addEventListener('change', refresh);
+  });
+
+  document.addEventListener('click', function(e){
+    var opener = e.target.closest('[data-bundle-open]');
+    if(opener){ e.preventDefault(); openBB(); }
+    if(e.target.closest('[data-bb-close]')) closeBB();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeBB(); });
+
+  goBtn.addEventListener('click', function(){
+    if(selected.length < min) return;
+    var payload = { items: [] };
+    selected.forEach(function(it){ payload.items.push({ id: parseInt(variantEl(it).value,10), quantity: 1 }); });
+    goBtn.disabled = true; goBtn.textContent = 'Adding…';
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){ if(!r.ok) throw new Error('add failed'); return r.json(); })
+    .then(function(){
+      window.location.href = code ? ('/discount/' + encodeURIComponent(code) + '?redirect=/cart') : '/cart';
+    })
+    .catch(function(){ goBtn.disabled = false; goBtn.textContent = 'Try again'; setTimeout(function(){ goBtn.textContent = goLabel; refresh(); }, 1800); });
+  });
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bundle builder",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable bundle builder", "default": true },
+    { "type": "collection", "id": "collection", "label": "Products to offer", "info": "Leave blank to use all products." },
+    { "type": "range", "id": "min_items", "min": 2, "max": 5, "step": 1, "label": "Items required for the deal", "default": 3 },
+    { "type": "range", "id": "discount_pct", "min": 5, "max": 40, "step": 1, "unit": "%", "label": "Discount shown", "default": 20 },
+    { "type": "text", "id": "discount_code", "label": "Discount code to apply", "default": "BUNDLE20", "info": "Must exist in Shopify Discounts as a code with a matching % and minimum-quantity rule." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Build your bundle" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Pick any 3, save 20%." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Choose your three recovery tools — the discount is applied automatically at checkout." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Add bundle & save 20%" }
+  ],
+  "presets": [{ "name": "Bundle builder" }]
+}
+{% endschema %}

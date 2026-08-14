@@ -1,0 +1,84 @@
+{%- liquid
+  assign sort = collection.sort_by | default: collection.default_sort_by
+-%}
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title }}</div>
+    <h1 class="pagetitle serif">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="pagelead">{{ collection.description }}</p>
+    {%- elsif section.settings.default_intro != blank -%}
+      <p class="pagelead">{{ section.settings.default_intro }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="blk" style="padding-top:26px">
+  <div class="container">
+    {%- paginate collection.products by 12 -%}
+      <div class="filters">
+        <div class="chips">
+          <a class="chip active" href="{{ collection.url }}">All</a>
+        </div>
+        <div class="sortwrap">
+          <span class="sortlabel">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+          <form method="get" class="sortform">
+            <select class="sortsel" name="sort_by" onchange="this.form.submit()" aria-label="Sort by">
+              {%- for opt in collection.sort_options -%}
+                <option value="{{ opt.value }}"{% if opt.value == sort %} selected{% endif %}>Sort: {{ opt.name }}</option>
+              {%- endfor -%}
+            </select>
+          </form>
+        </div>
+      </div>
+
+      {%- if collection.products_count > 0 -%}
+        <div class="prodgrid" data-reveal data-stagger>
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" role="navigation" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" aria-label="Previous">&#8592;</a>
+            {%- else -%}
+              <span class="disabled">&#8592;</span>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              {%- elsif part.title == paginate.current_page -%}
+                <span class="current">{{ part.title }}</span>
+              {%- else -%}
+                <span>{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" aria-label="Next">&#8594;</a>
+            {%- else -%}
+              <span class="disabled">&#8594;</span>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <div class="empty-state">
+          <h2 class="serif">Nothing here yet.</h2>
+          <p>Browse the full range instead.</p>
+          <p style="margin-top:18px"><a class="btn btn-honey" href="{{ routes.all_products_collection_url }}">Shop all recovery</a></p>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "textarea", "id": "default_intro", "label": "Fallback intro (when the collection has no description)",
+      "default": "Considered tools for release, decompression and better posture — thoughtfully made for the quiet work of feeling better. Free shipping on every order." }
+  ]
+}
+{% endschema %}

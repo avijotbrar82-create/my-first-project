@@ -1,0 +1,46 @@
+<section class="blk benefits" style="padding:70px 0">
+  <div class="container">
+    <div class="promises" data-reveal data-stagger>
+      {%- for block in section.blocks -%}
+        <div class="promise" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, class: 'ic' %}
+          <h4>{{ block.settings.heading }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Value props",
+  "blocks": [
+    {
+      "type": "prop",
+      "name": "Promise",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "shipping",
+          "options": [
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "guarantee", "label": "Guarantee" },
+            { "value": "chat", "label": "Support" },
+            { "value": "star", "label": "Star" },
+            { "value": "support", "label": "Care" }
+          ] },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Free shipping" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "On every order, Australia-wide and beyond — no minimums." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Value props",
+    "blocks": [
+      { "type": "prop", "settings": { "icon": "shipping", "heading": "Free shipping", "text": "On every order, Australia-wide and beyond — no minimums." } },
+      { "type": "prop", "settings": { "icon": "guarantee", "heading": "30-day returns", "text": "Not the right fit? Return unused items within 30 days." } },
+      { "type": "prop", "settings": { "icon": "chat", "heading": "Real support", "text": "We reply within 24–48 hours, Monday to Friday." } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Account</div>
+    <h1 class="pagetitle serif">Hello, {{ customer.first_name | default: 'friend' }}</h1>
+  </div>
+</section>
+<section class="blk" style="padding-top:24px">
+  <div class="container">
+    <div class="acct-grid">
+      <div>
+        <div class="info-card">
+          <div class="info-row"><div><b>{{ customer.name }}</b><span>{{ customer.email }}</span></div></div>
+          {%- if customer.default_address -%}<div class="info-row"><div><b>Default address</b><span>{{ customer.default_address | format_address }}</span></div></div>{%- endif -%}
+        </div>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+          <a class="btn btn-ghost" href="{{ routes.account_addresses_url }}">Manage addresses</a>
+          <a class="btn btn-ghost" href="{{ routes.account_logout_url }}">Log out</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="serif" style="font-size:26px;margin:0 0 18px">Order history</h2>
+        {%- paginate customer.orders by 12 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table class="acct-table">
+              <thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a href="{{ order.customer_url }}" style="color:var(--honey)">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: '%d %b %Y' }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          {%- else -%}
+            <p style="color:var(--taupe)">You haven't placed any orders yet.</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>

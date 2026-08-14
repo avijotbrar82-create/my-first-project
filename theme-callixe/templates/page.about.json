@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "about": {
+      "type": "page-about",
+      "blocks": {
+        "d1": { "type": "diff", "settings": { "heading": "Purpose-built, not just picked", "text": "Every item is selected for real, everyday relief — neck tension, posture, lower-back support, muscle recovery — not novelty." } },
+        "d2": { "type": "diff", "settings": { "heading": "Quality you can feel", "text": "We stand behind the materials and construction of every product, and refine our lineup based on real customer feedback." } },
+        "d3": { "type": "diff", "settings": { "heading": "Support that doesn't disappear", "text": "Questions about sizing, use or your order? Our team is here to help — before and after your purchase." } },
+        "d4": { "type": "diff", "settings": { "heading": "Built for real life", "text": "Quick to use, easy to bring along, and simple enough that they actually get used." } }
+      },
+      "block_order": ["d1", "d2", "d3", "d4"]
+    },
+    "method": {
+      "type": "method-steps",
+      "settings": {
+        "eyebrow": "The Verta method",
+        "heading": "Three gentle steps to <em>standing taller.</em>",
+        "subtext": "Recovery isn't a luxury — it's the quiet work between the work. Here's how the range fits together."
+      },
+      "blocks": {
+        "m1": { "type": "step", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussive therapy and warm massage at the end of the day." } },
+        "m2": { "type": "step", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
+        "m3": { "type": "step", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+    "valueprops": {
+      "type": "value-props",
+      "blocks": {
+        "v1": { "type": "prop", "settings": { "icon": "shipping", "heading": "Free shipping", "text": "On every order, Australia-wide and beyond — no minimums." } },
+        "v2": { "type": "prop", "settings": { "icon": "guarantee", "heading": "30-day returns", "text": "Not the right fit? Return unused items within 30 days." } },
+        "v3": { "type": "prop", "settings": { "icon": "chat", "heading": "Real support", "text": "We reply within 24–48 hours, Monday to Friday." } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "heading": "Backing a brand, <em>one order at a time.</em>",
+        "text": "We're a small, growing brand — and every review, question and order shapes how we grow. Thanks for being part of the journey.",
+        "button1_label": "Shop the range",
+        "button2_label": "Get in touch"
+      }
+    }
+  },
+  "order": ["about", "method", "valueprops", "cta"]
+}

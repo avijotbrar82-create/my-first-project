@@ -1,0 +1,271 @@
+{%- liquid
+  assign p1 = section.settings.dual_product_1
+  assign p2 = section.settings.dual_product_2
+  assign pr = section.settings.routine_product
+  assign hero_img = section.settings.hero_image
+-%}
+<div class="cx">
+
+  {%- comment -%} ===== HERO ===== {%- endcomment -%}
+  <section class="cx-hero">
+    <div class="cx-hero-media">
+      {%- if hero_img != blank -%}
+        <img src="{{ hero_img | image_url: width: 2000 }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="2000" height="1200" fetchpriority="high">
+      {%- else -%}
+        <img src="{{ 'hero-massage-guns.webp' | asset_url }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="1402" height="1122" fetchpriority="high">
+      {%- endif -%}
+      <div class="cx-hero-veil"></div>
+    </div>
+    <div class="container cx-hero-inner" data-reveal>
+      <h1 class="serif">{{ section.settings.hero_heading }}</h1>
+      <p class="cx-hero-sub">{{ section.settings.hero_sub }}</p>
+      <a class="cx-btn cx-btn-dark" href="{{ section.settings.hero_link | default: routes.all_products_collection_url }}">{{ section.settings.hero_cta }}</a>
+      {%- if section.settings.hero_note != blank -%}<div class="cx-hero-note">{% render 'icon', name: 'guarantee' %} {{ section.settings.hero_note }}</div>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ===== FEATURE CARDS ===== {%- endcomment -%}
+  <section class="cx-band">
+    <div class="container cx-feats">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature' -%}
+          <div class="cx-feat" {{ block.shopify_attributes }} data-reveal>
+            <div class="cx-feat-ic">{% render 'icon', name: block.settings.icon %}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} ===== FEATURED-IN QUOTE ===== {%- endcomment -%}
+  {%- if section.settings.quote != blank -%}
+  <section class="cx-featured">
+    <div class="container" data-reveal>
+      <div class="cx-eyebrow">{{ section.settings.featured_label }}</div>
+      <p class="cx-quote serif">{{ section.settings.quote }}</p>
+      <div class="cx-logos">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'logo' and block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" {{ block.shopify_attributes }}>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== HEALING STARTS AT HOME — DUAL PRODUCT CARDS ===== {%- endcomment -%}
+  <section class="cx-band cx-dual-wrap">
+    <div class="container">
+      {%- if section.settings.dual_eyebrow != blank -%}<div class="cx-eyebrow center">{{ section.settings.dual_eyebrow }}</div>{%- endif -%}
+      <h2 class="serif cx-h2 center">{{ section.settings.dual_heading }}</h2>
+      <div class="cx-dual" data-reveal>
+        {%- if p1 != blank -%}
+          <a class="cx-dcard" href="{{ p1.url }}" style="background-image:url('{{ p1.featured_image | image_url: width: 900 }}')">
+            <div class="cx-dcard-body"><h3 class="serif">{{ p1.title }}</h3><p>{{ p1.type | default: 'Recovery &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
+          </a>
+        {%- endif -%}
+        {%- if p2 != blank -%}
+          <a class="cx-dcard" href="{{ p2.url }}" style="background-image:url('{{ p2.featured_image | image_url: width: 900 }}')">
+            <div class="cx-dcard-body"><h3 class="serif">{{ p2.title }}</h3><p>{{ p2.type | default: 'Recovery &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== SHOP THE RANGE ===== {%- endcomment -%}
+  {%- assign coll = collections[section.settings.collection] -%}
+  <section class="cx-band">
+    <div class="container">
+      <h2 class="serif cx-h2">{{ section.settings.range_heading }}</h2>
+      <div class="cx-range" data-reveal data-stagger>
+        {%- if coll != blank and coll.products.size > 0 -%}
+          {%- for product in coll.products limit: 4 -%}{% render 'cx-card', product: product %}{%- endfor -%}
+        {%- else -%}
+          {%- for product in collections.all.products limit: 4 -%}{% render 'cx-card', product: product %}{%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== COMMUNITY / UGC (video placeholders) ===== {%- endcomment -%}
+  <section class="cx-community">
+    <div class="container">
+      <div class="cx-eyebrow light">{{ section.settings.community_eyebrow }}</div>
+      <h2 class="serif cx-h2 light">{{ section.settings.community_heading }}</h2>
+      <div class="cx-ugc" data-reveal>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'ugc' -%}
+            <figure class="cx-ugc-item" {{ block.shopify_attributes }}>
+              <div class="cx-ugc-media">
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: image_size: '600x', loop: true, muted: true, controls: true, playsinline: true }}
+                {%- elsif block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="" loading="lazy">
+                  <span class="cx-play">{% render 'icon', name: 'chat' %}</span>
+                {%- else -%}
+                  <div class="cx-ugc-ph"><span class="cx-play">▶</span><small>Video coming soon</small></div>
+                {%- endif -%}
+              </div>
+              <figcaption>{{ block.settings.caption }}</figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== 3-IN-1 ROUTINE SPLIT ===== {%- endcomment -%}
+  <section class="cx-band cx-routine-wrap">
+    <div class="container cx-routine">
+      <div class="cx-routine-copy" data-reveal>
+        <div class="cx-eyebrow">{{ section.settings.routine_eyebrow }}</div>
+        <h2 class="serif cx-h2">{{ section.settings.routine_heading }}</h2>
+        <p>{{ section.settings.routine_text }}</p>
+        <a class="cx-btn cx-btn-dark" href="{% if pr != blank %}{{ pr.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.routine_cta }}</a>
+      </div>
+      <div class="cx-routine-media" data-reveal>
+        {%- if section.settings.routine_image != blank -%}
+          <img src="{{ section.settings.routine_image | image_url: width: 900 }}" alt="" loading="lazy">
+        {%- elsif pr != blank -%}
+          <img src="{{ pr.featured_image | image_url: width: 900 }}" alt="{{ pr.title | escape }}" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== THE METHOD (authority slot) ===== {%- endcomment -%}
+  <section class="cx-band">
+    <div class="container">
+      <h2 class="serif cx-h2 center">{{ section.settings.method_heading }}</h2>
+      <div class="cx-method" data-reveal data-stagger>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'method' -%}
+            <div class="cx-mstep" {{ block.shopify_attributes }}>
+              <span class="cx-mnum serif">{{ block.settings.numeral }}</span>
+              <h4 class="serif">{{ block.settings.title }}</h4>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== REVIEWS (real, from reviews.js) ===== {%- endcomment -%}
+  <section class="cx-band cx-reviews">
+    <div class="container">
+      <div class="cx-eyebrow center">{{ section.settings.reviews_eyebrow }}</div>
+      <h2 class="serif cx-h2 center">{{ section.settings.reviews_heading }}</h2>
+      <div data-vr-reviews-home></div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== BLOGS ===== {%- endcomment -%}
+  {%- assign blog = blogs[section.settings.blog] -%}
+  <section class="cx-band cx-blogs-wrap">
+    <div class="container">
+      <div class="cx-blogs-head">
+        <h2 class="serif cx-h2">{{ section.settings.blog_heading }}</h2>
+        <a class="cx-btn cx-btn-ghost" href="{% if blog != blank %}{{ blog.url }}{% else %}#{% endif %}">Explore articles</a>
+      </div>
+      <div class="cx-blogs" data-reveal data-stagger>
+        {%- if blog != blank and blog.articles_count > 0 -%}
+          {%- for a in blog.articles limit: 4 -%}
+            <a class="cx-blog" href="{{ a.url }}">
+              <div class="cx-blog-img">{%- if a.image -%}<img src="{{ a.image | image_url: width: 500 }}" alt="{{ a.title | escape }}" loading="lazy">{%- endif -%}</div>
+              <time>{{ a.published_at | date: '%b %d, %Y' }}</time>
+              <h4 class="serif">{{ a.title }}</h4>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'blog' -%}
+              <a class="cx-blog" href="#" {{ block.shopify_attributes }}>
+                <div class="cx-blog-img">{%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 500 }}" alt="" loading="lazy">{%- endif -%}</div>
+                <time>{{ block.settings.date }}</time>
+                <h4 class="serif">{{ block.settings.title }}</h4>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Callixe home",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (lifestyle)" },
+    { "type": "html", "id": "hero_heading", "label": "Hero heading", "default": "Relief, redefined." },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero subtext", "default": "Science-minded recovery tools, made for everyday life at home." },
+    { "type": "text", "id": "hero_cta", "label": "Hero button", "default": "Shop now" },
+    { "type": "url", "id": "hero_link", "label": "Hero button link" },
+    { "type": "text", "id": "hero_note", "label": "Hero note", "default": "30-day comfort guarantee" },
+    { "type": "header", "content": "Featured in" },
+    { "type": "text", "id": "featured_label", "label": "Label", "default": "As recommended for" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"Beyond pain relief, people report better sleep, sharper focus and calmer days.\"" },
+    { "type": "header", "content": "Healing starts at home" },
+    { "type": "text", "id": "dual_eyebrow", "label": "Eyebrow", "default": "The essentials" },
+    { "type": "text", "id": "dual_heading", "label": "Heading", "default": "Relief starts at home." },
+    { "type": "product", "id": "dual_product_1", "label": "Product 1" },
+    { "type": "product", "id": "dual_product_2", "label": "Product 2" },
+    { "type": "header", "content": "Shop the range" },
+    { "type": "text", "id": "range_heading", "label": "Heading", "default": "Shop the range" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "header", "content": "Community" },
+    { "type": "text", "id": "community_eyebrow", "label": "Eyebrow", "default": "12,000+ happy customers" },
+    { "type": "text", "id": "community_heading", "label": "Heading", "default": "Hear from our community" },
+    { "type": "header", "content": "Routine" },
+    { "type": "text", "id": "routine_eyebrow", "label": "Eyebrow", "default": "The recovery routine" },
+    { "type": "text", "id": "routine_heading", "label": "Heading", "default": "Your neck & back reset" },
+    { "type": "textarea", "id": "routine_text", "label": "Text", "default": "Release tension, decompress the spine and realign your posture — a calm 15-minute routine you can do at home." },
+    { "type": "text", "id": "routine_cta", "label": "Button", "default": "Shop now" },
+    { "type": "product", "id": "routine_product", "label": "Routine product" },
+    { "type": "image_picker", "id": "routine_image", "label": "Routine image" },
+    { "type": "header", "content": "Method" },
+    { "type": "text", "id": "method_heading", "label": "Heading", "default": "The Verta method" },
+    { "type": "header", "content": "Reviews" },
+    { "type": "text", "id": "reviews_eyebrow", "label": "Eyebrow", "default": "90-day comfort guarantee" },
+    { "type": "text", "id": "reviews_heading", "label": "Heading", "default": "Join the relief journey" },
+    { "type": "header", "content": "Blogs" },
+    { "type": "text", "id": "blog_heading", "label": "Heading", "default": "Discover our latest journal" },
+    { "type": "blog", "id": "blog", "label": "Blog" }
+  ],
+  "blocks": [
+    { "type": "feature", "name": "Feature card", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "guarantee", "options": [
+        {"value":"guarantee","label":"Guarantee"},{"value":"shipping","label":"Shipping"},{"value":"check","label":"Check"},{"value":"star","label":"Star"},{"value":"support","label":"Support"}] },
+      { "type": "text", "id": "title", "label": "Title", "default": "Try risk-free for 30 days" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Enjoy at home and return it for a full refund if you don't love it." }
+    ]},
+    { "type": "logo", "name": "Featured-in logo", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Logo" },
+      { "type": "text", "id": "name", "label": "Name" }
+    ]},
+    { "type": "ugc", "name": "Community video", "settings": [
+      { "type": "video", "id": "video", "label": "Video" },
+      { "type": "image_picker", "id": "image", "label": "Image (fallback)" },
+      { "type": "text", "id": "caption", "label": "Caption", "default": "\"This has become my daily essential.\"" }
+    ]},
+    { "type": "method", "name": "Method step", "settings": [
+      { "type": "text", "id": "numeral", "label": "Numeral", "default": "i." },
+      { "type": "text", "id": "title", "label": "Title", "default": "Release" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Ease built-up tension with percussion and warm massage." }
+    ]},
+    { "type": "blog", "name": "Blog card (fallback)", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "date", "label": "Date", "default": "New" },
+      { "type": "text", "id": "title", "label": "Title", "default": "How to fix forward head posture at home" }
+    ]}
+  ],
+  "presets": [{ "name": "Callixe home" }]
+}
+{% endschema %}

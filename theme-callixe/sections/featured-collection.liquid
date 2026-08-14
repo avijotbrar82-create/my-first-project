@@ -1,0 +1,59 @@
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  assign limit = section.settings.products_to_show | default: 5
+-%}
+<section class="blk" id="shop">
+  <div class="container">
+    <div class="sechead" data-reveal>
+      <div class="row">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+          <h2 class="serif">{{ section.settings.heading }}</h2>
+        </div>
+        {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+      </div>
+    </div>
+    <div class="prodgrid" data-reveal data-stagger>
+      {%- if coll != blank and coll.products.size > 0 -%}
+        {%- for product in coll.products limit: limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for product in collections.all.products limit: limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if section.settings.show_bundle_card -%}
+        <a class="card viewall" href="{{ section.settings.bundle_link | default: routes.all_products_collection_url }}" data-bundle-open>
+          <div class="body" style="align-items:center; gap:14px; text-align:center; justify-content:center">
+            {% render 'icon', name: 'bundle', class: '' %}
+            <h3 style="font-size:23px">{{ section.settings.bundle_title }}</h3>
+            <p class="desc" style="text-align:center">{{ section.settings.bundle_text }}</p>
+            <span class="add" style="border-color:var(--honey); color:var(--honey)">{{ section.settings.bundle_cta }} &#8594;</span>
+          </div>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The range" },
+    { "type": "html", "id": "heading", "label": "Heading", "default": "Kind tools for <em>tired bodies.</em>" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Five considered pieces for the places sitting, training and stress settle in — neck, spine, lower back and muscle." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 3, "max": 12, "step": 1, "label": "Products to show", "default": 5 },
+    { "type": "header", "content": "Bundle card" },
+    { "type": "checkbox", "id": "show_bundle_card", "label": "Show bundle card", "default": true },
+    { "type": "text", "id": "bundle_title", "label": "Bundle title", "default": "Build your bundle" },
+    { "type": "text", "id": "bundle_text", "label": "Bundle text", "default": "Pair any three tools and save 20% on your recovery kit." },
+    { "type": "text", "id": "bundle_cta", "label": "Bundle CTA", "default": "Start building" },
+    { "type": "url", "id": "bundle_link", "label": "Bundle link" }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

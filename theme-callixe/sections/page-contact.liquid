@@ -1,0 +1,58 @@
+<section class="pagetop">
+  <div class="container">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Contact</div>
+    <h1 class="pagetitle serif">{{ section.settings.heading }}</h1>
+    {%- if section.settings.lead != blank -%}<p class="pagelead">{{ section.settings.lead }}</p>{%- endif -%}
+  </div>
+</section>
+
+<section class="blk" style="padding-top:34px">
+  <div class="container">
+    <div class="contact-grid">
+      <div data-reveal>
+        {%- form 'contact', class: 'form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-success">Thanks — we'll be in touch within 24–48 hours.</div>
+          {%- elsif form.errors -%}
+            <div class="form-error">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="frow">
+            <div class="field"><label for="c-name">First name</label><input id="c-name" type="text" name="contact[name]" placeholder="Jordan" value="{{ form.name }}"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" name="contact[email]" placeholder="you@email.com" value="{{ form.email }}" required></div>
+          </div>
+          <div class="field"><label for="c-order">Order number <span style="text-transform:none;font-weight:400">(optional)</span></label><input id="c-order" type="text" name="contact[order]" placeholder="#1024"></div>
+          <div class="field"><label for="c-body">How can we help?</label><textarea id="c-body" name="contact[body]" placeholder="Tell us what's on your mind…" required>{{ form.body }}</textarea></div>
+          <button class="btn btn-honey" type="submit" style="align-self:flex-start">Send message</button>
+        {%- endform -%}
+      </div>
+
+      <div data-reveal>
+        <div class="info-card">
+          <div class="info-row">{% render 'icon', name: 'mail', class: 'ic' %}<div><b>Email</b><span><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></span></div></div>
+          {%- if section.settings.phone != blank -%}<div class="info-row">{% render 'icon', name: 'phone', class: 'ic' %}<div><b>Phone</b><span>{{ section.settings.phone }}</span></div></div>{%- endif -%}
+          {%- if section.settings.address != blank -%}<div class="info-row">{% render 'icon', name: 'pin', class: 'ic' %}<div><b>Address</b><span>{{ section.settings.address }}</span></div></div>{%- endif -%}
+          {%- if section.settings.hours != blank -%}<div class="info-row">{% render 'icon', name: 'clock', class: 'ic' %}<div><b>Hours</b><span>{{ section.settings.hours }}</span></div></div>{%- endif -%}
+        </div>
+        <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn btn-ghost" href="/pages/track-order">Track my order</a>
+          <a class="btn btn-ghost" href="{{ routes.all_products_collection_url }}">Browse the range</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading", "default": "We're here to <em>help.</em>" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Questions about sizing, use or your order? Send us a note and we'll reply within 24–48 hours, Monday to Friday." },
+    { "type": "header", "content": "Contact details" },
+    { "type": "text", "id": "email", "label": "Email", "default": "avijotbrar82@gmail.com" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0480 756 291" },
+    { "type": "text", "id": "address", "label": "Address", "default": "Sydney Avenue, Barton ACT 2600, Australia" },
+    { "type": "text", "id": "hours", "label": "Hours", "default": "Replies within 24–48 hours · Mon–Fri" }
+  ]
+}
+{% endschema %}

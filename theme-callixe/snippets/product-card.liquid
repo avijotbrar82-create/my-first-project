@@ -1,0 +1,49 @@
+{%- comment -%}
+  Product card
+  Usage: {% render 'product-card', product: product, badge: 'Bestseller' %}
+  Params: product (required), badge (optional string)
+{%- endcomment -%}
+{%- liquid
+  assign badge_text = badge
+  if badge_text == blank
+    if product.compare_at_price > product.price
+      assign badge_text = 'Sale'
+    elsif product.tags contains 'bestseller'
+      assign badge_text = 'Bestseller'
+    endif
+  endif
+-%}
+<a class="card" href="{{ product.url }}">
+  <div class="art">
+    {%- if badge_text != blank -%}<span class="badge">{{ badge_text }}</span>{%- endif -%}
+    {%- if product.featured_media -%}
+      <img class="pimg"
+           src="{{ product.featured_media | image_url: width: 700 }}"
+           srcset="{{ product.featured_media | image_url: width: 500 }} 500w, {{ product.featured_media | image_url: width: 700 }} 700w, {{ product.featured_media | image_url: width: 1000 }} 1000w"
+           sizes="(max-width: 600px) 90vw, 33vw"
+           alt="{{ product.featured_media.alt | escape | default: product.title }}"
+           width="700" height="700" loading="lazy">
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'pimg placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="body">
+    {%- if settings.card_show_vendor and product.type != blank -%}
+      <span class="cat">{{ product.type }}</span>
+    {%- endif -%}
+    <h3>{{ product.title }}</h3>
+    {%- if settings.card_show_description and product.description != blank -%}
+      <p class="desc">{{ product.description | strip_html | truncatewords: 16 }}</p>
+    {%- endif -%}
+    <div class="foot">
+      <div class="price">
+        {%- if product.compare_at_price > product.price -%}
+          {{ product.price | money }} <small>{{ cart.currency.iso_code }}</small>
+        {%- else -%}
+          {{ product.price | money }} <small>{{ cart.currency.iso_code }}</small>
+        {%- endif -%}
+      </div>
+      <span class="add">{% if product.available %}Add{% else %}Sold out{% endif %}</span>
+    </div>
+  </div>
+</a>
