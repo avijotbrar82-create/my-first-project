@@ -1,6 +1,21 @@
 {%- liquid
   assign img = section.settings.image
+  assign shop_link = section.settings.button1_link | default: routes.all_products_collection_url
 -%}
+{%- if section.settings.hero_style == 'banner' -%}
+  <section class="hero banner">
+    <a class="hero-banner-wrap" href="{{ shop_link }}" aria-label="{{ section.settings.button1_label | default: 'Shop the range' | escape }}">
+      {%- if img != blank -%}
+        <img class="hero-banner-img" src="{{ img | image_url: width: 1600 }}" alt="{{ img.alt | escape | default: 'Verta Relief — ergonomic comfort, everyday support' }}" width="1536" height="1024" fetchpriority="high">
+      {%- else -%}
+        <img class="hero-banner-img" src="{{ 'hero-banner.webp' | asset_url }}" alt="Verta Relief — ergonomic comfort, everyday support" width="1536" height="1024" fetchpriority="high">
+      {%- endif -%}
+      {%- if section.settings.button1_label != blank -%}
+        <span class="hero-banner-cta"><span class="btn btn-honey">{{ section.settings.button1_label }} <span aria-hidden="true">&#8594;</span></span></span>
+      {%- endif -%}
+    </a>
+  </section>
+{%- else -%}
 <section class="hero">
   <div class="hero-media">
     {%- if img != blank -%}
@@ -33,12 +48,19 @@
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image (defaults to the packaged hero)" },
+    { "type": "select", "id": "hero_style", "label": "Hero style", "default": "banner",
+      "options": [
+        { "value": "overlay", "label": "Text overlay on photo" },
+        { "value": "banner", "label": "Full banner image (with Shop button)" }
+      ],
+      "info": "Banner mode shows your image whole with a Shop button — use it for a designed banner that already has its own text." },
+    { "type": "image_picker", "id": "image", "label": "Hero / banner image (defaults to the packaged banner)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Professional-grade recovery" },
     { "type": "html", "id": "heading", "label": "Heading", "default": "Recovery,<br><em>unhurried.</em>" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Percussion, decompression and posture support — thoughtfully made for the quiet work of feeling better, one calm day at a time." },

@@ -3,10 +3,11 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "hero_style": "banner",
         "eyebrow": "Professional-grade recovery",
         "heading": "Recovery,<br><em>unhurried.</em>",
         "subheading": "Percussion, decompression and posture support — thoughtfully made for the quiet work of feeling better, one calm day at a time.",
-        "button1_label": "Shop the range",
+        "button1_label": "Shop now",
         "button2_label": "How it works",
         "show_stats": true
       }
