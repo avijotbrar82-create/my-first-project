@@ -75,11 +75,10 @@
                 <label class="btier{% if forloop.first %} sel{% endif %}" data-qty-tier="{{ n }}" data-disc="{{ d }}">
                   <input type="radio" name="bundle_tier"{% if forloop.first %} checked{% endif %}>
                   <div class="bt-main">
-                    <div class="bt-title">Buy {{ n }}</div>
+                    <div class="bt-title">Buy {{ n }}{%- if n == 4 -%} <span class="pop-tag">Most popular</span>{%- endif -%}</div>
                     <div class="bt-save" data-bt-save></div>
                   </div>
                   <div class="bt-price"><span class="bt-was" data-bt-was></span><span data-bt-now></span></div>
-                  {%- if n == 4 -%}<span class="pop-tag">Most popular</span>{%- endif -%}
                 </label>
               {%- endfor -%}
               <p class="bundle-note">Volume discount applied automatically at checkout.</p>

@@ -3,6 +3,9 @@
   'use strict';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* theme.js loaded — cancel the inline "show everything" fallback so scroll reveals still work */
+  if (window.__vfReveal) { clearTimeout(window.__vfReveal); window.__vfReveal = null; }
+
   /* ---------- scroll reveal (robust: reveals in-view on load, safety net) ---------- */
   function initReveal() {
     var els = [].slice.call(document.querySelectorAll('[data-reveal]'));

@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>
+    /* Progressive enhancement: mark JS on, and guarantee content shows even if theme.js is slow/blocked. */
+    (function (d) {
+      d.className += ' js';
+      window.__vfReveal = setTimeout(function () { d.className += ' reveal-fallback'; }, 2500);
+    })(document.documentElement);
+  </script>
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="canonical" href="{{ canonical_url }}">
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">

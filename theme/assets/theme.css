@@ -27,11 +27,13 @@
   .grain{position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* reveal */
-  [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity 1s var(--ease), transform 1s var(--ease)}
+  /* reveal (only hidden when JS is active; a fallback shows all if theme.js never runs) */
+  .js [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity 1s var(--ease), transform 1s var(--ease)}
   [data-reveal].in{opacity:1; transform:none}
   [data-stagger].in > *{opacity:1 !important; transform:none !important}
-  [data-stagger] > *{opacity:0; transform:translateY(20px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+  .js [data-stagger] > *{opacity:0; transform:translateY(20px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+  .reveal-fallback [data-reveal],
+  .reveal-fallback [data-stagger] > *{opacity:1 !important; transform:none !important}
   [data-stagger].in > *:nth-child(2){transition-delay:.09s}
   [data-stagger].in > *:nth-child(3){transition-delay:.18s}
   [data-stagger].in > *:nth-child(4){transition-delay:.27s}
@@ -458,7 +460,7 @@ select.sortsel{appearance:none;-webkit-appearance:none;padding-right:34px;
 .btier .bt-price{font-family:var(--f-disp);font-weight:600;font-size:18px;color:var(--espresso);text-align:right;white-space:nowrap}
 .btier .bt-was{display:block;font-size:12px;color:var(--taupe);text-decoration:line-through;font-family:var(--f-body);font-weight:600}
 .btier.sel{background:#fff8ee}
-.btier .pop-tag{position:absolute;top:-9px;right:14px;background:var(--espresso);color:#fdf8ef;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.btier .pop-tag{display:inline-block;background:var(--espresso);color:#fdf8ef;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;white-space:nowrap}
 .bundle-note{font-size:12px;color:var(--taupe);margin:10px 2px 0}
 .pdp-launch{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:700;color:var(--honey);background:#fff5e6;border:1px solid rgba(176,115,46,.25);padding:8px 14px;border-radius:999px}
 
