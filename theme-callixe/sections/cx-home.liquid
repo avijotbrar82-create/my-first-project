@@ -7,22 +7,37 @@
 <div class="cx">
 
   {%- comment -%} ===== HERO ===== {%- endcomment -%}
-  <section class="cx-hero">
-    <div class="cx-hero-media">
-      {%- if hero_img != blank -%}
-        <img src="{{ hero_img | image_url: width: 2000 }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="2000" height="1200" fetchpriority="high">
-      {%- else -%}
-        <img src="{{ 'hero-massage-guns.webp' | asset_url }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="1402" height="1122" fetchpriority="high">
-      {%- endif -%}
-      <div class="cx-hero-veil"></div>
-    </div>
-    <div class="container cx-hero-inner" data-reveal>
-      <h1 class="serif">{{ section.settings.hero_heading }}</h1>
-      <p class="cx-hero-sub">{{ section.settings.hero_sub }}</p>
-      <a class="cx-btn cx-btn-dark" href="{{ section.settings.hero_link | default: routes.all_products_collection_url }}">{{ section.settings.hero_cta }}</a>
-      {%- if section.settings.hero_note != blank -%}<div class="cx-hero-note">{% render 'icon', name: 'guarantee' %} {{ section.settings.hero_note }}</div>{%- endif -%}
-    </div>
-  </section>
+  {%- if section.settings.hero_style == 'overlay' -%}
+    <section class="cx-hero">
+      <div class="cx-hero-media">
+        {%- if hero_img != blank -%}
+          <img src="{{ hero_img | image_url: width: 2000 }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="2000" height="1200" fetchpriority="high">
+        {%- else -%}
+          <img src="{{ 'hero-banner.webp' | asset_url }}" alt="{{ section.settings.hero_heading | strip_html | escape }}" width="1536" height="1024" fetchpriority="high">
+        {%- endif -%}
+        <div class="cx-hero-veil"></div>
+      </div>
+      <div class="container cx-hero-inner" data-reveal>
+        <h1 class="serif">{{ section.settings.hero_heading }}</h1>
+        <p class="cx-hero-sub">{{ section.settings.hero_sub }}</p>
+        <a class="cx-btn cx-btn-dark" href="{{ section.settings.hero_link | default: routes.all_products_collection_url }}">{{ section.settings.hero_cta }}</a>
+        {%- if section.settings.hero_note != blank -%}<div class="cx-hero-note">{% render 'icon', name: 'guarantee' %} {{ section.settings.hero_note }}</div>{%- endif -%}
+      </div>
+    </section>
+  {%- else -%}
+    <section class="cx-hero-banner">
+      <a class="cx-hb-wrap" href="{{ section.settings.hero_link | default: routes.all_products_collection_url }}" aria-label="{{ section.settings.hero_cta | default: 'Shop' | escape }}">
+        {%- if hero_img != blank -%}
+          <img src="{{ hero_img | image_url: width: 1800 }}" alt="{{ section.settings.hero_heading | strip_html | escape | default: 'Verta Relief' }}" width="1536" height="1024" fetchpriority="high">
+        {%- else -%}
+          <img src="{{ 'hero-banner.webp' | asset_url }}" alt="Verta Relief — ergonomic comfort, everyday support" width="1536" height="1024" fetchpriority="high">
+        {%- endif -%}
+        {%- if section.settings.hero_cta != blank -%}
+          <span class="cx-hb-cta"><span class="cx-btn cx-btn-dark">{{ section.settings.hero_cta }} <span aria-hidden="true">&#8594;</span></span></span>
+        {%- endif -%}
+      </a>
+    </section>
+  {%- endif -%}
 
   {%- comment -%} ===== FEATURE CARDS ===== {%- endcomment -%}
   <section class="cx-band">
@@ -203,7 +218,10 @@
   "name": "Callixe home",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image (lifestyle)" },
+    { "type": "select", "id": "hero_style", "label": "Hero style", "default": "banner", "options": [
+      { "value": "banner", "label": "Full banner image (with Shop button)" },
+      { "value": "overlay", "label": "Serif text over photo" } ] },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (defaults to the 6-product banner)" },
     { "type": "html", "id": "hero_heading", "label": "Hero heading", "default": "Relief, redefined." },
     { "type": "textarea", "id": "hero_sub", "label": "Hero subtext", "default": "Science-minded recovery tools, made for everyday life at home." },
     { "type": "text", "id": "hero_cta", "label": "Hero button", "default": "Shop now" },

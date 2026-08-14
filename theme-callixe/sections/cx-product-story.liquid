@@ -1,0 +1,94 @@
+{%- comment -%} Derila-style long-form content for the current product (below the buy panel). {%- endcomment -%}
+{%- liquid
+  assign imgs = product.images
+  assign chk = 'check'
+-%}
+<div class="plp">
+
+  {%- comment -%} Benefit cards {%- endcomment -%}
+  <section class="blk plp-deserve" style="padding-bottom:40px">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">{{ section.settings.benefits_heading }}</h2></div>
+      <div class="plp-icards" data-reveal data-stagger>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'guarantee' %}</div><b>Everyday relief</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'support' %}</div><b>Designed for your body</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'check' %}</div><b>Simple to use</b></div>
+        <div class="plp-icard"><div class="ic">{% render 'icon', name: 'star' %}</div><b>Loved by 12,000+</b></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Split 1 {%- endcomment -%}
+  <section class="blk plp-split-wrap">
+    <div class="container plp-split">
+      <div class="plp-split-media" data-reveal>{%- if imgs[1] != blank -%}<img src="{{ imgs[1] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">{%- elsif imgs[0] != blank -%}<img src="{{ imgs[0] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">{%- endif -%}</div>
+      <div class="plp-split-copy" data-reveal>
+        <h2 class="serif">{{ section.settings.split_heading }}</h2>
+        <p class="plp-lead">{{ section.settings.split_text }}</p>
+        <ul class="plp-feats">
+          <li><span class="ic">{% render 'icon', name: 'check' %}</span><div>{{ section.settings.split_point_1 }}</div></li>
+          <li><span class="ic">{% render 'icon', name: 'check' %}</span><div>{{ section.settings.split_point_2 }}</div></li>
+          <li><span class="ic">{% render 'icon', name: 'check' %}</span><div>{{ section.settings.split_point_3 }}</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Comparison {%- endcomment -%}
+  <section class="blk plp-compare-wrap">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">Why choose Verta Relief</h2></div>
+      <div class="plp-compare" data-reveal>
+        <div class="plp-crow plp-chead"><div class="plp-cfeat"></div><div class="plp-cours">Verta Relief</div><div class="plp-cstd">Generic</div></div>
+        {%- assign feats = 'Designed around real posture &amp; recovery,Quality materials built to last,Backed by a 30-day guarantee,Free Australian shipping,Trusted by 12,000+ customers' | split: ',' -%}
+        {%- for f in feats -%}
+          <div class="plp-crow"><div class="plp-cfeat">{{ f }}</div><div class="plp-cours"><span class="yes">{% render 'icon', name: 'check' %}</span></div><div class="plp-cstd"><span class="no">&times;</span></div></div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FAQ {%- endcomment -%}
+  <section class="blk plp-faq">
+    <div class="container">
+      <div class="sechead center" data-reveal><h2 class="serif">Frequently asked questions</h2></div>
+      <div class="acc plp-faq-acc" data-reveal>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <details {{ block.shopify_attributes }}><summary>{{ block.settings.q }}</summary><div class="body-acc">{{ block.settings.a }}</div></details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Product story",
+  "settings": [
+    { "type": "text", "id": "benefits_heading", "label": "Benefits heading", "default": "Why you'll love it" },
+    { "type": "text", "id": "split_heading", "label": "Split heading", "default": "Relief that fits into your day" },
+    { "type": "textarea", "id": "split_text", "label": "Split text", "default": "Made for the places sitting, training and stress settle in — thoughtful support you'll actually keep using." },
+    { "type": "text", "id": "split_point_1", "label": "Point 1", "default": "Eases everyday tension and stiffness" },
+    { "type": "text", "id": "split_point_2", "label": "Point 2", "default": "Comfortable enough for daily use" },
+    { "type": "text", "id": "split_point_3", "label": "Point 3", "default": "Built to last, backed by our guarantee" }
+  ],
+  "blocks": [
+    { "type": "faq", "name": "FAQ", "settings": [
+      { "type": "text", "id": "q", "label": "Question", "default": "How long until I feel a difference?" },
+      { "type": "textarea", "id": "a", "label": "Answer", "default": "Most people notice more comfort within the first few uses. Consistency helps — a little each day goes a long way." }
+    ]}
+  ],
+  "presets": [{
+    "name": "Product story",
+    "blocks": [
+      { "type": "faq", "settings": { "q": "How long until I feel a difference?", "a": "Most people notice more comfort within the first few uses. Consistency helps — a little each day goes a long way." } },
+      { "type": "faq", "settings": { "q": "What if it's not right for me?", "a": "Every order is backed by a 30-day comfort guarantee. If it's not for you, return it for a refund." } },
+      { "type": "faq", "settings": { "q": "How fast is shipping?", "a": "Orders are processed within 1–3 business days and shipped across Australia with tracking." } },
+      { "type": "faq", "settings": { "q": "Is it a medical device?", "a": "No — our products support everyday comfort, posture and recovery. Check with your doctor about any diagnosed condition." } }
+    ]
+  }]
+}
+{% endschema %}
