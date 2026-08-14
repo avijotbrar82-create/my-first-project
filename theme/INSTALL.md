@@ -61,6 +61,13 @@ shopify theme push --unpublished   # upload as a new unpublished theme
    shows on every product using this template). Toggle it off there too. The clip is muted,
    loops, and only plays while on screen; it's paused for visitors with reduced-motion on.
 
+7. **Butterfly Pillow landing page** (Derila-style long-form page). A page
+   **"Butterfly Pillow"** (`/pages/butterfly-pillow`) is already created and set to the
+   **`page.pillow`** template. Preview the theme and open that URL to see it. It pulls all
+   its imagery from the **Ergonomic Butterfly Memory Neck Pillow** product, so swapping the
+   product's photos updates the page. Edit copy/product in the theme editor → **Pillow
+   landing** section (hero, headings, reviews and FAQs are all editable blocks).
+
 That's it — product pages, collections, cart and checkout work out of the box.
 
 ---

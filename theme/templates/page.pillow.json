@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "pillow-landing",
+      "settings": {
+        "product": "ergonomic-butterfly-memory-neck-pillow",
+        "discount_label": "Launch offer · save 20%",
+        "heading": "Wake up <em>without the neck pain.</em>",
+        "cta_label": "Shop the Butterfly Pillow"
+      },
+      "blocks": {
+        "r1": { "type": "review", "settings": { "quote": "Quietly fixed the neck tension I'd had for years. I wake up without a stiff neck now.", "name": "Sarah R.", "location": "Melbourne, VIC" } },
+        "r2": { "type": "review", "settings": { "quote": "The butterfly shape is genuinely clever — my shoulders finally have somewhere to go.", "name": "Daniel L.", "location": "Perth, WA" } },
+        "r3": { "type": "review", "settings": { "quote": "Cool all night and so supportive. Best sleep I've had in years.", "name": "Mia T.", "location": "Sydney, NSW" } },
+        "r4": { "type": "review", "settings": { "quote": "I'm a side sleeper and it fits perfectly. No more waking up sore.", "name": "Priya N.", "location": "Brisbane, QLD" } },
+        "f1": { "type": "faq", "settings": { "q": "How is this different from a standard pillow?", "a": "The butterfly shape supports your neck and shoulders instead of just propping up your head, keeping your spine aligned in any position." } },
+        "f2": { "type": "faq", "settings": { "q": "Will it help with neck and shoulder pain?", "a": "It's designed to cradle the neck's natural curve and relieve pressure, which many people find eases morning stiffness. It supports posture and is not a medical device." } },
+        "f3": { "type": "faq", "settings": { "q": "Is it suitable for all sleeping positions?", "a": "Yes — back, side and stomach. The contoured wings adapt to how you move through the night." } },
+        "f4": { "type": "faq", "settings": { "q": "Does it come with a washable cover?", "a": "Yes, the outer cover is removable and machine-washable. Air-dry the memory foam core." } },
+        "f5": { "type": "faq", "settings": { "q": "What is the return policy?", "a": "Every order is backed by a 30-day comfort guarantee. If it's not right for you, return it for a refund." } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "f1", "f2", "f3", "f4", "f5"]
+    }
+  },
+  "order": ["main"]
+}
