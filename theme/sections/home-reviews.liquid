@@ -1,0 +1,20 @@
+{%- comment -%} Homepage real-reviews strip (data in assets/reviews.js), placed before the product catalog. {%- endcomment -%}
+<section class="blk vr-section vr-home-section" data-reveal>
+  <div class="container">
+    <div class="vr-sechead center">
+      {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="serif">{{ section.settings.heading }}</h2>
+    </div>
+    <div data-vr-reviews-home></div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Home reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real reviews · verified buyers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by people who sit all day" }
+  ],
+  "presets": [{ "name": "Home reviews" }]
+}
+{% endschema %}

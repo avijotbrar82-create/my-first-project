@@ -38,7 +38,7 @@
         <h1 class="serif">{{ product.title }}</h1>
 
         {%- if section.settings.show_rating -%}
-          <div class="rating">★★★★★ <span>{{ section.settings.rating_text }}</span></div>
+          <a class="rating" href="#reviews">★★★★★ <span data-vr-rating data-handle="{{ product.handle }}">{{ section.settings.rating_text }}</span></a>
         {%- endif -%}
 
         <div class="pdp-price" id="pdp-price" data-price>

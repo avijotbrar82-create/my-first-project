@@ -1,10 +1,14 @@
 {
   "sections": {
+    "reviews": {
+      "type": "product-reviews",
+      "settings": { "heading": "What buyers are saying" }
+    },
     "main": {
       "type": "main-product",
       "settings": {
         "show_rating": true,
-        "rating_text": "4.9 · 2,400+ reviews"
+        "rating_text": "New"
       }
     },
     "related": {
@@ -16,5 +20,5 @@
       }
     }
   },
-  "order": ["main", "related"]
+  "order": ["reviews", "main", "related"]
 }

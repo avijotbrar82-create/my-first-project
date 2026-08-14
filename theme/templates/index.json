@@ -12,6 +12,13 @@
         "show_stats": true
       }
     },
+    "home_reviews": {
+      "type": "home-reviews",
+      "settings": {
+        "eyebrow": "Real reviews · verified buyers",
+        "heading": "Loved by people who sit all day"
+      }
+    },
     "trust": {
       "type": "trust-row",
       "blocks": {
@@ -88,5 +95,5 @@
       }
     }
   },
-  "order": ["hero", "trust", "featured", "benefits", "spotlight", "method", "reviews", "cta"]
+  "order": ["hero", "trust", "home_reviews", "featured", "benefits", "spotlight", "method", "cta"]
 }
