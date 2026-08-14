@@ -4,12 +4,17 @@
 -%}
 {%- if section.settings.hero_style == 'banner' -%}
   <section class="hero banner">
-    <a class="hero-banner-wrap" href="{{ shop_link }}" aria-label="{{ section.settings.button1_label | default: 'Shop the range' | escape }}">
-      {%- if img != blank -%}
-        <img class="hero-banner-img" src="{{ img | image_url: width: 1600 }}" alt="{{ img.alt | escape | default: 'Verta Relief — ergonomic comfort, everyday support' }}" width="1536" height="1024" fetchpriority="high">
-      {%- else -%}
-        <img class="hero-banner-img" src="{{ 'hero-banner.webp' | asset_url }}" alt="Verta Relief — ergonomic comfort, everyday support" width="1536" height="1024" fetchpriority="high">
-      {%- endif -%}
+    <a class="hero-banner-wrap{% if section.settings.mobile_image != blank %} has-mobile{% endif %}" href="{{ shop_link }}" aria-label="{{ section.settings.button1_label | default: 'Shop the range' | escape }}">
+      <picture>
+        {%- if section.settings.mobile_image != blank -%}
+          <source media="(max-width: 600px)" srcset="{{ section.settings.mobile_image | image_url: width: 900 }}">
+        {%- endif -%}
+        {%- if img != blank -%}
+          <img class="hero-banner-img" src="{{ img | image_url: width: 1600 }}" alt="{{ img.alt | escape | default: 'Verta Relief — ergonomic comfort, everyday support' }}" width="1536" height="1024" fetchpriority="high">
+        {%- else -%}
+          <img class="hero-banner-img" src="{{ 'hero-banner.webp' | asset_url }}" alt="Verta Relief — ergonomic comfort, everyday support" width="1536" height="1024" fetchpriority="high">
+        {%- endif -%}
+      </picture>
       {%- if section.settings.button1_label != blank -%}
         <span class="hero-banner-cta"><span class="btn btn-honey">{{ section.settings.button1_label }} <span aria-hidden="true">&#8594;</span></span></span>
       {%- endif -%}
@@ -61,6 +66,7 @@
       ],
       "info": "Banner mode shows your image whole with a Shop button — use it for a designed banner that already has its own text." },
     { "type": "image_picker", "id": "image", "label": "Hero / banner image (defaults to the packaged banner)" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile banner image (optional)", "info": "Shown on phones (≤600px) in banner mode. Use a taller portrait/square image designed for small screens. Leave blank to reuse the main image." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Professional-grade recovery" },
     { "type": "html", "id": "heading", "label": "Heading", "default": "Recovery,<br><em>unhurried.</em>" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Percussion, decompression and posture support — thoughtfully made for the quiet work of feeling better, one calm day at a time." },
