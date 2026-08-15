@@ -39,12 +39,10 @@
         "m1": { "type": "method", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussion and warm massage at the end of the day." } },
         "m2": { "type": "method", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
         "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } },
-        "b1": { "type": "blog", "settings": { "date": "New", "title": "What causes lower back pain — and how to ease it" } },
-        "b2": { "type": "blog", "settings": { "date": "New", "title": "How to fix forward head posture at home, fast" } },
-        "b3": { "type": "blog", "settings": { "date": "New", "title": "Top tips for fixing poor neck posture" } },
-        "b4": { "type": "blog", "settings": { "date": "New", "title": "Can neck pain be a sign of something serious?" } }
+        "e1": { "type": "expert", "settings": { "name": "Dr. Angela Smith", "credential": "Ergonomics & Sleep Support Specialist" } },
+        "e2": { "type": "expert", "settings": { "name": "Expert review", "credential": "Video coming soon" } }
       },
-      "block_order": ["f1", "f2", "f3", "u1", "u2", "u3", "u4", "m1", "m2", "m3", "b1", "b2", "b3", "b4"]
+      "block_order": ["f1", "f2", "f3", "u1", "u2", "u3", "u4", "e1", "e2", "m1", "m2", "m3"]
     }
   },
   "order": ["main"]

@@ -973,3 +973,30 @@ footer .brand .about{margin-top:10px}
 .cx-hb-cta .cx-btn{box-shadow:0 16px 38px -12px rgba(40,28,16,.6)}
 @media(max-width:600px){ .cx-hb-cta{bottom:20%} .cx-hb-cta .cx-btn{font-size:12px;padding:10px 18px} }
 @media(prefers-reduced-motion:reduce){ .cx-hb-wrap{clip-path:none!important;animation:none!important} .cx-hb-cta{opacity:1!important;transform:translateX(-50%)!important;animation:none!important} }
+
+/* trusted by experts */
+.cx-experts{background:var(--cream)}
+.cx-experts-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:46px;align-items:center;margin-top:8px}
+.cx-expert-stars{color:var(--honey);letter-spacing:3px;font-size:18px;margin-bottom:16px}
+.cx-expert-quote blockquote{font-family:var(--f-disp);font-weight:500;font-size:clamp(16px,1.7vw,20px);line-height:1.55;color:var(--espresso);margin:0 0 20px}
+.cx-expert-by b{display:block;font-size:15px;color:var(--espresso)}
+.cx-expert-by span{font-size:13px;color:var(--taupe)}
+.cx-expert-vids{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cx-expert-vid{margin:0}
+.cx-expert-media{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--greige)}
+.cx-expert-media img,.cx-expert-media video{width:100%;height:100%;object-fit:cover}
+.cx-expert-media figcaption{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:14px;background:linear-gradient(0deg,rgba(30,24,18,.82),transparent);color:#fff}
+.cx-expert-media figcaption b{display:block;font-size:13.5px}
+.cx-expert-media figcaption span{font-size:11px;opacity:.85}
+
+/* bundle card in range */
+.cx-bundle-card{background:var(--espresso);border-color:var(--espresso)}
+.cx-bundle-art{background:var(--honey);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;position:relative}
+.cx-bundle-art img{width:100%;height:100%;object-fit:cover}
+.cx-bundle-badge{background:#fdf8ef;color:var(--honey);font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px}
+.cx-bundle-slot{color:#fdf8ef;font-size:10.5px;opacity:.8;letter-spacing:.08em;text-transform:uppercase}
+.cx-bundle-card .cx-card-body h3{color:#fdf8ef}
+.cx-bundle-text{font-size:13px;color:#e0d6c7;margin:0 0 12px;line-height:1.5}
+.cx-bundle-cta{font-weight:700;font-size:13px;color:var(--honey-lt);text-transform:uppercase;letter-spacing:.04em}
+
+@media(max-width:900px){ .cx-experts-grid{grid-template-columns:1fr;gap:26px} }

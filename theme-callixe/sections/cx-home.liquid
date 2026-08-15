@@ -97,11 +97,27 @@
     <div class="container">
       <h2 class="serif cx-h2">{{ section.settings.range_heading }}</h2>
       <div class="cx-range" data-reveal data-stagger>
-        {%- if coll != blank and coll.products.size > 0 -%}
-          {%- for product in coll.products limit: 4 -%}{% render 'cx-card', product: product %}{%- endfor -%}
-        {%- else -%}
-          {%- for product in collections.all.products limit: 4 -%}{% render 'cx-card', product: product %}{%- endfor -%}
-        {%- endif -%}
+        {%- assign src = coll.products | default: collections.all.products -%}
+        {%- assign shown = 0 -%}
+        {%- for product in src -%}
+          {%- unless product.handle == 'professional-mini-muscle-massage-gun-with-lcd-screen' -%}
+            {%- if shown < 3 -%}{% render 'cx-card', product: product %}{%- assign shown = shown | plus: 1 -%}{%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        <a class="cx-card cx-bundle-card" href="{{ routes.all_products_collection_url }}" data-bundle-open>
+          <div class="cx-card-art cx-bundle-art">
+            {%- if section.settings.bundle_image != blank -%}
+              <img src="{{ section.settings.bundle_image | image_url: width: 600 }}" alt="{{ section.settings.bundle_title | escape }}">
+            {%- else -%}
+              <span class="cx-bundle-badge">Save 20%</span><span class="cx-bundle-slot">Your image here</span>
+            {%- endif -%}
+          </div>
+          <div class="cx-card-body">
+            <h3 class="serif">{{ section.settings.bundle_title }}</h3>
+            <p class="cx-bundle-text">{{ section.settings.bundle_text }}</p>
+            <span class="cx-bundle-cta">{{ section.settings.bundle_cta }} &#8594;</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -129,6 +145,39 @@
             </figure>
           {%- endif -%}
         {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== TRUSTED BY EXPERTS ===== {%- endcomment -%}
+  <section class="cx-band cx-experts">
+    <div class="container">
+      <div class="cx-eyebrow">{{ section.settings.experts_eyebrow }}</div>
+      <h2 class="serif cx-h2">{{ section.settings.experts_heading }}</h2>
+      <div class="cx-experts-grid" data-reveal>
+        <div class="cx-expert-quote">
+          <div class="cx-expert-stars">★★★★★</div>
+          <blockquote class="serif">{{ section.settings.expert_quote | newline_to_br }}</blockquote>
+          <div class="cx-expert-by"><b>{{ section.settings.expert_name }}</b><span>{{ section.settings.expert_title }}</span></div>
+        </div>
+        <div class="cx-expert-vids">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'expert' -%}
+              <figure class="cx-expert-vid" {{ block.shopify_attributes }}>
+                <div class="cx-expert-media">
+                  {%- if block.settings.video != blank -%}
+                    {{ block.settings.video | video_tag: image_size: '600x', loop: true, muted: true, controls: true, playsinline: true }}
+                  {%- elsif block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}" loading="lazy"><span class="cx-play">▶</span>
+                  {%- else -%}
+                    <div class="cx-ugc-ph"><span class="cx-play">▶</span><small>Video coming soon</small></div>
+                  {%- endif -%}
+                  <figcaption><b>{{ block.settings.name }}</b><span>{{ block.settings.credential }}</span></figcaption>
+                </div>
+              </figure>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </section>
@@ -179,37 +228,6 @@
     </div>
   </section>
 
-  {%- comment -%} ===== BLOGS ===== {%- endcomment -%}
-  {%- assign blog = blogs[section.settings.blog] -%}
-  <section class="cx-band cx-blogs-wrap">
-    <div class="container">
-      <div class="cx-blogs-head">
-        <h2 class="serif cx-h2">{{ section.settings.blog_heading }}</h2>
-        <a class="cx-btn cx-btn-ghost" href="{% if blog != blank %}{{ blog.url }}{% else %}#{% endif %}">Explore articles</a>
-      </div>
-      <div class="cx-blogs" data-reveal data-stagger>
-        {%- if blog != blank and blog.articles_count > 0 -%}
-          {%- for a in blog.articles limit: 4 -%}
-            <a class="cx-blog" href="{{ a.url }}">
-              <div class="cx-blog-img">{%- if a.image -%}<img src="{{ a.image | image_url: width: 500 }}" alt="{{ a.title | escape }}" loading="lazy">{%- endif -%}</div>
-              <time>{{ a.published_at | date: '%b %d, %Y' }}</time>
-              <h4 class="serif">{{ a.title }}</h4>
-            </a>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'blog' -%}
-              <a class="cx-blog" href="#" {{ block.shopify_attributes }}>
-                <div class="cx-blog-img">{%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 500 }}" alt="" loading="lazy">{%- endif -%}</div>
-                <time>{{ block.settings.date }}</time>
-                <h4 class="serif">{{ block.settings.title }}</h4>
-              </a>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%}
-      </div>
-    </div>
-  </section>
 
 </div>
 
@@ -238,6 +256,17 @@
     { "type": "header", "content": "Shop the range" },
     { "type": "text", "id": "range_heading", "label": "Heading", "default": "Shop the range" },
     { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "header", "content": "Bundle card (in range)" },
+    { "type": "image_picker", "id": "bundle_image", "label": "Bundle card image" },
+    { "type": "text", "id": "bundle_title", "label": "Bundle title", "default": "Build your bundle" },
+    { "type": "textarea", "id": "bundle_text", "label": "Bundle text", "default": "Pick any three tools and save 20% on your recovery kit." },
+    { "type": "text", "id": "bundle_cta", "label": "Bundle button", "default": "Start building" },
+    { "type": "header", "content": "Trusted by experts" },
+    { "type": "text", "id": "experts_eyebrow", "label": "Eyebrow", "default": "Trusted by experts" },
+    { "type": "text", "id": "experts_heading", "label": "Heading", "default": "What the specialists say" },
+    { "type": "textarea", "id": "expert_quote", "label": "Expert quote", "default": "A thoughtfully designed pillow that prioritises proper neck support and comfort. The ergonomic butterfly shape helps cradle the head and neck while keeping the user in a more natural sleeping position. I was particularly impressed by the supportive contouring and overall construction.\n\nFor people who experience everyday neck or shoulder discomfort, or simply want better support while sleeping, this is a product worth considering. It combines practical ergonomic design with excellent comfort." },
+    { "type": "text", "id": "expert_name", "label": "Expert name", "default": "— Dr. Angela Smith" },
+    { "type": "text", "id": "expert_title", "label": "Expert title", "default": "Ergonomics & Sleep Support Specialist" },
     { "type": "header", "content": "Community" },
     { "type": "text", "id": "community_eyebrow", "label": "Eyebrow", "default": "12,000+ happy customers" },
     { "type": "text", "id": "community_heading", "label": "Heading", "default": "Hear from our community" },
@@ -278,10 +307,11 @@
       { "type": "text", "id": "title", "label": "Title", "default": "Release" },
       { "type": "textarea", "id": "text", "label": "Text", "default": "Ease built-up tension with percussion and warm massage." }
     ]},
-    { "type": "blog", "name": "Blog card (fallback)", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "text", "id": "date", "label": "Date", "default": "New" },
-      { "type": "text", "id": "title", "label": "Title", "default": "How to fix forward head posture at home" }
+    { "type": "expert", "name": "Expert video", "settings": [
+      { "type": "video", "id": "video", "label": "Video" },
+      { "type": "image_picker", "id": "image", "label": "Image (fallback)" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Dr. Angela Smith" },
+      { "type": "text", "id": "credential", "label": "Credential", "default": "Ergonomics & Sleep Support Specialist" }
     ]}
   ],
   "presets": [{ "name": "Callixe home" }]
