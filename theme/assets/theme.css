@@ -9,7 +9,7 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0}
-  .site{background:var(--cream); color:var(--espresso); font-family:var(--f-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative}
+  .site{background:var(--cream); color:var(--espresso); font-family:var(--f-body); -webkit-font-smoothing:antialiased; overflow-x:clip; position:relative}
   .site img{max-width:100%; display:block}
   a{color:inherit; text-decoration:none}
   .container{max-width:var(--maxw); margin:0 auto; padding:0 30px}
@@ -233,8 +233,8 @@
   /* ---- pdp ---- */
   .pdp{display:grid; grid-template-columns:1.02fr .98fr; gap:54px; align-items:start}
   @media(max-width:900px){.pdp{grid-template-columns:1fr; gap:30px}}
-  .pdp-main{aspect-ratio:1/1; border-radius:22px; overflow:hidden; background:var(--panel)}
-  .pdp-main img{width:100%; height:100%; object-fit:contain}
+  .pdp-main{border-radius:22px; overflow:hidden; background:var(--panel); display:flex; align-items:center; justify-content:center}
+  .pdp-main img{width:100%; height:auto; display:block; max-height:78vh; object-fit:contain}
   .thumbs{display:flex; gap:12px; margin-top:14px}
   .thumb{width:84px; height:84px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--oat); cursor:pointer; padding:0}
   .thumb img{width:100%; height:100%; object-fit:cover}
@@ -625,7 +625,8 @@ footer .brand .about{margin-top:10px}
 /* ============ MOBILE — product page (PDP) ============ */
 @media(max-width:600px){
   .pdp{gap:18px}
-  .pdp-main{border-radius:16px; max-height:74vh}
+  .pdp-main{border-radius:16px}
+  .pdp-main img{max-height:70vh}
   .thumbs{gap:8px; margin-top:10px}
   .thumb{width:60px; height:60px; border-radius:10px}
   .pdp-info h1{font-size:22px; margin-top:6px}
