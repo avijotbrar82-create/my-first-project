@@ -107,10 +107,11 @@
         <a class="cx-card cx-bundle-card" href="{{ routes.all_products_collection_url }}" data-bundle-open>
           <div class="cx-card-art cx-bundle-art">
             {%- if section.settings.bundle_image != blank -%}
-              <img src="{{ section.settings.bundle_image | image_url: width: 600 }}" alt="{{ section.settings.bundle_title | escape }}">
+              <img src="{{ section.settings.bundle_image | image_url: width: 700 }}" alt="{{ section.settings.bundle_title | escape }}">
             {%- else -%}
-              <span class="cx-bundle-badge">Save 20%</span><span class="cx-bundle-slot">Your image here</span>
+              <img src="{{ 'bundle-box.webp' | asset_url }}" alt="Build your Verta Relief bundle">
             {%- endif -%}
+            <span class="cx-bundle-badge">Save 20%</span>
           </div>
           <div class="cx-card-body">
             <h3 class="serif">{{ section.settings.bundle_title }}</h3>

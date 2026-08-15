@@ -16,6 +16,7 @@
   <div class="cx-card-body">
     <span class="cx-card-reviews" data-vr-rating-mini data-handle="{{ product.handle }}"></span>
     <h3 class="serif">{{ product.title }}</h3>
+    {%- if desc and product.description != blank -%}<p class="cx-card-desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
     <div class="cx-card-price">
       <span class="cx-now">{{ product.price | money }}</span>
       {%- if onsale -%}<span class="cx-was">{{ product.compare_at_price | money }}</span>{%- endif -%}
