@@ -30,6 +30,19 @@
     {%- paginate collection.products by 12 -%}
       {%- if collection.products_count > 0 -%}
         <div class="cx-range cx-coll-grid" data-reveal data-stagger>
+          {%- unless current_tags -%}
+            <a class="cx-card cx-bundle-card" href="{{ routes.all_products_collection_url }}" data-bundle-open>
+              <div class="cx-card-art cx-bundle-art">
+                <img src="{{ 'bundle-box.webp' | asset_url }}" alt="Build your Verta Relief bundle">
+                <span class="cx-bundle-badge">Save 20%</span>
+              </div>
+              <div class="cx-card-body">
+                <h3 class="serif">Build your bundle</h3>
+                <p class="cx-bundle-text">Pick any three tools and save 20% on your recovery kit.</p>
+                <span class="cx-bundle-cta">Start building &#8594;</span>
+              </div>
+            </a>
+          {%- endunless -%}
           {%- for product in collection.products -%}{% render 'cx-card', product: product, desc: true %}{%- endfor -%}
         </div>
         {%- if paginate.pages > 1 -%}
