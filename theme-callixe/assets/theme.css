@@ -1067,3 +1067,12 @@ footer .brand .about{margin-top:10px}
   .pdp-info .eyebrow{white-space:normal;word-break:break-word}
   .acc .body-acc{overflow-wrap:break-word}
 }
+
+/* single expert review video */
+.cx-expert-vids-single{grid-template-columns:1fr}
+.cx-expert-single{margin:0}
+.cx-expert-single .cx-expert-media{aspect-ratio:auto;background:#100d0b;border-radius:14px;overflow:hidden}
+.cx-expert-single .cx-expert-media video{width:100%;height:auto;display:block;max-height:70vh}
+.cx-expert-cap{margin-top:12px;font-size:13.5px;color:var(--taupe)}
+.cx-expert-cap b{color:var(--espresso)}
+.cx-expert-cap span{margin-left:8px}

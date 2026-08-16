@@ -38,11 +38,9 @@
         "u4": { "type": "ugc", "settings": { "caption": "\"If you sit all day, this is what you need.\"" } },
         "m1": { "type": "method", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussion and warm massage at the end of the day." } },
         "m2": { "type": "method", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
-        "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } },
-        "e1": { "type": "expert", "settings": { "name": "Dr. Angela Smith", "credential": "Ergonomics & Sleep Support Specialist" } },
-        "e2": { "type": "expert", "settings": { "name": "Expert review", "credential": "Video coming soon" } }
+        "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
       },
-      "block_order": ["f1", "f2", "f3", "u1", "u2", "u3", "u4", "e1", "e2", "m1", "m2", "m3"]
+      "block_order": ["f1", "f2", "f3", "u1", "u2", "u3", "u4", "m1", "m2", "m3"]
     }
   },
   "order": ["main"]

@@ -161,24 +161,39 @@
           <blockquote class="serif">{{ section.settings.expert_quote | newline_to_br }}</blockquote>
           <div class="cx-expert-by"><b>{{ section.settings.expert_name }}</b><span>{{ section.settings.expert_title }}</span></div>
         </div>
-        <div class="cx-expert-vids">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'expert' -%}
-              <figure class="cx-expert-vid" {{ block.shopify_attributes }}>
-                <div class="cx-expert-media">
-                  {%- if block.settings.video != blank -%}
-                    {{ block.settings.video | video_tag: image_size: '600x', loop: true, muted: true, controls: true, playsinline: true }}
-                  {%- elsif block.settings.image != blank -%}
-                    <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}" loading="lazy"><span class="cx-play">▶</span>
-                  {%- else -%}
-                    <div class="cx-ugc-ph"><span class="cx-play">▶</span><small>Video coming soon</small></div>
-                  {%- endif -%}
-                  <figcaption><b>{{ block.settings.name }}</b><span>{{ block.settings.credential }}</span></figcaption>
-                </div>
-              </figure>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
+        {%- assign has_expert_block = false -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'expert' -%}{%- assign has_expert_block = true -%}{%- endif -%}{%- endfor -%}
+        {%- if has_expert_block -%}
+          <div class="cx-expert-vids">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'expert' -%}
+                <figure class="cx-expert-vid" {{ block.shopify_attributes }}>
+                  <div class="cx-expert-media">
+                    {%- if block.settings.video != blank -%}
+                      {{ block.settings.video | video_tag: image_size: '600x', controls: true, playsinline: true }}
+                    {%- elsif block.settings.image != blank -%}
+                      <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}" loading="lazy"><span class="cx-play">▶</span>
+                    {%- else -%}
+                      <div class="cx-ugc-ph"><span class="cx-play">▶</span><small>Video coming soon</small></div>
+                    {%- endif -%}
+                    <figcaption><b>{{ block.settings.name }}</b><span>{{ block.settings.credential }}</span></figcaption>
+                  </div>
+                </figure>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="cx-expert-vids cx-expert-vids-single">
+            <figure class="cx-expert-vid cx-expert-single">
+              <div class="cx-expert-media">
+                <video controls playsinline preload="metadata">
+                  <source src="{{ 'expert-review.mp4' | asset_url }}" type="video/mp4">
+                </video>
+              </div>
+              <figcaption class="cx-expert-cap"><b>{{ section.settings.expert_name | remove: '— ' | remove: '—' | strip }}</b><span>{{ section.settings.expert_title }}</span></figcaption>
+            </figure>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </section>
