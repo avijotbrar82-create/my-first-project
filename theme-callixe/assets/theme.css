@@ -1056,3 +1056,14 @@ footer .brand .about{margin-top:10px}
 /* keep the sticky top bars above everything while scrolling */
 .announce{position:sticky;top:0}
 .hdr.solid{position:sticky;top:var(--announce-h)}
+
+/* ===== Mobile fit — product columns must shrink (no horizontal overflow) ===== */
+.pdp > *{min-width:0}
+.pdp-launch{flex-wrap:wrap;max-width:100%}
+.pdp-info h1{overflow-wrap:break-word}
+@media (max-width:600px){
+  .bundle,.btier,.buyrow,.pdp-info,.gallery,.acc,.acc .body-acc{max-width:100%}
+  .buyrow .btn-honey{min-width:0}
+  .pdp-info .eyebrow{white-space:normal;word-break:break-word}
+  .acc .body-acc{overflow-wrap:break-word}
+}
