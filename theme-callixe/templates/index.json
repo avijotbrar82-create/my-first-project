@@ -30,7 +30,7 @@
       },
       "blocks": {
         "f1": { "type": "feature", "settings": { "icon": "guarantee", "title": "Try risk-free for 30 days", "text": "Enjoy it at home and return it for a full refund if you don't love it." } },
-        "f2": { "type": "feature", "settings": { "icon": "shipping", "title": "Free shipping over $80", "text": "Fast, tracked delivery across Australia on every qualifying order." } },
+        "f2": { "type": "feature", "settings": { "icon": "shipping", "title": "Free shipping on every order", "text": "Free shipping on every order across Australia — no minimum spend, ever." } },
         "f3": { "type": "feature", "settings": { "icon": "check", "title": "Secure checkout", "text": "Choose from a range of easy, secure payment options at checkout." } },
         "u1": { "type": "ugc", "settings": { "caption": "\"This has become my daily essential.\"" } },
         "u2": { "type": "ugc", "settings": { "caption": "\"For the first time in ages, I'm actually out of pain.\"" } },

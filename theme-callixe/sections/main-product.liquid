@@ -47,7 +47,10 @@
         <div class="pdp-launch">&#10022; Extra 15% off sitewide with code <strong style="margin-left:5px;letter-spacing:1px">WELCOME15</strong></div>
 
         {%- if product.description != blank -%}
-          <div class="pdp-desc">{{ product.description | strip_html | truncatewords: 40 }}</div>
+          <div class="pdp-desc" data-pdp-desc>
+            <div class="pdp-desc-clip" data-desc-clip>{{ product.description }}</div>
+            <button type="button" class="pdp-desc-more" data-desc-toggle aria-expanded="false">Read more</button>
+          </div>
         {%- endif -%}
 
         {%- form 'product', product, class: 'pdp-form', id: 'product-form' -%}
@@ -108,9 +111,6 @@
         </ul>
 
         <div class="acc">
-          {%- if product.description != blank -%}
-            <details open><summary>Details</summary><div class="body-acc">{{ product.description }}</div></details>
-          {%- endif -%}
           <details><summary>Shipping &amp; returns</summary><div class="body-acc">{{ section.settings.shipping_text }}</div></details>
           {%- if section.settings.extra_note != blank -%}
             <details><summary>Good to know</summary><div class="body-acc">{{ section.settings.extra_note }}</div></details>
@@ -250,6 +250,23 @@
       if(mainImg && t.dataset.src) mainImg.src = t.dataset.src;
     });
   });
+
+  // description "Read more" — fully expands the product description
+  var descWrap = root.querySelector('[data-pdp-desc]');
+  if(descWrap){
+    var clip = descWrap.querySelector('[data-desc-clip]');
+    var toggle = descWrap.querySelector('[data-desc-toggle]');
+    // only show the toggle if the text is actually clamped
+    function needsClamp(){ return clip && clip.scrollHeight - clip.clientHeight > 4; }
+    if(toggle){
+      if(!descWrap.classList.contains('open') && !needsClamp()){ toggle.style.display = 'none'; }
+      toggle.addEventListener('click', function(){
+        var open = descWrap.classList.toggle('open');
+        toggle.textContent = open ? 'Read less' : 'Read more';
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  }
 })();
 </script>
 

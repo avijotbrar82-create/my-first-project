@@ -451,6 +451,20 @@ select.sortsel{appearance:none;-webkit-appearance:none;padding-right:34px;
 .vf-code{display:inline-block;font-family:var(--f-disp);font-weight:600;font-size:26px;letter-spacing:3px;color:var(--espresso);
   background:var(--oat);border:1.5px dashed var(--honey);border-radius:12px;padding:14px 24px;margin:6px 0 4px;cursor:copy}
 
+/* Floating "Get 15% off" tab — reopens the signup popup */
+.vf-pop-tab{position:fixed;right:0;bottom:96px;z-index:60;border:0;cursor:pointer;padding:0;
+  background:var(--honey);color:#fff;border-radius:12px 0 0 12px;
+  box-shadow:0 6px 20px rgba(59,50,42,.28);transition:transform .25s ease,box-shadow .25s ease}
+.vf-pop-tab .vf-pop-tab-in{display:flex;align-items:center;gap:7px;font-family:var(--f-body);font-weight:700;
+  font-size:13px;letter-spacing:.02em;padding:11px 16px 11px 18px;line-height:1;white-space:nowrap}
+.vf-pop-tab .vf-pop-tab-in::before{content:"✦";font-size:12px;opacity:.9}
+.vf-pop-tab:hover{transform:translateX(-3px);box-shadow:0 10px 26px rgba(59,50,42,.34)}
+:root.pop-open .vf-pop-tab{opacity:0;pointer-events:none;transform:translateX(100%)}
+@media (max-width:600px){
+  .vf-pop-tab{bottom:78px}
+  .vf-pop-tab .vf-pop-tab-in{font-size:12px;padding:10px 13px 10px 15px}
+}
+
 /* ===== Bundle / quantity tiers (PDP) ===== */
 .bundle{margin:26px 0 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
 .bundle .bhead{text-align:center;font-family:var(--f-disp);font-weight:600;font-size:16px;padding:12px;background:var(--oat);color:var(--espresso)}
@@ -1076,3 +1090,16 @@ footer .brand .about{margin-top:10px}
 .cx-expert-cap{margin-top:12px;font-size:13.5px;color:var(--taupe)}
 .cx-expert-cap b{color:var(--espresso)}
 .cx-expert-cap span{margin-left:8px}
+
+/* PDP description — clamp + Read more */
+.pdp-desc-clip{max-height:9.5em;overflow:hidden;position:relative}
+.pdp-desc-clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,var(--cream));pointer-events:none}
+.pdp-desc.open .pdp-desc-clip{max-height:none}
+.pdp-desc.open .pdp-desc-clip::after{display:none}
+.pdp-desc-clip p{margin:0 0 10px}
+.pdp-desc-clip p:last-child{margin-bottom:0}
+.pdp-desc-clip h1,.pdp-desc-clip h2,.pdp-desc-clip h3,.pdp-desc-clip h4{font-family:var(--f-disp);font-weight:600;color:var(--espresso);font-size:18px;line-height:1.2;margin:0 0 8px}
+.pdp-desc-clip strong,.pdp-desc-clip b{color:var(--espresso)}
+.pdp-desc-clip ul,.pdp-desc-clip ol{margin:8px 0;padding-left:20px}
+.pdp-desc-more{background:none;border:0;color:var(--honey);font-weight:800;font-size:14px;cursor:pointer;padding:8px 0 0;text-decoration:underline;text-underline-offset:3px}
+.pdp-desc-more:hover{color:var(--honey-lt)}

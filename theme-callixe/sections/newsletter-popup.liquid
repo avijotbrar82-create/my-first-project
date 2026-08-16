@@ -26,6 +26,10 @@
   {%- endform -%}
 </aside>
 
+<button class="vf-pop-tab" type="button" data-pop-open aria-label="{{ section.settings.tab_label | default: 'Get 15% off' }}">
+  <span class="vf-pop-tab-in">{{ section.settings.tab_label | default: 'Get 15% off' }}</span>
+</button>
+
 <script>
 (function(){
   var root = document.documentElement;
@@ -37,6 +41,7 @@
   function close(){ root.classList.remove('pop-open'); mark(); }
 
   document.addEventListener('click', function(e){
+    if(e.target.closest('[data-pop-open]')){ e.preventDefault(); open(); return; }
     if(e.target.closest('[data-pop-close]')) close();
     var code = e.target.closest('[data-copy-code]');
     if(code){ var t=code.textContent.trim(); if(navigator.clipboard){navigator.clipboard.writeText(t);} code.textContent='Copied!'; setTimeout(function(){code.textContent=t;},1200); }
@@ -65,6 +70,7 @@
     { "type": "html", "id": "heading", "label": "Heading", "default": "15% off, <em>on the house.</em>" },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Join Verta Relief and we'll send your 15% sitewide code — plus early access to new drops and calm recovery tips." },
     { "type": "text", "id": "button", "label": "Button", "default": "Get my 15% code" },
+    { "type": "text", "id": "tab_label", "label": "Floating tab label", "default": "Get 15% off" },
     { "type": "text", "id": "code", "label": "Discount code to reveal", "default": "WELCOME15" },
     { "type": "html", "id": "success_heading", "label": "Success heading", "default": "Here's your <em>15% off.</em>" },
     { "type": "text", "id": "success_text", "label": "Success text", "default": "Use this code at checkout — it's yours sitewide." },
