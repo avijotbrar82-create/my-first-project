@@ -81,6 +81,7 @@
       <div class="cx-founder-story">
         <div class="cx-eyebrow">Verta Relief</div>
         {%- if section.settings.story_heading != blank -%}<h2 class="serif cx-founder-h">{{ section.settings.story_heading }}</h2>{%- endif -%}
+        <a class="cx-btn cx-btn-ghost cx-founder-story-btn" href="{{ section.settings.about_link | default: '/pages/about-us' }}">{{ section.settings.about_cta | default: 'Our story' }}</a>
         {%- if section.settings.story_text != blank -%}<p class="cx-founder-lead">{{ section.settings.story_text }}</p>{%- endif -%}
         {%- if section.settings.story_highlight != blank -%}<p class="cx-founder-hl">{{ section.settings.story_highlight }}</p>{%- endif -%}
         <ul class="cx-founder-benefits">
@@ -311,8 +312,10 @@
     { "type": "text", "id": "b3_title", "label": "Benefit 3 title", "default": "Calmer Days" },
     { "type": "text", "id": "b3_text", "label": "Benefit 3 text", "default": "Feel more balanced, less overwhelmed, and back in control." },
     { "type": "textarea", "id": "story_closing", "label": "Closing line", "default": "Verta Relief isn't just another recovery tool. It's your daily reset — so you can move better, feel better, and live better." },
-    { "type": "text", "id": "story_cta", "label": "Story button", "default": "Shop now" },
-    { "type": "url", "id": "story_cta_link", "label": "Story button link" },
+    { "type": "text", "id": "about_cta", "label": "Story link button (under heading)", "default": "Our story" },
+    { "type": "url", "id": "about_link", "label": "Story link button URL (About page)" },
+    { "type": "text", "id": "story_cta", "label": "Shop button", "default": "Shop now" },
+    { "type": "url", "id": "story_cta_link", "label": "Shop button link" },
     { "type": "header", "content": "Healing starts at home" },
     { "type": "text", "id": "dual_eyebrow", "label": "Eyebrow", "default": "The essentials" },
     { "type": "text", "id": "dual_heading", "label": "Heading", "default": "Relief starts at home." },
