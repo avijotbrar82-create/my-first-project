@@ -71,7 +71,7 @@
           {%- if section.settings.founder_image != blank -%}
             <img src="{{ section.settings.founder_image | image_url: width: 760 }}" alt="{{ section.settings.founder_name | default: 'Emma Collins' | escape }}, founder of Verta Relief" loading="lazy">
           {%- else -%}
-            <div class="cx-founder-ph"><span>Add founder photo</span><small>Theme editor → Callixe home → Founder story → Founder photo</small></div>
+            <img src="{{ 'founder-emma.webp' | asset_url }}" alt="{{ section.settings.founder_name | default: 'Emma Collins' | escape }}, founder of Verta Relief" loading="lazy">
           {%- endif -%}
           <figcaption class="cx-founder-tag">{{ section.settings.founder_tag | default: 'Founder of Verta Relief' }}</figcaption>
         </div>
