@@ -1043,6 +1043,7 @@ footer .brand .about{margin-top:10px}
 .cx-expert-quote blockquote{font-family:var(--f-disp);font-weight:500;font-size:clamp(16px,1.7vw,20px);line-height:1.55;color:var(--espresso);margin:0 0 20px}
 .cx-expert-by b{display:block;font-size:15px;color:var(--espresso)}
 .cx-expert-by span{font-size:13px;color:var(--taupe)}
+.cx-expert-cta{margin-top:20px}
 .cx-expert-vids{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cx-expert-vid{margin:0}
 .cx-expert-media{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--greige)}

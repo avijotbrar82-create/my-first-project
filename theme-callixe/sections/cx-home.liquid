@@ -194,6 +194,7 @@
           <div class="cx-expert-stars">★★★★★</div>
           <blockquote class="serif">{{ section.settings.expert_quote | newline_to_br }}</blockquote>
           <div class="cx-expert-by"><b>{{ section.settings.expert_name }}</b><span>{{ section.settings.expert_title }}</span></div>
+          <a class="cx-btn cx-btn-dark cx-expert-cta" href="{{ section.settings.experts_cta_link | default: routes.all_products_collection_url }}">{{ section.settings.experts_cta | default: 'Shop now' }}</a>
         </div>
         {%- assign has_expert_block = false -%}
         {%- for block in section.blocks -%}{%- if block.type == 'expert' -%}{%- assign has_expert_block = true -%}{%- endif -%}{%- endfor -%}
@@ -335,6 +336,8 @@
     { "type": "textarea", "id": "expert_quote", "label": "Expert quote", "default": "A thoughtfully designed pillow that prioritises proper neck support and comfort. The ergonomic butterfly shape helps cradle the head and neck while keeping the user in a more natural sleeping position. I was particularly impressed by the supportive contouring and overall construction.\n\nFor people who experience everyday neck or shoulder discomfort, or simply want better support while sleeping, this is a product worth considering. It combines practical ergonomic design with excellent comfort." },
     { "type": "text", "id": "expert_name", "label": "Expert name", "default": "— Dr. Angela Smith" },
     { "type": "text", "id": "expert_title", "label": "Expert title", "default": "Ergonomics & Sleep Support Specialist" },
+    { "type": "text", "id": "experts_cta", "label": "Specialist button", "default": "Shop now" },
+    { "type": "url", "id": "experts_cta_link", "label": "Specialist button link" },
     { "type": "header", "content": "Community" },
     { "type": "text", "id": "community_eyebrow", "label": "Eyebrow", "default": "12,000+ happy customers" },
     { "type": "text", "id": "community_heading", "label": "Heading", "default": "Hear from our community" },
