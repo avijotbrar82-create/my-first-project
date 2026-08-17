@@ -54,22 +54,55 @@
     </div>
   </section>
 
-  {%- comment -%} ===== FEATURED-IN QUOTE ===== {%- endcomment -%}
-  {%- if section.settings.quote != blank -%}
-  <section class="cx-featured">
-    <div class="container" data-reveal>
-      <div class="cx-eyebrow">{{ section.settings.featured_label }}</div>
-      <p class="cx-quote serif">{{ section.settings.quote }}</p>
-      <div class="cx-logos">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'logo' and block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" {{ block.shopify_attributes }}>
-          {%- endif -%}
-        {%- endfor -%}
+  {%- comment -%} ===== FOUNDER STORY — quote · founder · story ===== {%- endcomment -%}
+  <section class="cx-founder">
+    <div class="container cx-founder-grid" data-reveal>
+
+      {%- comment -%} LEFT — the relocated quote {%- endcomment -%}
+      <div class="cx-founder-quote">
+        {%- if section.settings.featured_label != blank -%}<div class="cx-eyebrow">{{ section.settings.featured_label }}</div>{%- endif -%}
+        {%- if section.settings.quote != blank -%}<p class="cx-quote serif">{{ section.settings.quote }}</p>{%- endif -%}
       </div>
+
+      {%- comment -%} MIDDLE — the founder portrait {%- endcomment -%}
+      <figure class="cx-founder-photo">
+        <span class="cx-founder-name serif">{{ section.settings.founder_name | default: 'Emma Collins' }}</span>
+        <div class="cx-founder-media">
+          {%- if section.settings.founder_image != blank -%}
+            <img src="{{ section.settings.founder_image | image_url: width: 760 }}" alt="{{ section.settings.founder_name | default: 'Emma Collins' | escape }}, founder of Verta Relief" loading="lazy">
+          {%- else -%}
+            <div class="cx-founder-ph"><span>Add founder photo</span><small>Theme editor → Callixe home → Founder story → Founder photo</small></div>
+          {%- endif -%}
+          <figcaption class="cx-founder-tag">{{ section.settings.founder_tag | default: 'Founder of Verta Relief' }}</figcaption>
+        </div>
+      </figure>
+
+      {%- comment -%} RIGHT — the founder story {%- endcomment -%}
+      <div class="cx-founder-story">
+        <div class="cx-eyebrow">Verta Relief</div>
+        {%- if section.settings.story_heading != blank -%}<h2 class="serif cx-founder-h">{{ section.settings.story_heading }}</h2>{%- endif -%}
+        {%- if section.settings.story_text != blank -%}<p class="cx-founder-lead">{{ section.settings.story_text }}</p>{%- endif -%}
+        {%- if section.settings.story_highlight != blank -%}<p class="cx-founder-hl">{{ section.settings.story_highlight }}</p>{%- endif -%}
+        <ul class="cx-founder-benefits">
+          <li>
+            <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span>
+            <div><b>{{ section.settings.b1_title | default: 'Better Sleep' }}</b><span>{{ section.settings.b1_text | default: 'Loosen tension, calm the body, and sleep deeper.' }}</span></div>
+          </li>
+          <li>
+            <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-1.5 5.6A3 3 0 0 0 6 17a3 3 0 0 0 3 3 2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"/><path d="M15 3a3 3 0 0 1 3 3 3 3 0 0 1 1.5 5.6A3 3 0 0 1 18 17a3 3 0 0 1-3 3 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg></span>
+            <div><b>{{ section.settings.b2_title | default: 'Sharper Focus' }}</b><span>{{ section.settings.b2_text | default: 'Relieve stress and fatigue to think clearer and get more done.' }}</span></div>
+          </li>
+          <li>
+            <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 8v6m0 0-6 5m6-5 6 5m-6-5c-3 0-6-1.4-8-3m8 3c3 0 6-1.4 8-3"/></svg></span>
+            <div><b>{{ section.settings.b3_title | default: 'Calmer Days' }}</b><span>{{ section.settings.b3_text | default: 'Feel more balanced, less overwhelmed, and back in control.' }}</span></div>
+          </li>
+        </ul>
+        {%- if section.settings.story_closing != blank -%}<p class="cx-founder-close">{{ section.settings.story_closing }}</p>{%- endif -%}
+        <a class="cx-btn cx-btn-dark cx-founder-cta" href="{{ section.settings.story_cta_link | default: routes.all_products_collection_url }}">{{ section.settings.story_cta | default: 'Shop now' }}</a>
+      </div>
+
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ===== HEALING STARTS AT HOME — DUAL PRODUCT CARDS ===== {%- endcomment -%}
   <section class="cx-band cx-dual-wrap">
@@ -261,9 +294,25 @@
     { "type": "text", "id": "hero_cta", "label": "Hero button", "default": "Shop now" },
     { "type": "url", "id": "hero_link", "label": "Hero button link" },
     { "type": "text", "id": "hero_note", "label": "Hero note", "default": "30-day comfort guarantee" },
-    { "type": "header", "content": "Featured in" },
-    { "type": "text", "id": "featured_label", "label": "Label", "default": "As recommended for" },
-    { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"Beyond pain relief, people report better sleep, sharper focus and calmer days.\"" },
+    { "type": "header", "content": "Founder story" },
+    { "type": "paragraph", "content": "Row layout: quote (left) · founder photo (middle) · story (right)." },
+    { "type": "text", "id": "featured_label", "label": "Quote label (left)", "default": "Made for desk workers, athletes & tired bodies" },
+    { "type": "textarea", "id": "quote", "label": "Quote (left)", "default": "\"Beyond pain relief, people report better sleep, sharper focus and calmer days.\"" },
+    { "type": "image_picker", "id": "founder_image", "label": "Founder photo (middle)" },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Emma Collins" },
+    { "type": "text", "id": "founder_tag", "label": "Founder tag", "default": "Founder of Verta Relief" },
+    { "type": "html", "id": "story_heading", "label": "Story heading (right)", "default": "We built Verta Relief as the antidote to everyday pain and burnout." },
+    { "type": "textarea", "id": "story_text", "label": "Story intro", "default": "We felt it too: sore shoulders from long hours, restless nights, low energy, and that foggy, drained feeling that just wouldn't go away." },
+    { "type": "text", "id": "story_highlight", "label": "Highlight line", "default": "We knew there had to be a better way." },
+    { "type": "text", "id": "b1_title", "label": "Benefit 1 title", "default": "Better Sleep" },
+    { "type": "text", "id": "b1_text", "label": "Benefit 1 text", "default": "Loosen tension, calm the body, and sleep deeper." },
+    { "type": "text", "id": "b2_title", "label": "Benefit 2 title", "default": "Sharper Focus" },
+    { "type": "text", "id": "b2_text", "label": "Benefit 2 text", "default": "Relieve stress and fatigue to think clearer and get more done." },
+    { "type": "text", "id": "b3_title", "label": "Benefit 3 title", "default": "Calmer Days" },
+    { "type": "text", "id": "b3_text", "label": "Benefit 3 text", "default": "Feel more balanced, less overwhelmed, and back in control." },
+    { "type": "textarea", "id": "story_closing", "label": "Closing line", "default": "Verta Relief isn't just another recovery tool. It's your daily reset — so you can move better, feel better, and live better." },
+    { "type": "text", "id": "story_cta", "label": "Story button", "default": "Shop now" },
+    { "type": "url", "id": "story_cta_link", "label": "Story button link" },
     { "type": "header", "content": "Healing starts at home" },
     { "type": "text", "id": "dual_eyebrow", "label": "Eyebrow", "default": "The essentials" },
     { "type": "text", "id": "dual_heading", "label": "Heading", "default": "Relief starts at home." },
