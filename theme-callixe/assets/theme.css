@@ -260,6 +260,9 @@
   .qty button{border:0; background:none; font-size:18px; width:42px; height:48px; cursor:pointer; color:var(--espresso)}
   .qty span{min-width:26px; text-align:center; font-weight:700}
   .buyrow .btn-honey{flex:1; justify-content:center; min-width:210px}
+  .buy-assure{display:flex; flex-wrap:wrap; gap:8px 20px; margin:14px 0 0; padding:0}
+  .buy-assure span{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:var(--espresso)}
+  .buy-assure svg{width:16px; height:16px; color:var(--honey); flex:0 0 auto}
   .buynow{display:flex; justify-content:center; margin:12px 0 0; width:100%}
   /* ---- PDP trust badges ---- */
   .trust-badges{margin:22px 0 0}

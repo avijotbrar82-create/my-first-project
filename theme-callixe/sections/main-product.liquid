@@ -99,6 +99,11 @@
             </button>
           </div>
 
+          <p class="buy-assure">
+            <span>{% render 'icon', name: 'guarantee', class: '' %} 30-day money-back guarantee</span>
+            <span>{% render 'icon', name: 'shipping', class: '' %} Free AU shipping</span>
+          </p>
+
           {%- if product.selected_or_first_available_variant.available == false -%}
             <p class="pdp-unavailable">This variant is currently unavailable.</p>
           {%- endif -%}
