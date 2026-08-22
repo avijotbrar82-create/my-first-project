@@ -261,9 +261,20 @@
   .qty span{min-width:26px; text-align:center; font-weight:700}
   .buyrow .btn-honey{flex:1; justify-content:center; min-width:210px}
   .buynow{display:flex; justify-content:center; margin:12px 0 0; width:100%}
-  .trustpts{list-style:none; margin:24px 0 0; padding:0; display:flex; flex-direction:column; gap:10px}
-  .trustpts li{font-size:14px; color:var(--espresso); display:flex; gap:10px; align-items:center}
-  .trustpts li svg{width:17px;height:17px;color:var(--honey);flex:0 0 auto}
+  /* ---- PDP trust badges ---- */
+  .trust-badges{margin:22px 0 0}
+  .tb-guarantee{display:flex;gap:12px;align-items:center;background:var(--oat);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .tb-guarantee .tb-ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--cream);display:grid;place-items:center}
+  .tb-guarantee .tb-ic svg{width:22px;height:22px;color:var(--honey)}
+  .tb-guarantee b{display:block;font-size:14.5px;color:var(--espresso)}
+  .tb-guarantee span{display:block;font-size:12.5px;color:var(--taupe);line-height:1.45;margin-top:2px}
+  .tb-pills{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .tb-pills li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--espresso);font-weight:600;
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+  .tb-pills li svg{width:15px;height:15px;color:var(--honey);flex:0 0 auto}
+  .tb-pay{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .tb-pay i{font-style:normal;font-weight:700;font-size:9.5px;letter-spacing:.03em;color:var(--taupe);
+    background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:6px 9px;line-height:1}
   .acc{margin:28px 0 0; border-top:1px solid var(--line)}
   .acc details{border-bottom:1px solid var(--line)}
   .acc summary{cursor:pointer; padding:16px 0; font-family:var(--f-disp); font-weight:600; font-size:17px; list-style:none; display:flex; justify-content:space-between; align-items:center}
@@ -656,8 +667,8 @@ footer .brand .about{margin-top:10px}
   .buyrow{margin-top:18px; gap:10px}
   .buyrow .btn-honey{min-width:0}
   .qty button{width:38px; height:44px}
-  .trustpts{margin-top:18px; gap:8px}
-  .trustpts li{font-size:12.5px}
+  .trust-badges{margin-top:18px}
+  .tb-guarantee b{font-size:13.5px}
   .acc{margin-top:20px}
   .acc summary{font-size:15px; padding:13px 0}
   .acc details .body-acc{font-size:13px; line-height:1.6}
