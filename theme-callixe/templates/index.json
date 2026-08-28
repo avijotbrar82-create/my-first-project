@@ -32,15 +32,11 @@
         "f1": { "type": "feature", "settings": { "icon": "guarantee", "title": "30-day money-back guarantee", "text": "Try it at home risk-free. If you don't love it, send it back within 30 days for a full refund." } },
         "f2": { "type": "feature", "settings": { "icon": "shipping", "title": "Free shipping on every order", "text": "Free shipping on every order across Australia — no minimum spend, ever." } },
         "f3": { "type": "feature", "settings": { "icon": "check", "title": "Secure checkout", "text": "Choose from a range of easy, secure payment options at checkout." } },
-        "u1": { "type": "ugc", "settings": { "caption": "\"This has become my daily essential.\"" } },
-        "u2": { "type": "ugc", "settings": { "caption": "\"For the first time in ages, I'm actually out of pain.\"" } },
-        "u3": { "type": "ugc", "settings": { "caption": "\"Helps so much with my neck & shoulder tension.\"" } },
-        "u4": { "type": "ugc", "settings": { "caption": "\"If you sit all day, this is what you need.\"" } },
         "m1": { "type": "method", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussion and warm massage at the end of the day." } },
         "m2": { "type": "method", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
         "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
       },
-      "block_order": ["f1", "f2", "f3", "u1", "u2", "u3", "u4", "m1", "m2", "m3"]
+      "block_order": ["f1", "f2", "f3", "m1", "m2", "m3"]
     }
   },
   "order": ["main"]

@@ -157,33 +157,6 @@
     </div>
   </section>
 
-  {%- comment -%} ===== COMMUNITY / UGC (video placeholders) ===== {%- endcomment -%}
-  <section class="cx-community">
-    <div class="container">
-      <div class="cx-eyebrow light">{{ section.settings.community_eyebrow }}</div>
-      <h2 class="serif cx-h2 light">{{ section.settings.community_heading }}</h2>
-      <div class="cx-ugc" data-reveal>
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'ugc' -%}
-            <figure class="cx-ugc-item" {{ block.shopify_attributes }}>
-              <div class="cx-ugc-media">
-                {%- if block.settings.video != blank -%}
-                  {{ block.settings.video | video_tag: image_size: '600x', loop: true, muted: true, controls: true, playsinline: true }}
-                {%- elsif block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="" loading="lazy">
-                  <span class="cx-play">{% render 'icon', name: 'chat' %}</span>
-                {%- else -%}
-                  <div class="cx-ugc-ph"><span class="cx-play">▶</span><small>Video coming soon</small></div>
-                {%- endif -%}
-              </div>
-              <figcaption>{{ block.settings.caption }}</figcaption>
-            </figure>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </div>
-  </section>
-
   {%- comment -%} ===== TRUSTED BY EXPERTS ===== {%- endcomment -%}
   <section class="cx-band cx-experts">
     <div class="container">
