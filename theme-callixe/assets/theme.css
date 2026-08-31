@@ -657,7 +657,7 @@ footer .brand .about{margin-top:10px}
 @media(max-width:600px){
   .pdp{gap:18px}
   .pdp-main{border-radius:16px}
-  .pdp-main img{max-height:70vh}
+  .pdp-main img{max-height:54vh}
   .thumbs{gap:8px; margin-top:10px}
   .thumb{width:60px; height:60px; border-radius:10px}
   .pdp-info h1{font-size:22px; margin-top:6px}
@@ -869,15 +869,15 @@ footer .brand .about{margin-top:10px}
 .vr-home-sum{text-align:center;margin-bottom:24px;font-size:15px;color:var(--espresso)}
 .vr-home-sum .vr-home-stars{display:block;color:var(--honey);letter-spacing:4px;font-size:24px;margin-bottom:8px}
 .vr-home-sum b{font-family:var(--f-disp);font-weight:600}
-.vr-home-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(300px,1fr);gap:16px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory}
-.vr-home-track .vr-rev-card{scroll-snap-align:start;min-width:0}
+.vr-home-track{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:4px 0 0}
+.vr-home-track .vr-rev-card{min-width:0}
 
-@media(max-width:900px){ .vr-rev-list{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:900px){ .vr-rev-list{grid-template-columns:repeat(2,1fr)} .vr-home-track{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:600px){
   .vr-rev-summary{grid-template-columns:1fr;gap:18px;padding:20px}
   .vr-rev-avg{padding-right:0;border-right:0;border-bottom:1px solid var(--line);padding-bottom:16px}
   .vr-rev-list{grid-template-columns:1fr}
-  .vr-home-track{grid-auto-columns:minmax(260px,80%)}
+  .vr-home-track{grid-template-columns:1fr;gap:12px}
 }
 
 /* ============================================================
@@ -1101,28 +1101,27 @@ footer .brand .about{margin-top:10px}
 
 /* ============ MOBILE polish — Callixe homepage ============ */
 @media(max-width:600px){
-  .cx-band{padding:42px 0}
-  .cx-h2{font-size:clamp(23px,6.6vw,30px);margin-bottom:18px}
+  .cx-band{padding:34px 0}
+  .cx-h2{font-size:clamp(22px,6.2vw,28px);margin-bottom:16px}
   .cx-eyebrow{font-size:10.5px}
-  .cx-hero-inner{padding-top:40px;padding-bottom:40px}
+  .cx-hero-banner{padding:12px 0 2px}
+  .cx-hero-inner{padding-top:34px;padding-bottom:34px}
   .cx-hero-inner h1{font-size:clamp(30px,9vw,44px)}
   .cx-hero-sub{font-size:14.5px}
-  .cx-feat{padding:20px 18px}
-  .cx-feat h3{font-size:18px}
+  .cx-feat{padding:18px 16px}
+  .cx-feat h3{font-size:17px}
   .cx-dual{gap:14px}
   .cx-dcard-body{padding:18px}
   .cx-dcard-body h3{font-size:21px}
   .cx-card-body{padding:13px 13px 15px}
   .cx-card-body h3{font-size:15px}
   .cx-card-desc{font-size:12px;-webkit-line-clamp:2}
-  .cx-community{padding:44px 0}
-  .cx-ugc{gap:10px}
-  .cx-expert-quote blockquote{font-size:16px}
+  .cx-expert-quote blockquote{font-size:15.5px}
   .cx-expert-vids{gap:10px}
-  .cx-routine{gap:22px}
+  .cx-routine{gap:20px}
   .cx-routine-copy p{font-size:14.5px}
-  .cx-mstep{padding:22px 20px}
-  .cx-coll{padding:34px 0 60px}
+  .cx-mstep{padding:20px 18px}
+  .cx-coll{padding:30px 0 52px}
   .cx-coll-bar{gap:12px}
   .cx-coll-bar .chip{font-size:12px;padding:7px 13px}
   .cx-btn{padding:12px 24px;font-size:13px}

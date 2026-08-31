@@ -72,6 +72,15 @@ window.VR_REVIEW_NAMES = {"adjustable-posture-corrector-back-brace-for-scoliosis
       var five = revs.filter(function(r){ return r.s===5 && r.t.length>40; });
       if(five.length){ var r=five[0]; picks.push({n:r.n,s:5,t:r.t,h:h}); }
     });
+    // top up to a full grid (9) with a second strong review per handle
+    if(picks.length < 9){
+      handles.forEach(function(h){
+        if(picks.length >= 9) return;
+        var revs=DATA[h]; if(!revs) return;
+        var five = revs.filter(function(r){ return r.s===5 && r.t.length>40; });
+        if(five[1]){ var r=five[1]; picks.push({n:r.n,s:5,t:r.t,h:h}); }
+      });
+    }
     var avg = all? (sum/all) : 0;
     var cards = picks.map(function(r){ return card(r,true); }).join('');
     el.innerHTML =
