@@ -87,15 +87,15 @@
         <ul class="cx-founder-benefits">
           <li>
             <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span>
-            <div><b>{{ section.settings.b1_title | default: 'Better Sleep' }}</b><span>{{ section.settings.b1_text | default: 'Loosen tension, calm the body, and sleep deeper.' }}</span></div>
+            <div><b>{{ section.settings.b1_title | default: 'Wind Down' }}</b><span>{{ section.settings.b1_text | default: 'Cosy warmth and gentle support to help you relax at the end of the day.' }}</span></div>
           </li>
           <li>
             <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-1.5 5.6A3 3 0 0 0 6 17a3 3 0 0 0 3 3 2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"/><path d="M15 3a3 3 0 0 1 3 3 3 3 0 0 1 1.5 5.6A3 3 0 0 1 18 17a3 3 0 0 1-3 3 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg></span>
-            <div><b>{{ section.settings.b2_title | default: 'Sharper Focus' }}</b><span>{{ section.settings.b2_text | default: 'Relieve stress and fatigue to think clearer and get more done.' }}</span></div>
+            <div><b>{{ section.settings.b2_title | default: 'Everyday Comfort' }}</b><span>{{ section.settings.b2_text | default: 'Comfortable support that helps you stay at ease through a busy day.' }}</span></div>
           </li>
           <li>
             <span class="cx-fb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 8v6m0 0-6 5m6-5 6 5m-6-5c-3 0-6-1.4-8-3m8 3c3 0 6-1.4 8-3"/></svg></span>
-            <div><b>{{ section.settings.b3_title | default: 'Calmer Days' }}</b><span>{{ section.settings.b3_text | default: 'Feel more balanced, less overwhelmed, and back in control.' }}</span></div>
+            <div><b>{{ section.settings.b3_title | default: 'Feel-Good Routine' }}</b><span>{{ section.settings.b3_text | default: 'A simple, calming part of your daily routine to look forward to.' }}</span></div>
           </li>
         </ul>
         {%- if section.settings.story_closing != blank -%}<p class="cx-founder-close">{{ section.settings.story_closing }}</p>{%- endif -%}
@@ -113,12 +113,12 @@
       <div class="cx-dual" data-reveal>
         {%- if p1 != blank -%}
           <a class="cx-dcard" href="{{ p1.url }}" style="background-image:url('{{ p1.featured_image | image_url: width: 900 }}')">
-            <div class="cx-dcard-body"><h3 class="serif">{{ p1.title }}</h3><p>{{ p1.type | default: 'Recovery &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
+            <div class="cx-dcard-body"><h3 class="serif">{{ p1.title }}</h3><p>{{ p1.type | default: 'Comfort &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
           </a>
         {%- endif -%}
         {%- if p2 != blank -%}
           <a class="cx-dcard" href="{{ p2.url }}" style="background-image:url('{{ p2.featured_image | image_url: width: 900 }}')">
-            <div class="cx-dcard-body"><h3 class="serif">{{ p2.title }}</h3><p>{{ p2.type | default: 'Recovery &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
+            <div class="cx-dcard-body"><h3 class="serif">{{ p2.title }}</h3><p>{{ p2.type | default: 'Comfort &amp; support' }}</p><span class="cx-btn cx-btn-light">Shop now</span></div>
           </a>
         {%- endif -%}
       </div>
@@ -265,32 +265,32 @@
       { "value": "overlay", "label": "Serif text over photo" } ] },
     { "type": "image_picker", "id": "hero_image", "label": "Hero image (defaults to the 6-product banner)" },
     { "type": "html", "id": "hero_heading", "label": "Hero heading", "default": "Relief, redefined." },
-    { "type": "textarea", "id": "hero_sub", "label": "Hero subtext", "default": "Science-minded recovery tools, made for everyday life at home." },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero subtext", "default": "Considered comfort and support, made for everyday life at home." },
     { "type": "text", "id": "hero_cta", "label": "Hero button", "default": "Shop now" },
     { "type": "url", "id": "hero_link", "label": "Hero button link" },
     { "type": "text", "id": "hero_note", "label": "Hero note", "default": "30-day comfort guarantee" },
     { "type": "header", "content": "Founder story" },
     { "type": "paragraph", "content": "Row layout: quote (left) · founder photo (middle) · story (right)." },
     { "type": "text", "id": "featured_label", "label": "Quote label (left)", "default": "Made for desk workers, athletes & tired bodies" },
-    { "type": "textarea", "id": "quote", "label": "Quote (left)", "default": "\"Beyond pain relief, people report better sleep, sharper focus and calmer days.\"" },
+    { "type": "textarea", "id": "quote", "label": "Quote (left)", "default": "\"Comfortable, considered support that fits right into everyday life.\"" },
     { "type": "image_picker", "id": "founder_image", "label": "Founder photo (middle)" },
     { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Emma Collins" },
     { "type": "text", "id": "founder_tag", "label": "Founder tag", "default": "Founder of Verta Relief" },
-    { "type": "html", "id": "story_heading", "label": "Story heading (right)", "default": "We built Verta Relief as the antidote to everyday pain and burnout." },
-    { "type": "textarea", "id": "story_text", "label": "Story intro", "default": "We felt it too: sore shoulders from long hours, restless nights, low energy, and that foggy, drained feeling that just wouldn't go away." },
+    { "type": "html", "id": "story_heading", "label": "Story heading (right)", "default": "We built Verta Relief for the comfort your everyday deserves." },
+    { "type": "textarea", "id": "story_text", "label": "Story intro", "default": "We felt it too: long hours at a desk, restless evenings, and days that leave you wanting a little more comfort at home." },
     { "type": "text", "id": "story_highlight", "label": "Highlight line", "default": "We knew there had to be a better way." },
-    { "type": "text", "id": "b1_title", "label": "Benefit 1 title", "default": "Better Sleep" },
-    { "type": "text", "id": "b1_text", "label": "Benefit 1 text", "default": "Loosen tension, calm the body, and sleep deeper." },
-    { "type": "text", "id": "b2_title", "label": "Benefit 2 title", "default": "Sharper Focus" },
-    { "type": "text", "id": "b2_text", "label": "Benefit 2 text", "default": "Relieve stress and fatigue to think clearer and get more done." },
-    { "type": "text", "id": "b3_title", "label": "Benefit 3 title", "default": "Calmer Days" },
-    { "type": "text", "id": "b3_text", "label": "Benefit 3 text", "default": "Feel more balanced, less overwhelmed, and back in control." },
-    { "type": "textarea", "id": "story_closing", "label": "Closing line", "default": "Verta Relief isn't just another recovery tool. It's your daily reset — so you can move better, feel better, and live better." },
+    { "type": "text", "id": "b1_title", "label": "Benefit 1 title", "default": "Wind Down" },
+    { "type": "text", "id": "b1_text", "label": "Benefit 1 text", "default": "Cosy warmth and gentle support to help you relax at the end of the day." },
+    { "type": "text", "id": "b2_title", "label": "Benefit 2 title", "default": "Everyday Comfort" },
+    { "type": "text", "id": "b2_text", "label": "Benefit 2 text", "default": "Comfortable support that helps you stay at ease through a busy day." },
+    { "type": "text", "id": "b3_title", "label": "Benefit 3 title", "default": "Feel-Good Routine" },
+    { "type": "text", "id": "b3_text", "label": "Benefit 3 text", "default": "A simple, calming part of your daily routine you'll look forward to." },
+    { "type": "textarea", "id": "story_closing", "label": "Closing line", "default": "Verta Relief isn't just another gadget. It's a considered part of your day — comfortable, dependable, and made to be used." },
     { "type": "text", "id": "about_cta", "label": "Story link button (under heading)", "default": "Our story" },
     { "type": "url", "id": "about_link", "label": "Story link button URL (About page)" },
     { "type": "text", "id": "story_cta", "label": "Shop button", "default": "Shop now" },
     { "type": "url", "id": "story_cta_link", "label": "Shop button link" },
-    { "type": "header", "content": "Healing starts at home" },
+    { "type": "header", "content": "Dual product cards" },
     { "type": "text", "id": "dual_eyebrow", "label": "Eyebrow", "default": "The essentials" },
     { "type": "text", "id": "dual_heading", "label": "Heading", "default": "Relief starts at home." },
     { "type": "product", "id": "dual_product_1", "label": "Product 1" },
@@ -301,12 +301,12 @@
     { "type": "header", "content": "Bundle card (in range)" },
     { "type": "image_picker", "id": "bundle_image", "label": "Bundle card image" },
     { "type": "text", "id": "bundle_title", "label": "Bundle title", "default": "Build your bundle" },
-    { "type": "textarea", "id": "bundle_text", "label": "Bundle text", "default": "Pick any three tools and save 20% on your recovery kit." },
+    { "type": "textarea", "id": "bundle_text", "label": "Bundle text", "default": "Pick any three tools and save 20% on your comfort kit." },
     { "type": "text", "id": "bundle_cta", "label": "Bundle button", "default": "Start building" },
     { "type": "header", "content": "Trusted by experts" },
     { "type": "text", "id": "experts_eyebrow", "label": "Eyebrow", "default": "Trusted by experts" },
     { "type": "text", "id": "experts_heading", "label": "Heading", "default": "What the specialists say" },
-    { "type": "textarea", "id": "expert_quote", "label": "Expert quote", "default": "A thoughtfully designed pillow that prioritises proper neck support and comfort. The ergonomic butterfly shape helps cradle the head and neck while keeping the user in a more natural sleeping position. I was particularly impressed by the supportive contouring and overall construction.\n\nFor people who experience everyday neck or shoulder discomfort, or simply want better support while sleeping, this is a product worth considering. It combines practical ergonomic design with excellent comfort." },
+    { "type": "textarea", "id": "expert_quote", "label": "Expert quote", "default": "A thoughtfully designed pillow that prioritises proper neck support and comfort. The ergonomic butterfly shape cradles the head and neck to keep you in a comfortable, natural position. I was particularly impressed by the supportive contouring and overall construction.\n\nFor anyone who wants comfortable, supportive rest, this is a product worth considering. It combines practical ergonomic design with excellent comfort." },
     { "type": "text", "id": "expert_name", "label": "Expert name", "default": "— Dr. Angela Smith" },
     { "type": "text", "id": "expert_title", "label": "Expert title", "default": "Ergonomics & Sleep Support Specialist" },
     { "type": "text", "id": "experts_cta", "label": "Specialist button", "default": "Shop now" },
@@ -315,9 +315,9 @@
     { "type": "text", "id": "community_eyebrow", "label": "Eyebrow", "default": "12,000+ happy customers" },
     { "type": "text", "id": "community_heading", "label": "Heading", "default": "Hear from our community" },
     { "type": "header", "content": "Routine" },
-    { "type": "text", "id": "routine_eyebrow", "label": "Eyebrow", "default": "The recovery routine" },
+    { "type": "text", "id": "routine_eyebrow", "label": "Eyebrow", "default": "The everyday routine" },
     { "type": "text", "id": "routine_heading", "label": "Heading", "default": "Your neck & back reset" },
-    { "type": "textarea", "id": "routine_text", "label": "Text", "default": "Release tension, decompress the spine and realign your posture — a calm 15-minute routine you can do at home." },
+    { "type": "textarea", "id": "routine_text", "label": "Text", "default": "A calm 15-minute routine you can do at home — thoughtful comfort and support for the way you sit, work and unwind." },
     { "type": "text", "id": "routine_cta", "label": "Button", "default": "Shop now" },
     { "type": "product", "id": "routine_product", "label": "Routine product" },
     { "type": "image_picker", "id": "routine_image", "label": "Routine image" },
@@ -349,7 +349,7 @@
     { "type": "method", "name": "Method step", "settings": [
       { "type": "text", "id": "numeral", "label": "Numeral", "default": "i." },
       { "type": "text", "id": "title", "label": "Title", "default": "Release" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "Ease built-up tension with percussion and warm massage." }
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Settle in with gentle warmth and massage." }
     ]},
     { "type": "expert", "name": "Expert video", "settings": [
       { "type": "video", "id": "video", "label": "Video" },

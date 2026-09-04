@@ -4,11 +4,11 @@
       "type": "cx-home",
       "settings": {
         "hero_heading": "Relief, <em>redefined.</em>",
-        "hero_sub": "Considered recovery tools, made for everyday life at home.",
+        "hero_sub": "Considered comfort and support, made for everyday life at home.",
         "hero_cta": "Shop now",
         "hero_note": "30-day money-back guarantee · Free AU shipping",
-        "featured_label": "Made for desk workers, athletes & tired bodies",
-        "quote": "\"Beyond pain relief, people report better sleep, sharper focus and calmer days.\"",
+        "featured_label": "Made for desk workers, athletes & busy people",
+        "quote": "\"Comfortable, considered support that fits right into everyday life.\"",
         "dual_eyebrow": "The essentials",
         "dual_heading": "Relief starts at home.",
         "dual_product_1": "cervical-massage-heating-pillow-with-adjustable-support",
@@ -17,9 +17,9 @@
         "collection": "featured",
         "community_eyebrow": "12,000+ happy customers",
         "community_heading": "Hear from our community",
-        "routine_eyebrow": "The recovery routine",
-        "routine_heading": "Your neck & back reset",
-        "routine_text": "Release tension, decompress the spine and realign your posture — a calm 15-minute routine you can do at home.",
+        "routine_eyebrow": "The everyday routine",
+        "routine_heading": "Your everyday comfort routine",
+        "routine_text": "A calm 15-minute routine you can do at home — thoughtful comfort and support for the way you sit, work and unwind.",
         "routine_cta": "Shop the massage gun",
         "routine_product": "professional-mini-muscle-massage-gun-with-lcd-screen",
         "method_heading": "The Verta method",
@@ -32,9 +32,9 @@
         "f1": { "type": "feature", "settings": { "icon": "guarantee", "title": "30-day money-back guarantee", "text": "Try it at home risk-free. If you don't love it, send it back within 30 days for a full refund." } },
         "f2": { "type": "feature", "settings": { "icon": "shipping", "title": "Free shipping on every order", "text": "Free shipping on every order across Australia — no minimum spend, ever." } },
         "f3": { "type": "feature", "settings": { "icon": "check", "title": "Secure checkout", "text": "Choose from a range of easy, secure payment options at checkout." } },
-        "m1": { "type": "method", "settings": { "numeral": "i.", "title": "Release", "text": "Ease built-up tension with percussion and warm massage at the end of the day." } },
-        "m2": { "type": "method", "settings": { "numeral": "ii.", "title": "Decompress", "text": "Lengthen the neck and lower spine to undo hours spent sitting and screen-bound." } },
-        "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Realign", "text": "Retrain posture with daily support until better alignment becomes second nature." } }
+        "m1": { "type": "method", "settings": { "numeral": "i.", "title": "Unwind", "text": "Settle in with gentle warmth and massage at the end of the day." } },
+        "m2": { "type": "method", "settings": { "numeral": "ii.", "title": "Support", "text": "Comfortable support through the hours you spend sitting and on-screen." } },
+        "m3": { "type": "method", "settings": { "numeral": "iii.", "title": "Sit Better", "text": "Gentle everyday support that helps comfortable posture feel natural." } }
       },
       "block_order": ["f1", "f2", "f3", "m1", "m2", "m3"]
     }

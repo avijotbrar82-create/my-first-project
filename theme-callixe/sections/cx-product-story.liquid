@@ -21,7 +21,14 @@
   {%- comment -%} Split 1 {%- endcomment -%}
   <section class="blk plp-split-wrap">
     <div class="container plp-split">
-      <div class="plp-split-media" data-reveal>{%- if imgs[1] != blank -%}<img src="{{ imgs[1] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">{%- elsif imgs[0] != blank -%}<img src="{{ imgs[0] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">{%- endif -%}</div>
+      <div class="plp-split-media{% if product.handle == 'cervical-massage-heating-pillow-with-adjustable-support' %} plp-split-media-video{% endif %}" data-reveal>
+        {%- if product.handle == 'cervical-massage-heating-pillow-with-adjustable-support' -%}
+          <video class="plp-split-vid" controls playsinline preload="metadata"{% if imgs[1] != blank %} poster="{{ imgs[1] | image_url: width: 800 }}"{% elsif imgs[0] != blank %} poster="{{ imgs[0] | image_url: width: 800 }}"{% endif %}>
+            <source src="{{ 'cervical-demo.mp4' | asset_url }}" type="video/mp4">
+          </video>
+        {%- elsif imgs[1] != blank -%}<img src="{{ imgs[1] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">
+        {%- elsif imgs[0] != blank -%}<img src="{{ imgs[0] | image_url: width: 800 }}" alt="{{ product.title | escape }}" width="800" height="800" loading="lazy">{%- endif -%}
+      </div>
       <div class="plp-split-copy" data-reveal>
         <h2 class="serif">{{ section.settings.split_heading }}</h2>
         <p class="plp-lead">{{ section.settings.split_text }}</p>

@@ -743,6 +743,7 @@ footer .brand .about{margin-top:10px}
 /* split */
 .plp-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
 .plp-split-media img{width:100%;height:auto;border-radius:22px}
+.plp-split-vid{width:100%;height:auto;display:block;border-radius:22px;background:#000;aspect-ratio:1/1;object-fit:cover}
 .plp-split-copy h2{font-size:clamp(28px,3.6vw,44px);margin:0;color:var(--espresso)}
 .plp-feats{list-style:none;padding:0;margin:24px 0}
 .plp-feats li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line)}
