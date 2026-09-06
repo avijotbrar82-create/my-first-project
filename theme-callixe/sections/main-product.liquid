@@ -46,6 +46,19 @@
         </div>
         <div class="pdp-launch">&#10022; Extra 15% off sitewide with code <strong style="margin-left:5px;letter-spacing:1px">WELCOME15</strong></div>
 
+        {%- assign hl = product.metafields.custom.highlights.value -%}
+        <ul class="pdp-highlights">
+          {%- if hl != blank and hl.size > 0 -%}
+            {%- for h in hl limit: 5 -%}<li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>{{ h }}</span></li>{%- endfor -%}
+          {%- else -%}
+            <li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>Comfortable, everyday support you'll actually keep using</span></li>
+            <li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>Made to fit into home, work and travel</span></li>
+            <li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>Quality materials, built to last</span></li>
+            <li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>Backed by a 30-day money-back guarantee</span></li>
+            <li><span class="ph-ic">{% render 'icon', name: 'check' %}</span><span>Free shipping across Australia</span></li>
+          {%- endif -%}
+        </ul>
+
         {%- if product.description != blank -%}
           <div class="pdp-desc" data-pdp-desc>
             <div class="pdp-desc-clip" data-desc-clip>{{ product.description }}</div>
