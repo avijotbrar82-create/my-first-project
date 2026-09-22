@@ -7,9 +7,6 @@
 
   var CURR = drawer.getAttribute('data-currency') || 'AUD';
   var RESERVE_MIN = parseInt(drawer.getAttribute('data-reserve-min'), 10) || 7;
-  var FREE_THRESH = parseInt(drawer.getAttribute('data-free-threshold'), 10) || 0;
-  var FREE_LABEL = drawer.getAttribute('data-free-label') || 'FREE EXPRESS SHIPPING';
-  var FREE_UNLOCKED = drawer.getAttribute('data-free-unlocked') || "You've unlocked free express shipping!";
   var PROT_VARIANT = drawer.getAttribute('data-protection-variant') || '';
   var REVIEWS = window.VR_REVIEWS || {};
 
@@ -38,10 +35,6 @@
     total: drawer.querySelector('[data-cd-total]'),
     compare: drawer.querySelector('[data-cd-compare]'),
     saving: drawer.querySelector('[data-cd-saving]'),
-    ship: drawer.querySelector('[data-cd-ship]'),
-    shipMsg: drawer.querySelector('[data-cd-ship-msg]'),
-    shipTitle: drawer.querySelector('[data-cd-ship-title]'),
-    shipFill: drawer.querySelector('[data-cd-ship-fill]'),
     timer: drawer.querySelector('[data-cd-timer]'),
     protectToggle: drawer.querySelector('[data-cd-protect-toggle]')
   };
@@ -133,7 +126,6 @@
       els.items.innerHTML = '';
       if (els.empty) els.empty.hidden = false;
       if (els.foot) els.foot.hidden = true;
-      if (els.ship) els.ship.hidden = true;
       return;
     }
     if (els.empty) els.empty.hidden = true;
@@ -156,20 +148,6 @@
       els.saving.hidden = false; els.saving.textContent = 'Was ' + money(was) + " · you're saving " + money(saving);
     } else {
       els.compare.hidden = true; els.saving.hidden = true;
-    }
-
-    // free shipping bar
-    if (els.ship && FREE_THRESH > 0) {
-      els.ship.hidden = false;
-      var pct = Math.min(100, Math.round((total / FREE_THRESH) * 100));
-      els.shipFill.style.width = pct + '%';
-      if (total >= FREE_THRESH) {
-        els.shipTitle.textContent = FREE_UNLOCKED;
-        els.shipMsg.innerHTML = '<b>Unlocked ✓</b>';
-      } else {
-        els.shipTitle.textContent = FREE_LABEL;
-        els.shipMsg.innerHTML = '<b>' + money(FREE_THRESH - total) + ' more</b> to unlock';
-      }
     }
 
     // protection toggle state

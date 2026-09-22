@@ -1,14 +1,9 @@
 {%- if section.settings.enabled -%}
-{%- assign thresh_cents = section.settings.free_ship_threshold | times: 100 -%}
 <div class="cd-overlay" data-cd-close hidden></div>
 <aside class="cd" role="dialog" aria-modal="true" aria-label="Your cart" aria-hidden="true"
   data-cart-drawer
   data-currency="{{ cart.currency.iso_code }}"
   data-reserve-min="{{ section.settings.reserve_minutes | default: 7 }}"
-  data-free-threshold="{{ thresh_cents }}"
-  data-free-label="{{ section.settings.free_ship_label | escape }}"
-  data-free-sub="{{ section.settings.free_ship_sub | escape }}"
-  data-free-unlocked="{{ section.settings.free_ship_unlocked | escape }}"
   {%- if section.settings.protection_variant != blank %} data-protection-variant="{{ section.settings.protection_variant.variants.first.id }}" data-protection-price="{{ section.settings.protection_variant.price | money }}"{% endif -%}>
 
   <header class="cd-head">
@@ -50,18 +45,6 @@
       <p>Your cart is empty.</p>
       <a class="cd-checkout cd-empty-cta" href="{{ routes.all_products_collection_url }}" data-cd-close>Shop the range</a>
     </div>
-
-    {%- comment -%} Free express shipping progress {%- endcomment -%}
-    {%- if thresh_cents > 0 -%}
-    <div class="cd-ship" data-cd-ship hidden>
-      <div class="cd-ship-head">
-        <span class="cd-ship-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7.5" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg></span>
-        <div><b data-cd-ship-title>{{ section.settings.free_ship_label | default: 'FREE EXPRESS SHIPPING' }}</b><span data-cd-ship-msg></span></div>
-      </div>
-      <div class="cd-ship-bar"><i data-cd-ship-fill></i></div>
-      <small>{{ section.settings.free_ship_sub | default: 'Free tracked shipping, 7 to 14 business days' }}</small>
-    </div>
-    {%- endif -%}
 
     {%- comment -%} Shipping protection toggle (only if a variant is configured) {%- endcomment -%}
     {%- if section.settings.protection_variant != blank -%}
@@ -115,11 +98,6 @@
     { "type": "text", "id": "reserve_label", "label": "Reserve label", "default": "YOUR ORDER IS RESERVED FOR" },
     { "type": "textarea", "id": "reserve_sub", "label": "Reserve subtext", "default": "Due to high demand, items in your cart are only held for a limited time." },
     { "type": "text", "id": "reserve_badge", "label": "Reserve badge", "default": "You're one step closer to comfort ♡" },
-    { "type": "header", "content": "Free express shipping bar" },
-    { "type": "number", "id": "free_ship_threshold", "label": "Unlock threshold (in dollars, 0 to hide)", "default": 150 },
-    { "type": "text", "id": "free_ship_label", "label": "Bar title", "default": "FREE EXPRESS SHIPPING" },
-    { "type": "text", "id": "free_ship_sub", "label": "Bar subtext", "default": "Free tracked shipping, 7 to 14 business days" },
-    { "type": "text", "id": "free_ship_unlocked", "label": "Unlocked message", "default": "You've unlocked free express shipping!" },
     { "type": "header", "content": "Shipping protection (optional)" },
     { "type": "paragraph", "content": "Pick a product (e.g. a $2.99 Shipping Protection product) to show the toggle. Leave blank to hide it." },
     { "type": "product", "id": "protection_variant", "label": "Shipping protection product" },

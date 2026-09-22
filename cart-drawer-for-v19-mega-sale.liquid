@@ -1,0 +1,439 @@
+{%- if section.settings.enabled -%}
+<style>
+/* ============ Slide-out cart drawer ============ */
+:root.cd-open{overflow:hidden}
+.cd-overlay{position:fixed;inset:0;background:rgba(59,50,42,.5);z-index:120;opacity:0;pointer-events:none;transition:opacity .3s}
+:root.cd-open .cd-overlay{opacity:1;pointer-events:auto}
+.cd{position:fixed;top:0;right:0;height:100%;width:min(438px,94vw);z-index:121;background:var(--cream);
+  display:flex;flex-direction:column;transform:translateX(100%);transition:transform .34s var(--ease);box-shadow:-24px 0 60px -30px rgba(40,28,16,.5)}
+:root.cd-open .cd{transform:none}
+.cd-busy{opacity:.75;pointer-events:none}
+.cd-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.cd-head h2{margin:0;font-family:var(--f-disp);font-weight:600;font-size:23px;color:var(--espresso)}
+.cd-head .cd-count{color:var(--taupe);font-weight:500}
+.cd-x{background:none;border:0;font-size:30px;line-height:1;color:var(--taupe);cursor:pointer;padding:0 4px}
+.cd-scroll{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px 8px}
+/* reservation countdown */
+.cd-reserve{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--oat);border-radius:16px;padding:14px 15px;overflow:hidden}
+.cd-reserve-ic{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--cream);display:grid;place-items:center;color:var(--honey)}
+.cd-reserve-ic svg{width:19px;height:19px}
+.cd-reserve-txt small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.1em;color:var(--taupe)}
+.cd-reserve-txt b{display:block;font-family:var(--f-disp);font-weight:600;font-size:22px;color:var(--espresso);line-height:1.1;margin:1px 0 3px}
+.cd-reserve-txt b span{font-variant-numeric:tabular-nums}
+.cd-reserve-txt > span{display:block;font-size:11.5px;color:var(--taupe);line-height:1.4;max-width:30ch}
+.cd-reserve-badge{position:absolute;top:12px;right:12px;max-width:96px;text-align:right;font-family:var(--f-disp);font-style:italic;font-size:11px;line-height:1.25;color:var(--clay);opacity:.85}
+/* trust row */
+.cd-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.cd-trust-i{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px 11px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.cd-ti-ic{width:34px;height:34px;border-radius:50%;background:var(--oat);display:grid;place-items:center;color:var(--espresso);margin-bottom:4px}
+.cd-ti-ic svg{width:18px;height:18px}
+.cd-trust-i b{font-size:12px;color:var(--espresso)}
+.cd-trust-i span{font-size:10px;color:var(--taupe);line-height:1.3}
+.cd-ti-stars{color:var(--honey)!important;letter-spacing:1px;font-size:12px!important}
+/* items */
+.cd-items{margin-top:16px;display:flex;flex-direction:column;gap:16px}
+.cd-item{display:flex;gap:12px}
+.cd-item-img{flex:0 0 auto;width:74px;height:74px;border-radius:12px;overflow:hidden;background:var(--oat);border:1px solid var(--line)}
+.cd-item-img img{width:100%;height:100%;object-fit:cover}
+.cd-item-main{flex:1;min-width:0}
+.cd-item-title{display:block;font-weight:700;font-size:14px;color:var(--espresso);text-decoration:none;line-height:1.3}
+.cd-item-variant{font-size:12px;color:var(--taupe);margin-top:1px}
+.cd-item-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.cd-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.cd-qty button{border:0;background:none;width:30px;height:30px;font-size:16px;cursor:pointer;color:var(--espresso)}
+.cd-qty-n{min-width:22px;text-align:center;font-weight:700;font-size:13px}
+.cd-item-price{font-weight:700;font-size:14px;color:var(--espresso)}
+.cd-item-protect{font-size:12px;color:var(--taupe);font-weight:600}
+.cd-item-review{margin-top:8px;background:var(--oat);border-radius:10px;padding:8px 10px;font-size:11.5px;color:var(--espresso);line-height:1.45}
+.cd-ir-stars{color:var(--honey);letter-spacing:.5px}
+.cd-ir-name{color:var(--taupe);font-weight:600}
+.cd-item-remove{background:none;border:0;padding:6px 0 0;font-size:11.5px;color:var(--taupe);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.cd-item-remove:hover{color:var(--honey)}
+/* shipping protection */
+.cd-protect{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.cd-protect-txt b{display:block;font-size:14px;color:var(--espresso)}
+.cd-protect-price{color:var(--taupe);font-weight:600;margin-left:2px}
+.cd-protect-txt span{font-size:12px;color:var(--taupe)}
+.cd-switch{flex:0 0 auto;width:46px;height:26px;border-radius:999px;border:0;background:var(--greige);cursor:pointer;position:relative;transition:background .25s}
+.cd-switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .25s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.cd-switch.on{background:var(--honey)}
+.cd-switch.on i{left:23px}
+/* footer */
+.cd-foot{flex:0 0 auto;border-top:1px solid var(--line);padding:16px 18px calc(16px + env(safe-area-inset-bottom));background:var(--cream)}
+.cd-subtotal{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.cd-sub-l b{font-size:15px;color:var(--espresso)}
+.cd-saving{display:block;font-size:12px;color:var(--honey);font-weight:700;margin-top:2px}
+.cd-sub-r{text-align:right}
+.cd-compare{color:var(--taupe);font-size:15px;margin-right:4px}
+.cd-total{font-family:var(--f-disp);font-weight:600;font-size:26px;color:var(--espresso)}
+.cd-checkout{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--espresso);color:#fdf8ef;
+  font-family:var(--f-body);font-weight:800;font-size:16px;padding:16px;border-radius:14px;text-decoration:none;transition:background .2s}
+.cd-checkout:hover{background:#2c251f}
+.cd-checkout svg{width:16px;height:16px}
+.cd-links{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.cd-link{background:none;border:0;font-family:var(--f-body);font-size:13px;color:var(--taupe);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cd-link:hover{color:var(--honey)}
+.cd-discount-row{display:flex;gap:8px;margin-top:12px}
+.cd-discount-row input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--panel);color:var(--espresso)}
+.cd-discount-row button{border:0;background:var(--honey);color:#fff;font-weight:700;border-radius:10px;padding:0 16px;cursor:pointer}
+.cd-empty{text-align:center;padding:40px 10px;color:var(--taupe)}
+.cd-empty-cta{margin-top:14px}
+@media(max-width:600px){
+  .cd{width:100%}
+  .cd-reserve-badge{display:none}
+  .cd-trust-i b{font-size:11px}
+  .cd-total{font-size:23px}
+}
+</style>
+
+<div class="cd-overlay" data-cd-close hidden></div>
+<aside class="cd" role="dialog" aria-modal="true" aria-label="Your cart" aria-hidden="true"
+  data-cart-drawer
+  data-currency="{{ cart.currency.iso_code }}"
+  data-reserve-min="{{ section.settings.reserve_minutes | default: 7 }}"
+  {%- if section.settings.protection_variant != blank %} data-protection-variant="{{ section.settings.protection_variant.variants.first.id }}" data-protection-price="{{ section.settings.protection_variant.price | money }}"{% endif -%}>
+
+  <header class="cd-head">
+    <h2 class="serif">{{ section.settings.title | default: 'Your cart' }} <span class="cd-count" data-cd-count>(0)</span></h2>
+    <button class="cd-x" type="button" data-cd-close aria-label="Close cart">&times;</button>
+  </header>
+
+  <div class="cd-scroll" data-cd-scroll>
+    {%- comment -%} Reservation countdown {%- endcomment -%}
+    <div class="cd-reserve">
+      <span class="cd-reserve-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <div class="cd-reserve-txt">
+        <small>{{ section.settings.reserve_label | default: 'YOUR ORDER IS RESERVED FOR' }}</small>
+        <b><span data-cd-timer>07:00</span> minutes</b>
+        <span>{{ section.settings.reserve_sub | default: 'Due to high demand, items in your cart are only held for a limited time.' }}</span>
+      </div>
+      <span class="cd-reserve-badge">{{ section.settings.reserve_badge | default: "You're one step closer to comfort ♡" }}</span>
+    </div>
+
+    {%- comment -%} Trust row {%- endcomment -%}
+    <div class="cd-trust">
+      <div class="cd-trust-i">
+        <span class="cd-ti-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7.5" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg></span>
+        <b>Free shipping</b><span>Tracked, 7–14 business days, AU wide</span>
+      </div>
+      <div class="cd-trust-i">
+        <span class="cd-ti-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <b>30-day guarantee</b><span>Money-back, nothing to lose</span>
+      </div>
+      <div class="cd-trust-i">
+        <span class="cd-ti-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 19a4.5 4.5 0 0 1 6-4.2"/></svg></span>
+        <b>Loved by 12,000+</b><span class="cd-ti-stars">★★★★★</span>
+      </div>
+    </div>
+
+    {%- comment -%} Line items (rendered by JS) {%- endcomment -%}
+    <div class="cd-items" data-cd-items></div>
+    <div class="cd-empty" data-cd-empty hidden>
+      <p>Your cart is empty.</p>
+      <a class="cd-checkout cd-empty-cta" href="{{ routes.all_products_collection_url }}" data-cd-close>Shop the range</a>
+    </div>
+
+    {%- comment -%} Shipping protection toggle (only if a variant is configured) {%- endcomment -%}
+    {%- if section.settings.protection_variant != blank -%}
+    <div class="cd-protect" data-cd-protect>
+      <div class="cd-protect-txt">
+        <b>{{ section.settings.protection_title | default: 'Shipping Protection' }} <span class="cd-protect-price">{{ section.settings.protection_variant.price | money }}</span></b>
+        <span>{{ section.settings.protection_sub | default: 'from Damage, Loss & Theft' }}</span>
+      </div>
+      <button type="button" class="cd-switch" data-cd-protect-toggle role="switch" aria-checked="false" aria-label="Add shipping protection"><i></i></button>
+    </div>
+    {%- endif -%}
+  </div>
+
+  <footer class="cd-foot" data-cd-foot>
+    <div class="cd-subtotal">
+      <div class="cd-sub-l"><b>Subtotal</b><small class="cd-saving" data-cd-saving hidden></small></div>
+      <div class="cd-sub-r"><s class="cd-compare" data-cd-compare hidden></s> <b class="cd-total" data-cd-total>—</b></div>
+    </div>
+    <a class="cd-checkout" href="/checkout">{{ section.settings.checkout_label | default: 'Checkout' }} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></a>
+    <div class="cd-links">
+      <button type="button" class="cd-link" data-cd-discount>Have a discount code?</button>
+      <a class="cd-link" href="{{ routes.cart_url }}">View cart</a>
+    </div>
+    <form class="cd-discount-row" data-cd-discount-row hidden action="/discount" method="get">
+      <input type="text" name="code" placeholder="Discount code" autocomplete="off">
+      <button type="submit">Apply</button>
+    </form>
+  </footer>
+
+  {%- comment -%} variant id -> compare-at price (cents), for savings display {%- endcomment -%}
+  <script data-cd-compare-map type="application/json">{% assign f = true %}{
+  {%- for product in collections.all.products -%}
+    {%- for v in product.variants -%}
+      {%- if v.compare_at_price and v.compare_at_price > v.price -%}
+        {%- unless f %},{% endunless %}"{{ v.id }}":{{ v.compare_at_price }}{% assign f = false %}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  }</script>
+</aside>
+
+<script>
+/* Verta Relief — slide-out cart drawer (AJAX) */
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var drawer = document.querySelector('[data-cart-drawer]');
+  if (!drawer) return;
+
+  var CURR = drawer.getAttribute('data-currency') || 'AUD';
+  var RESERVE_MIN = parseInt(drawer.getAttribute('data-reserve-min'), 10) || 7;
+  var PROT_VARIANT = drawer.getAttribute('data-protection-variant') || '';
+  var REVIEWS = window.VR_REVIEWS || {};
+
+  // compare-at map
+  var COMPARE = {};
+  try {
+    var mapEl = drawer.querySelector('[data-cd-compare-map]');
+    if (mapEl) COMPARE = JSON.parse(mapEl.textContent || '{}');
+  } catch (e) { COMPARE = {}; }
+
+  var fmt;
+  try {
+    fmt = new Intl.NumberFormat(undefined, { style: 'currency', currency: CURR });
+  } catch (e) {
+    fmt = { format: function (n) { return '$' + (n).toFixed(2); } };
+  }
+  function money(cents) { return fmt.format((cents || 0) / 100); }
+
+  var els = {
+    overlay: document.querySelector('.cd-overlay'),
+    count: drawer.querySelector('[data-cd-count]'),
+    items: drawer.querySelector('[data-cd-items]'),
+    empty: drawer.querySelector('[data-cd-empty]'),
+    scroll: drawer.querySelector('[data-cd-scroll]'),
+    foot: drawer.querySelector('[data-cd-foot]'),
+    total: drawer.querySelector('[data-cd-total]'),
+    compare: drawer.querySelector('[data-cd-compare]'),
+    saving: drawer.querySelector('[data-cd-saving]'),
+    timer: drawer.querySelector('[data-cd-timer]'),
+    protectToggle: drawer.querySelector('[data-cd-protect-toggle]')
+  };
+
+  /* ---------- open / close ---------- */
+  function open() {
+    root.classList.add('cd-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    if (els.overlay) els.overlay.hidden = false;
+    startTimer();
+    refresh();
+  }
+  function close() {
+    root.classList.remove('cd-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (els.overlay) els.overlay.hidden = true;
+  }
+
+  /* ---------- countdown (persisted) ---------- */
+  var timerInt = null;
+  function startTimer() {
+    if (!els.timer) return;
+    var KEY = 'vr_cart_reserve';
+    var now = Date.now();
+    var end = parseInt(sessionStorage.getItem(KEY), 10);
+    if (!end || end < now) { end = now + RESERVE_MIN * 60000; try { sessionStorage.setItem(KEY, end); } catch (e) {} }
+    function tick() {
+      var ms = end - Date.now();
+      if (ms <= 0) { end = Date.now() + RESERVE_MIN * 60000; try { sessionStorage.setItem(KEY, end); } catch (e) {} ms = end - Date.now(); }
+      var s = Math.floor(ms / 1000);
+      var m = Math.floor(s / 60);
+      var ss = s % 60;
+      els.timer.textContent = (m < 10 ? '0' : '') + m + ':' + (ss < 10 ? '0' : '') + ss;
+    }
+    tick();
+    if (timerInt) clearInterval(timerInt);
+    timerInt = setInterval(tick, 1000);
+  }
+
+  /* ---------- matched review per item ---------- */
+  function reviewFor(handle) {
+    var list = REVIEWS[handle];
+    if (!list || !list.length) return null;
+    var five = list.filter(function (r) { return r.s === 5 && r.t && r.t.length > 30; });
+    var r = (five[0] || list[0]);
+    if (!r) return null;
+    var t = r.t.length > 120 ? r.t.slice(0, 117).replace(/\s+\S*$/, '') + '…' : r.t;
+    return { n: r.n, t: t };
+  }
+
+  /* ---------- render ---------- */
+  function esc(s) { return (s == null ? '' : String(s)).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function itemHTML(item) {
+    var variant = (!item.product_has_only_default_variant && item.variant_title) ? '<div class="cd-item-variant">' + esc(item.variant_title) + '</div>' : '';
+    var rev = reviewFor(item.handle);
+    var revHTML = rev ? '<div class="cd-item-review"><span class="cd-ir-stars">★★★★★</span> “' + esc(rev.t) + '” <span class="cd-ir-name">— ' + esc(rev.n) + '</span></div>' : '';
+    var isProtect = PROT_VARIANT && String(item.id) === String(PROT_VARIANT);
+    var img = item.image ? item.image.replace(/(\.[a-z]+)(\?|$)/i, '_160x$1$2') : '';
+    return '' +
+      '<div class="cd-item" data-key="' + esc(item.key) + '">' +
+        '<a class="cd-item-img" href="' + esc(item.url) + '">' + (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '') + '</a>' +
+        '<div class="cd-item-main">' +
+          '<a class="cd-item-title" href="' + esc(item.url) + '">' + esc(item.product_title) + '</a>' +
+          variant +
+          '<div class="cd-item-row">' +
+            (isProtect ? '<span class="cd-item-protect">Shipping Protection</span>' :
+            '<div class="cd-qty" data-key="' + esc(item.key) + '">' +
+              '<button type="button" data-cd-dec aria-label="Decrease">&minus;</button>' +
+              '<span class="cd-qty-n">' + item.quantity + '</span>' +
+              '<button type="button" data-cd-inc aria-label="Increase">+</button>' +
+            '</div>') +
+            '<div class="cd-item-price">' + money(item.final_line_price) + '</div>' +
+          '</div>' +
+          revHTML +
+          '<button type="button" class="cd-item-remove" data-cd-remove data-key="' + esc(item.key) + '">Remove</button>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function render(cart) {
+    var count = cart.item_count || 0;
+    if (els.count) els.count.textContent = '(' + count + ')';
+    // header badge
+    var badge = document.querySelector('.cart .badge');
+    if (badge) { badge.textContent = count; badge.hidden = count === 0; }
+
+    if (count === 0) {
+      els.items.innerHTML = '';
+      if (els.empty) els.empty.hidden = false;
+      if (els.foot) els.foot.hidden = true;
+      return;
+    }
+    if (els.empty) els.empty.hidden = true;
+    if (els.foot) els.foot.hidden = false;
+
+    els.items.innerHTML = cart.items.map(itemHTML).join('');
+
+    // totals + savings (compare-at aware)
+    var was = 0;
+    cart.items.forEach(function (it) {
+      var cmp = COMPARE[it.id];
+      var unitWas = (cmp && cmp > it.final_price) ? cmp : it.final_price;
+      was += unitWas * it.quantity;
+    });
+    var total = cart.total_price;
+    els.total.textContent = money(total);
+    var saving = was - total;
+    if (saving > 0) {
+      els.compare.hidden = false; els.compare.textContent = money(was);
+      els.saving.hidden = false; els.saving.textContent = 'Was ' + money(was) + " · you're saving " + money(saving);
+    } else {
+      els.compare.hidden = true; els.saving.hidden = true;
+    }
+
+    // protection toggle state
+    if (els.protectToggle && PROT_VARIANT) {
+      var on = cart.items.some(function (it) { return String(it.id) === String(PROT_VARIANT); });
+      els.protectToggle.setAttribute('aria-checked', on ? 'true' : 'false');
+      els.protectToggle.classList.toggle('on', on);
+    }
+  }
+
+  /* ---------- cart API ---------- */
+  function getCart() { return fetch('/cart.js', { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); }); }
+  function refresh() { return getCart().then(render).catch(function () {}); }
+
+  function changeKey(key, qty) {
+    drawer.classList.add('cd-busy');
+    return fetch('/cart/change.js', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: qty })
+    }).then(function (r) { return r.json(); }).then(render).catch(function () {}).then(function () { drawer.classList.remove('cd-busy'); });
+  }
+
+  function addVariant(id, qty) {
+    drawer.classList.add('cd-busy');
+    return fetch('/cart/add.js', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: id, quantity: qty || 1 })
+    }).then(function (r) { return r.json(); }).then(function () { return refresh(); }).then(function () { drawer.classList.remove('cd-busy'); });
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-cart-open], .cart[href$="/cart"], a.cart')) {
+      var opener = e.target.closest('[data-cart-open], a.cart');
+      if (opener) { e.preventDefault(); open(); return; }
+    }
+    if (e.target.closest('[data-cd-close]')) { e.preventDefault(); close(); return; }
+
+    var inc = e.target.closest('[data-cd-inc]');
+    var dec = e.target.closest('[data-cd-dec]');
+    var rem = e.target.closest('[data-cd-remove]');
+    if (inc || dec) {
+      var q = (inc || dec).closest('.cd-qty');
+      var key = q.getAttribute('data-key');
+      var n = parseInt(q.querySelector('.cd-qty-n').textContent, 10) || 1;
+      changeKey(key, inc ? n + 1 : Math.max(0, n - 1));
+      return;
+    }
+    if (rem) { e.preventDefault(); changeKey(rem.getAttribute('data-key'), 0); return; }
+
+    if (e.target.closest('[data-cd-discount]')) {
+      var row = drawer.querySelector('[data-cd-discount-row]');
+      if (row) row.hidden = !row.hidden;
+      return;
+    }
+
+    var prot = e.target.closest('[data-cd-protect-toggle]');
+    if (prot && PROT_VARIANT) {
+      var isOn = prot.getAttribute('aria-checked') === 'true';
+      if (isOn) {
+        getCart().then(function (c) {
+          var it = c.items.filter(function (x) { return String(x.id) === String(PROT_VARIANT); })[0];
+          if (it) changeKey(it.key, 0);
+        });
+      } else { addVariant(PROT_VARIANT, 1); }
+      return;
+    }
+  });
+
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+  /* intercept add-to-cart forms → AJAX add + open drawer */
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form || !form.action || form.action.indexOf('/cart/add') === -1) return;
+    e.preventDefault();
+    var btn = form.querySelector('[type="submit"]');
+    if (btn) { btn.classList.add('is-loading'); btn.disabled = true; }
+    fetch('/cart/add.js', { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+      .then(function (r) { return r.json(); })
+      .then(function () { open(); return refresh(); })
+      .catch(function () { form.submit(); })
+      .then(function () { if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; } });
+  });
+
+  // keep badge fresh on load
+  refresh();
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable slide-out cart drawer", "default": true },
+    { "type": "text", "id": "title", "label": "Title", "default": "Your cart" },
+    { "type": "header", "content": "Reservation countdown" },
+    { "type": "range", "id": "reserve_minutes", "min": 3, "max": 20, "step": 1, "unit": "min", "label": "Reserve time", "default": 7 },
+    { "type": "text", "id": "reserve_label", "label": "Reserve label", "default": "YOUR ORDER IS RESERVED FOR" },
+    { "type": "textarea", "id": "reserve_sub", "label": "Reserve subtext", "default": "Due to high demand, items in your cart are only held for a limited time." },
+    { "type": "text", "id": "reserve_badge", "label": "Reserve badge", "default": "You're one step closer to comfort ♡" },
+    { "type": "header", "content": "Shipping protection (optional)" },
+    { "type": "paragraph", "content": "Pick a product (e.g. a $2.99 Shipping Protection product) to show the toggle. Leave blank to hide it." },
+    { "type": "product", "id": "protection_variant", "label": "Shipping protection product" },
+    { "type": "text", "id": "protection_title", "label": "Protection title", "default": "Shipping Protection" },
+    { "type": "text", "id": "protection_sub", "label": "Protection subtext", "default": "from Damage, Loss & Theft" },
+    { "type": "header", "content": "Checkout" },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Checkout" }
+  ],
+  "presets": [{ "name": "Cart drawer" }]
+}
+{% endschema %}
