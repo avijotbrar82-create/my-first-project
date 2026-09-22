@@ -1171,3 +1171,99 @@ footer .brand .about{margin-top:10px}
 .pdp-desc-clip ul,.pdp-desc-clip ol{margin:8px 0;padding-left:20px}
 .pdp-desc-more{background:none;border:0;color:var(--honey);font-weight:800;font-size:14px;cursor:pointer;padding:8px 0 0;text-decoration:underline;text-underline-offset:3px}
 .pdp-desc-more:hover{color:var(--honey-lt)}
+
+/* ============ Slide-out cart drawer ============ */
+:root.cd-open{overflow:hidden}
+.cd-overlay{position:fixed;inset:0;background:rgba(59,50,42,.5);z-index:120;opacity:0;pointer-events:none;transition:opacity .3s}
+:root.cd-open .cd-overlay{opacity:1;pointer-events:auto}
+.cd{position:fixed;top:0;right:0;height:100%;width:min(438px,94vw);z-index:121;background:var(--cream);
+  display:flex;flex-direction:column;transform:translateX(100%);transition:transform .34s var(--ease);box-shadow:-24px 0 60px -30px rgba(40,28,16,.5)}
+:root.cd-open .cd{transform:none}
+.cd-busy{opacity:.75;pointer-events:none}
+.cd-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.cd-head h2{margin:0;font-family:var(--f-disp);font-weight:600;font-size:23px;color:var(--espresso)}
+.cd-head .cd-count{color:var(--taupe);font-weight:500}
+.cd-x{background:none;border:0;font-size:30px;line-height:1;color:var(--taupe);cursor:pointer;padding:0 4px}
+.cd-scroll{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px 8px}
+/* reservation countdown */
+.cd-reserve{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--oat);border-radius:16px;padding:14px 15px;overflow:hidden}
+.cd-reserve-ic{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--cream);display:grid;place-items:center;color:var(--honey)}
+.cd-reserve-ic svg{width:19px;height:19px}
+.cd-reserve-txt small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.1em;color:var(--taupe)}
+.cd-reserve-txt b{display:block;font-family:var(--f-disp);font-weight:600;font-size:22px;color:var(--espresso);line-height:1.1;margin:1px 0 3px}
+.cd-reserve-txt b span{font-variant-numeric:tabular-nums}
+.cd-reserve-txt > span{display:block;font-size:11.5px;color:var(--taupe);line-height:1.4;max-width:30ch}
+.cd-reserve-badge{position:absolute;top:12px;right:12px;max-width:96px;text-align:right;font-family:var(--f-disp);font-style:italic;font-size:11px;line-height:1.25;color:var(--clay);opacity:.85}
+/* trust row */
+.cd-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.cd-trust-i{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px 11px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.cd-ti-ic{width:34px;height:34px;border-radius:50%;background:var(--oat);display:grid;place-items:center;color:var(--espresso);margin-bottom:4px}
+.cd-ti-ic svg{width:18px;height:18px}
+.cd-trust-i b{font-size:12px;color:var(--espresso)}
+.cd-trust-i span{font-size:10px;color:var(--taupe);line-height:1.3}
+.cd-ti-stars{color:var(--honey)!important;letter-spacing:1px;font-size:12px!important}
+/* items */
+.cd-items{margin-top:16px;display:flex;flex-direction:column;gap:16px}
+.cd-item{display:flex;gap:12px}
+.cd-item-img{flex:0 0 auto;width:74px;height:74px;border-radius:12px;overflow:hidden;background:var(--oat);border:1px solid var(--line)}
+.cd-item-img img{width:100%;height:100%;object-fit:cover}
+.cd-item-main{flex:1;min-width:0}
+.cd-item-title{display:block;font-weight:700;font-size:14px;color:var(--espresso);text-decoration:none;line-height:1.3}
+.cd-item-variant{font-size:12px;color:var(--taupe);margin-top:1px}
+.cd-item-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.cd-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.cd-qty button{border:0;background:none;width:30px;height:30px;font-size:16px;cursor:pointer;color:var(--espresso)}
+.cd-qty-n{min-width:22px;text-align:center;font-weight:700;font-size:13px}
+.cd-item-price{font-weight:700;font-size:14px;color:var(--espresso)}
+.cd-item-protect{font-size:12px;color:var(--taupe);font-weight:600}
+.cd-item-review{margin-top:8px;background:var(--oat);border-radius:10px;padding:8px 10px;font-size:11.5px;color:var(--espresso);line-height:1.45}
+.cd-ir-stars{color:var(--honey);letter-spacing:.5px}
+.cd-ir-name{color:var(--taupe);font-weight:600}
+.cd-item-remove{background:none;border:0;padding:6px 0 0;font-size:11.5px;color:var(--taupe);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.cd-item-remove:hover{color:var(--honey)}
+/* free express shipping bar */
+.cd-ship{margin-top:18px;background:var(--oat);border-radius:16px;padding:14px 15px}
+.cd-ship-head{display:flex;gap:11px;align-items:center}
+.cd-ship-ic{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--cream);display:grid;place-items:center;color:var(--honey)}
+.cd-ship-ic svg{width:19px;height:19px}
+.cd-ship-head b{display:block;font-size:13px;letter-spacing:.04em;color:var(--espresso)}
+.cd-ship-head [data-cd-ship-msg]{font-size:12.5px;color:var(--taupe)}
+.cd-ship-head [data-cd-ship-msg] b{display:inline;color:var(--honey);letter-spacing:0}
+.cd-ship-bar{height:7px;border-radius:999px;background:#e7ddca;margin:11px 0 7px;overflow:hidden}
+.cd-ship-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--honey),var(--honey-lt,#c58a3d));border-radius:999px;transition:width .4s var(--ease)}
+.cd-ship small{font-size:11px;color:var(--taupe)}
+/* shipping protection */
+.cd-protect{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.cd-protect-txt b{display:block;font-size:14px;color:var(--espresso)}
+.cd-protect-price{color:var(--taupe);font-weight:600;margin-left:2px}
+.cd-protect-txt span{font-size:12px;color:var(--taupe)}
+.cd-switch{flex:0 0 auto;width:46px;height:26px;border-radius:999px;border:0;background:var(--greige);cursor:pointer;position:relative;transition:background .25s}
+.cd-switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .25s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.cd-switch.on{background:var(--honey)}
+.cd-switch.on i{left:23px}
+/* footer */
+.cd-foot{flex:0 0 auto;border-top:1px solid var(--line);padding:16px 18px calc(16px + env(safe-area-inset-bottom));background:var(--cream)}
+.cd-subtotal{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.cd-sub-l b{font-size:15px;color:var(--espresso)}
+.cd-saving{display:block;font-size:12px;color:var(--honey);font-weight:700;margin-top:2px}
+.cd-sub-r{text-align:right}
+.cd-compare{color:var(--taupe);font-size:15px;margin-right:4px}
+.cd-total{font-family:var(--f-disp);font-weight:600;font-size:26px;color:var(--espresso)}
+.cd-checkout{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--espresso);color:#fdf8ef;
+  font-family:var(--f-body);font-weight:800;font-size:16px;padding:16px;border-radius:14px;text-decoration:none;transition:background .2s}
+.cd-checkout:hover{background:#2c251f}
+.cd-checkout svg{width:16px;height:16px}
+.cd-links{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.cd-link{background:none;border:0;font-family:var(--f-body);font-size:13px;color:var(--taupe);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cd-link:hover{color:var(--honey)}
+.cd-discount-row{display:flex;gap:8px;margin-top:12px}
+.cd-discount-row input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--panel);color:var(--espresso)}
+.cd-discount-row button{border:0;background:var(--honey);color:#fff;font-weight:700;border-radius:10px;padding:0 16px;cursor:pointer}
+.cd-empty{text-align:center;padding:40px 10px;color:var(--taupe)}
+.cd-empty-cta{margin-top:14px}
+@media(max-width:600px){
+  .cd{width:100%}
+  .cd-reserve-badge{display:none}
+  .cd-trust-i b{font-size:11px}
+  .cd-total{font-size:23px}
+}
