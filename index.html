@@ -414,7 +414,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
     <div class="reveal">
       <h2 class="serif">Let's build your <em>new fence.</em></h2>
       <p class="lead">Tell us about your yard. We'll measure up on site and give you a written price. No pressure.</p>
-      <div class="contact">Call or text Taj<a href="tel:0425237500">0425 237 500</a><a href="mailto:info@bestfencing.com.au" style="font-size:.95rem">info@bestfencing.com.au</a></div>
+      <div class="contact">Call or text Taj<a href="tel:0425237500">0425 237 500</a><a href="mailto:fence.best@yahoo.com.au" style="font-size:.95rem">fence.best@yahoo.com.au</a></div>
     </div>
     <form id="qf" class="reveal">
       <input name="name" placeholder="Your name" required>
@@ -433,7 +433,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
 <footer>
   <div class="wrap">
     <img src="images/logo.png" alt="Best Fencing">
-    <div>Servicing Melbourne &amp; surrounds<br><a href="tel:0425237500">0425 237 500</a> · <a href="mailto:info@bestfencing.com.au">info@bestfencing.com.au</a></div>
+    <div>Servicing Melbourne &amp; surrounds<br><a href="tel:0425237500">0425 237 500</a> · <a href="mailto:fence.best@yahoo.com.au">fence.best@yahoo.com.au</a></div>
     <div>&copy; <span id="yr"></span> Best Fencing</div>
   </div>
 </footer>
@@ -610,7 +610,7 @@ est();
 $('#qType').innerHTML=STY.map(s=>`<option>${s.name}</option>`).join('')+'<option>Timber paling + lattice top</option><option>Gate</option><option>Repair</option>';
 $('#qf').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
   const body=`Name: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nSuburb: ${f.get('suburb')}\nService: ${f.get('type')}\n\n${f.get('msg')}`;
-  location.href='mailto:info@bestfencing.com.au?subject='+encodeURIComponent('Free estimate request')+'&body='+encodeURIComponent(body)});
+  location.href='mailto:fence.best@yahoo.com.au?subject='+encodeURIComponent('Free estimate request')+'&body='+encodeURIComponent(body)});
 
 /* ---------- reveal + scroll ---------- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
