@@ -4,296 +4,507 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Best Fencing | Quality Fencing Melbourne</title>
-<meta name="description" content="Best Fencing – professional timber, Colorbond, front fencing and retaining walls for residential and commercial properties across Melbourne. Get a free quote.">
+<meta name="description" content="Best Fencing – timber, Colorbond, front fencing and retaining walls for Melbourne homes and businesses. Price your fence in twenty seconds and book a free on-site estimate.">
 <style>
 :root{
-  --charcoal:#17191B;
-  --white:#FFFFFF;
-  --gold:#E7AA32;
-  --gold-dark:#c98f1c;
-  --timber:#B47A48;
-  --grey:#777B7E;
-  --light:#F2F2F0;
+  --charcoal:#17191B; --ink:#0f1112; --white:#fff; --gold:#E7AA32; --gold-dark:#c98f1c;
+  --timber:#B47A48; --grey:#777B7E; --paper:#f6f5f2; --line:#e4e2dc;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;color:var(--charcoal);background:var(--white);line-height:1.6}
-img{max-width:100%;display:block}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-h1,h2,h3{font-weight:800;line-height:1.1;letter-spacing:-.01em;text-transform:uppercase}
-
-/* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(23,25,27,.96);backdrop-filter:blur(8px);border-bottom:1px solid #2a2d30}
-.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{height:58px;width:auto;filter:invert(1);mix-blend-mode:screen}
-.brand small{display:block;color:var(--gold);font-size:.7rem;letter-spacing:.18em;font-weight:700}
-nav ul{display:flex;gap:28px;list-style:none;color:#fff;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-nav a:hover{color:var(--gold)}
-.btn{display:inline-block;background:var(--gold);color:var(--charcoal);font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:16px 30px;border-radius:6px;border:0;cursor:pointer;font-size:1rem;transition:.2s}
+button{font:inherit;cursor:pointer}
+svg{display:block;width:100%;height:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.serif{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
+.serif em{font-style:italic;color:var(--gold-dark);font-weight:400}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--timber);font-weight:700;margin-bottom:14px}
+.btn{display:inline-block;background:var(--gold);color:var(--charcoal);font-weight:800;border:0;border-radius:999px;padding:14px 28px;transition:.2s;letter-spacing:.02em}
 .btn:hover{background:var(--gold-dark);transform:translateY(-2px)}
-.btn.ghost{background:transparent;color:#fff;border:2px solid #fff}
-.btn.ghost:hover{background:#fff;color:var(--charcoal)}
-.nav .btn{padding:11px 20px;font-size:.85rem}
-.menu-btn{display:none;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer}
+.btn.sm{padding:10px 18px;font-size:.85rem}
+.btn.line{background:transparent;border:1.5px solid currentColor;color:inherit}
+.btn.line:hover{background:rgba(255,255,255,.12);transform:none}
 
-/* Hero */
-.hero{position:relative;background:var(--charcoal);color:#fff;overflow:hidden;padding:110px 0 130px}
-.hero::before{ /* CSS timber fence pattern – replace with a real photo: background:url(images/hero.jpg) center/cover */
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(23,25,27,.55),rgba(23,25,27,.92)),
-    repeating-linear-gradient(90deg,#3a2a1c 0 46px,#2b1f15 46px 50px);
-  opacity:.9}
-.hero .wrap{position:relative}
-.tag{display:inline-block;color:#f08a3c;background:rgba(240,138,60,.12);border:1px solid rgba(240,138,60,.4);padding:6px 14px;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.12em;margin-bottom:22px}
-.hero h1{font-size:clamp(2.4rem,6.5vw,5rem);max-width:800px}
-.hero h1 span{color:var(--gold)}
-.hero p{max-width:560px;margin:22px 0 34px;font-size:1.15rem;color:#d8d8d6}
-.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
-.hero .call{margin-top:18px;color:#bbb;font-size:.95rem}
-.hero .call a{color:var(--gold);font-weight:700}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 28px;background:rgba(23,25,27,.82);backdrop-filter:blur(10px);color:#fff}
+.nav .logo img{height:52px;width:auto;filter:invert(1);mix-blend-mode:screen}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.nav ul a:hover{color:var(--gold)}
+.nav .right{display:flex;gap:14px;align-items:center}
+.nav .btn.line{color:#fff}
+.burger{display:none;background:none;border:0;color:#fff;font-size:1.7rem}
 
-/* Trust bar */
-.trust{background:var(--gold);color:var(--charcoal)}
-.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:22px;padding-bottom:22px;text-align:center}
-.trust strong{display:block;font-size:1.5rem;font-weight:900;text-transform:uppercase}
-.trust span{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+/* STICKY ESTIMATE PILL */
+.est{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;align-items:center;gap:18px;background:rgba(23,25,27,.94);color:#fff;
+  padding:12px 12px 12px 20px;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.est b{display:block;font-size:.9rem}
+.est span{font-size:.75rem;color:#bbb}
 
-section{padding:90px 0}
-.title{text-align:center;margin-bottom:48px}
-.title h2{font-size:clamp(1.8rem,4vw,2.8rem)}
-.title p{color:var(--grey);margin-top:12px}
-.title .bar{width:70px;height:5px;background:var(--gold);margin:16px auto 0;border-radius:3px}
+/* HERO (scroll-scrubbed build) */
+.hero{height:520vh;position:relative}
+.hero .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a2a12}
+.hero .stick>svg,#heroSvg{position:absolute;inset:0}
+.hero::after{content:"";position:absolute}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 55%,rgba(0,0,0,.55));pointer-events:none}
+.card-day{position:absolute;left:28px;top:96px;width:290px;background:rgba(23,25,27,.58);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.15);
+  color:#fff;border-radius:16px;padding:16px 18px}
+.card-day .top{display:flex;justify-content:space-between;align-items:baseline;font-size:.65rem;letter-spacing:.18em;color:#ddd}
+.card-day .top b{font-family:var(--serif);font-size:1.3rem;letter-spacing:0;color:#fff}
+.card-day h4{font-family:var(--serif);font-size:1.8rem;margin:2px 0 10px}
+.card-day ul{list-style:none;display:grid;gap:8px;font-size:.85rem;color:#cfcfcf}
+.card-day li{display:flex;gap:10px;align-items:center;transition:.3s}
+.card-day li::before{content:"";width:12px;height:12px;border-radius:50%;border:1.5px solid #888;flex:none}
+.card-day li.on{color:#fff}
+.card-day li.on::before{background:var(--gold);border-color:var(--gold)}
+.card-day li.done::before{background:var(--gold);border-color:var(--gold);opacity:.55}
+.headline{position:absolute;left:5vw;bottom:14vh;max-width:min(640px,88vw);color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.headline h1{font-size:clamp(2.6rem,7vw,5.4rem);transition:opacity .35s,transform .35s}
+.headline h1 em{color:var(--gold)}
+.headline p{margin:16px 0 22px;max-width:480px;color:#eee;font-size:1.05rem;transition:opacity .35s}
+.headline .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.headline .row small{color:#ddd}
+.swap{opacity:0;transform:translateY(14px)}
+.scrollhint{position:absolute;right:28px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;color:#fff;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
 
-/* Services */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.card{position:relative;border-radius:14px;overflow:hidden;background:var(--charcoal);color:#fff;aspect-ratio:4/3;display:flex;align-items:flex-end;transition:.25s}
-.card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.25)}
-.card .ph{position:absolute;inset:0}
-.card .txt{position:relative;width:100%;padding:60px 26px 24px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent)}
-.card h3{font-size:1.4rem}
-.card p{font-size:.92rem;color:#ddd;margin-top:6px}
-/* placeholder textures – swap each for background:url(images/xxx.jpg) center/cover */
-.ph.timber{background:linear-gradient(180deg,#7a9a52 0 18%,transparent 18%),repeating-linear-gradient(90deg,#c9a46a 0 34px,#a98450 34px 37px)}
-.ph.colorbond{background:linear-gradient(180deg,#8fb06a 0 18%,transparent 18%),repeating-linear-gradient(90deg,#4a5258 0 22px,#3a4146 22px 25px)}
-.ph.front{background:linear-gradient(180deg,#9bb978 0 22%,transparent 22%),repeating-linear-gradient(180deg,#b9722f 0 26px,#8f5522 26px 30px)}
-.ph.retaining{background:linear-gradient(180deg,#5b4636 0 55%,transparent 55%),repeating-linear-gradient(180deg,#b47a48 0 34px,#8a5b33 34px 38px)}
+/* TRUST */
+.trust{max-width:1000px;margin:-1px auto 0;padding:0 24px;transform:translateY(-34px);position:relative;z-index:5}
+.trust .in{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.08)}
+.trust div{padding:20px 22px;border-right:1px solid var(--line)}
+.trust div:last-child{border:0}
+.trust b{font-family:var(--serif);font-size:1.1rem;display:block}
+.trust span{font-size:.8rem;color:var(--grey)}
 
-/* Why */
-.why{background:var(--light)}
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-.why-item{background:#fff;border-radius:12px;padding:30px 24px;border-top:4px solid var(--gold);box-shadow:0 4px 18px rgba(0,0,0,.06)}
-.why-item .ic{width:50px;height:50px;border-radius:50%;background:var(--charcoal);color:var(--gold);display:grid;place-items:center;font-size:1.4rem;margin-bottom:16px}
-.why-item h3{font-size:1.05rem;margin-bottom:8px}
-.why-item p{color:var(--grey);font-size:.95rem}
+section.s{padding:80px 0}
+h2.serif{font-size:clamp(2.2rem,5vw,3.6rem)}
 
-/* Process */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
-.step{position:relative;padding:26px;border:2px solid #e6e6e3;border-radius:12px}
-.step::before{counter-increment:s;content:"0" counter(s);font-size:2.6rem;font-weight:900;color:var(--gold);display:block;line-height:1}
-.step h3{margin:10px 0 6px;font-size:1.05rem}
-.step p{color:var(--grey);font-size:.93rem}
+/* DRAG THE LINE */
+.dl-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px;gap:20px;flex-wrap:wrap}
+.toggle{display:inline-flex;background:#ebe8e1;border-radius:999px;padding:4px}
+.toggle button{border:0;background:none;padding:8px 18px;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--grey)}
+.toggle button.on{background:#fff;color:var(--charcoal);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.ba{position:relative;aspect-ratio:16/8.6;border-radius:22px;overflow:hidden;user-select:none;touch-action:pan-y;cursor:ew-resize;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.ba .layer{position:absolute;inset:0}
+.ba .after{clip-path:inset(0 0 0 50%)}
+.ba .lbl{position:absolute;top:16px;background:rgba(0,0,0,.6);color:#fff;font-size:.65rem;letter-spacing:.18em;padding:6px 10px;border-radius:6px;font-weight:700}
+.ba .lbl.l{left:16px}.ba .lbl.r{right:16px;background:var(--gold);color:var(--charcoal)}
+.ba .handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.4)}
+.ba .handle i{position:absolute;top:50%;left:50%;width:42px;height:42px;margin:-21px;border-radius:50%;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.35);display:grid;place-items:center;font-style:normal;font-size:.8rem;font-weight:900;color:var(--charcoal)}
 
-/* Before / after */
-.ba{background:var(--charcoal);color:#fff}
-.ba .title p{color:#aaa}
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;border-radius:14px;overflow:hidden;max-width:900px;margin:0 auto}
-.ba-grid div{aspect-ratio:4/3;position:relative}
-.ba-grid span{position:absolute;left:0;bottom:0;background:#000;color:#fff;font-weight:800;padding:8px 18px;text-transform:uppercase}
-.ba-grid .before{background:linear-gradient(180deg,#6e8b4a 0 25%,transparent 25%),repeating-linear-gradient(80deg,#8a8a80 0 28px,#6f6f66 28px 32px)}
-.ba-grid .after{background:linear-gradient(180deg,#86a85f 0 25%,transparent 25%),repeating-linear-gradient(90deg,#d6b072 0 30px,#b9915a 30px 33px)}
+/* PICK YOUR FENCE */
+.pick{position:relative;aspect-ratio:16/9;min-height:520px;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.2);background:#222}
+.pick .sv{position:absolute;inset:0;transition:opacity .4s}
+.pick .pills{position:absolute;left:28px;top:84px;display:flex;gap:8px;flex-wrap:wrap;z-index:3;max-width:90%}
+.pick h2{position:absolute;left:28px;top:24px;color:#fff;z-index:3;font-size:clamp(2rem,4vw,3rem);text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.pill{border:0;border-radius:999px;padding:8px 16px;font-size:.82rem;font-weight:700;background:rgba(40,44,48,.78);color:#eee;backdrop-filter:blur(8px)}
+.pill.on{background:var(--gold);color:var(--charcoal)}
+.fcard{position:absolute;left:28px;bottom:28px;width:320px;background:rgba(23,25,27,.82);backdrop-filter:blur(14px);color:#fff;border-radius:16px;padding:18px 20px;z-index:3}
+.fcard .t{display:flex;justify-content:space-between;gap:12px}
+.fcard h3{font-family:var(--serif);font-size:1.6rem;line-height:1.05}
+.fcard .pr{text-align:right;font-family:var(--serif);font-size:1.5rem}
+.fcard .pr small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;color:#bbb}
+.fcard p{font-size:.85rem;color:#ddd;margin:8px 0 12px}
+.meters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;font-size:.58rem;letter-spacing:.14em;color:#aaa}
+.bar{display:flex;gap:3px;margin-top:5px}
+.bar i{height:4px;flex:1;background:#4a4e52;border-radius:2px}
+.bar i.on{background:var(--gold)}
+.meters b{color:#fff;font-size:.8rem;letter-spacing:0;display:block;margin-top:4px}
+.fcard .best{font-size:.8rem;color:#ccc;margin-bottom:14px}
+.fcard .foot{display:flex;align-items:center;gap:12px}
+.fcard .foot small{color:#999;font-size:.7rem}
 
-/* Quote */
-.quote{background:var(--charcoal);color:#fff;text-align:center}
-.quote h2{font-size:clamp(1.8rem,4vw,2.8rem)}
-.quote>.wrap>p{color:#bbb;margin:12px 0 36px}
-form{max-width:700px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+/* ESTIMATOR */
+.pricing{background:#fff}
+.pr-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;margin-top:40px;align-items:stretch}
+.pr-left{background:var(--paper);border-radius:22px;padding:26px;border:1px solid var(--line)}
+.pr-left .prev{aspect-ratio:16/6.5;border-radius:14px;overflow:hidden;margin-bottom:20px}
+.pr-left label{display:block;font-size:.65rem;letter-spacing:.18em;color:var(--grey);font-weight:700;text-transform:uppercase;margin:16px 0 8px}
+.pr-left .pills{display:flex;gap:8px;flex-wrap:wrap}
+.pr-left .pill{background:#e8e5de;color:#444;backdrop-filter:none}
+.pr-left .pill.on{background:var(--gold);color:var(--charcoal)}
+.len{display:flex;justify-content:space-between;align-items:center}
+.len b{font-family:var(--serif);font-size:1.6rem}
+input[type=range]{width:100%;accent-color:var(--gold-dark);margin-top:6px}
+.stepper{display:inline-flex;align-items:center;gap:14px;font-weight:800}
+.stepper button{width:34px;height:34px;border-radius:50%;border:1.5px solid #bbb;background:#fff;font-size:1.1rem}
+.res{background:var(--charcoal);color:#fff;border-radius:22px;padding:30px;display:flex;flex-direction:column}
+.res .k{font-size:.62rem;letter-spacing:.2em;color:var(--gold);font-weight:700;text-transform:uppercase}
+.res .big{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.2rem);margin:10px 0 4px;line-height:1}
+.res .sub{font-size:.85rem;color:#aaa;padding-bottom:20px;border-bottom:1px solid #34383c}
+.res .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:20px 0;border-bottom:1px solid #34383c}
+.res .stats b{font-family:var(--serif);font-size:1.8rem;display:block}
+.res .stats span{font-size:.7rem;color:#aaa;letter-spacing:.1em;text-transform:uppercase}
+.res .blurb{padding:18px 0;color:#ddd;font-size:.92rem;flex:1}
+.res .btn{text-align:center;width:100%}
+.res small{display:block;margin-top:14px;font-size:.72rem;color:#8e9296}
+
+/* QUOTE */
+.quote{background:var(--charcoal);color:#fff}
+.quote .grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.quote h2 em{color:var(--gold)}
+.quote p.lead{color:#bbb;margin:16px 0 24px;max-width:420px}
+.quote .contact a{display:block;font-size:1.1rem;font-weight:700;color:var(--gold);margin-top:6px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 form .full{grid-column:1/-1}
-input,select,textarea{width:100%;padding:15px 16px;border-radius:6px;border:2px solid #34383c;background:#202326;color:#fff;font:inherit}
+input,select,textarea{width:100%;padding:14px 16px;border-radius:10px;border:1.5px solid #34383c;background:#202326;color:#fff;font:inherit}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
-textarea{min-height:120px;resize:vertical}
-form .btn{width:100%}
-.note{font-size:.85rem;color:#999;text-align:center;margin-top:6px;grid-column:1/-1}
+textarea{min-height:100px;resize:vertical}
+form .btn{width:100%;border-radius:10px;padding:16px}
+.note{grid-column:1/-1;font-size:.78rem;color:#8e9296;text-align:center}
 
-footer{background:#0e0f10;color:#999;padding:40px 0;font-size:.9rem}
-footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer{background:var(--ink);color:#8e9296;padding:36px 0;font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
-footer a:hover{color:var(--gold)}
 
-/* Sticky mobile call bar */
-.callbar{display:none}
-
-/* Reveal animation */
-.reveal{opacity:0;transform:translateY(30px);transition:.7s ease}
-.reveal{transition-delay:0s}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:900px){
-  nav ul{display:none;position:absolute;top:72px;left:0;right:0;background:var(--charcoal);flex-direction:column;padding:20px;gap:18px}
-  nav ul.open{display:flex}
-  .menu-btn{display:block}
-  .nav .btn{display:none}
-  .why-grid,.steps{grid-template-columns:1fr 1fr}
-  .trust .wrap{grid-template-columns:1fr 1fr}
+  .nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:var(--charcoal);flex-direction:column;padding:20px 28px;gap:18px}
+  .nav ul.open{display:flex}
+  .burger{display:block}
+  .nav .right .btn{display:none}
+  .trust .in{grid-template-columns:1fr 1fr}
+  .trust div:nth-child(2){border-right:0}
+  .trust div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .pr-grid,.quote .grid{grid-template-columns:1fr}
+  .card-day{width:230px;top:84px;left:14px}
+  .scrollhint{display:none}
 }
-@media(max-width:600px){
-  .grid,.why-grid,.steps,form{grid-template-columns:1fr}
-  section{padding:64px 0}
-  .hero{padding:70px 0 90px}
-  .callbar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60}
-  .callbar a{flex:1;text-align:center;padding:16px;font-weight:800;text-transform:uppercase;font-size:.9rem}
-  .callbar a:first-child{background:var(--charcoal);color:#fff}
-  .callbar a:last-child{background:var(--gold);color:var(--charcoal)}
-  body{padding-bottom:54px}
+@media(max-width:640px){
+  .nav{padding:8px 16px}
+  .hero{height:460vh}
+  .card-day{display:none}
+  .headline{left:20px;bottom:18vh}
+  .est{left:12px;right:12px;bottom:12px;justify-content:space-between;padding:8px 8px 8px 16px}
+  .est span:not(.btn){display:none}
+  .pick{aspect-ratio:auto;height:640px}
+  .pick .pills{top:76px;left:16px}
+  .pick h2{left:16px}
+  .fcard{left:12px;right:12px;bottom:12px;width:auto}
+  .ba{aspect-ratio:4/5}
+  form{grid-template-columns:1fr}
+  section.s{padding:60px 0}
+  .res .stats b{font-size:1.4rem}
 }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap nav">
-    <a href="#top" class="brand" aria-label="Best Fencing home">
-      <img src="images/logo.png" alt="Best Fencing logo">
-    </a>
-    <nav>
-      <ul id="menu">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#work">Our Work</a></li>
-        <li><a href="#quote">Contact</a></li>
-      </ul>
-    </nav>
-    <a href="#quote" class="btn">Free Quote</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+<header class="nav">
+  <a href="#top" class="logo" aria-label="Best Fencing"><img src="images/logo.png" alt="Best Fencing"></a>
+  <ul id="menu">
+    <li><a href="#install">Install</a></li>
+    <li><a href="#styles">Styles</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#repairs">Repairs</a></li>
+  </ul>
+  <div class="right">
+    <a href="#quote" class="btn line sm">Free Estimate</a>
+    <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <span class="tag">MELBOURNE FENCING SPECIALISTS</span>
-      <h1>Quality fencing.<br><span>Built to last.</span></h1>
-      <p>Professional fencing solutions for residential and commercial properties across Melbourne.</p>
-      <div class="cta">
-        <a href="#quote" class="btn">Get Your Free Quote &rarr;</a>
-        <a href="#work" class="btn ghost">See Our Work</a>
-      </div>
-      <p class="call">Call us today for an enquiry: <a href="tel:0400000000">0400 000 000</a></p>
-    </div>
-  </section>
+<a class="est" href="#quote" id="estPill">
+  <div><b>Free on-site estimate</b><span>We measure, you get a written price.</span></div>
+  <span class="btn sm" style="color:#17191B">Get my estimate</span>
+</a>
 
-  <div class="trust">
-    <div class="wrap">
-      <div><strong>Free</strong><span>Quotes</span></div>
-      <div><strong>Melbourne</strong><span>Wide Service</span></div>
-      <div><strong>Residential</strong><span>&amp; Commercial</span></div>
-      <div><strong>Built</strong><span>To Last</span></div>
+<main id="top">
+
+<!-- HERO: scroll to build the fence -->
+<section class="hero" id="install">
+  <div class="stick">
+    <div id="heroSvg"></div>
+    <div class="shade"></div>
+    <div class="card-day">
+      <div class="top"><span>JOB LOG</span><span><b id="ftN">0</b> m of 45 built</span></div>
+      <h4 id="dayT">Day 1</h4>
+      <ul id="steps">
+        <li>Dial Before You Dig – yard marked</li>
+        <li>Posts set in concrete</li>
+        <li>Rails level &amp; fastened</li>
+        <li>Boards + cap rail</li>
+        <li>Clean-up &amp; walkthrough</li>
+      </ul>
+    </div>
+    <div class="headline">
+      <h1 class="serif" id="hTitle">Good fences, <em>built right.</em></h1>
+      <p id="hSub">Professional fencing for Melbourne homes and businesses. Scroll to watch one go up.</p>
+      <div class="row"><a href="#pricing" class="btn">Price your fence</a><a href="#quote" class="btn line">Free estimate</a></div>
+    </div>
+    <div class="scrollhint">Scroll to build</div>
+  </div>
+</section>
+
+<div class="trust reveal"><div class="in">
+  <div><b>Dial Before You Dig</b><span>Checked before every dig</span></div>
+  <div><b>Posts set deep</b><span>In concrete, plumb</span></div>
+  <div><b>Permits &amp; council</b><span>We handle the paperwork</span></div>
+  <div><b>Written warranty</b><span>On every install</span></div>
+</div></div>
+
+<!-- DRAG THE LINE -->
+<section class="s" id="repairs">
+  <div class="wrap">
+    <div class="dl-head reveal">
+      <div><p class="eyebrow">Before &amp; after</p><h2 class="serif">Drag the <em>line.</em></h2></div>
+      <div class="toggle" id="baToggle"><button data-m="new">New install</button><button data-m="repair" class="on">Repair</button></div>
+    </div>
+    <div class="ba reveal" id="ba">
+      <div class="layer" id="baBefore"></div>
+      <div class="layer after" id="baAfter"></div>
+      <span class="lbl l" id="baL">AFTER THE STORM</span><span class="lbl r">BEST FENCING</span>
+      <div class="handle" id="baHandle"><i>&#8596;</i></div>
     </div>
   </div>
+</section>
 
-  <section id="services">
-    <div class="wrap">
-      <div class="title reveal"><h2>Our Fencing Services</h2><div class="bar"></div></div>
-      <div class="grid">
-        <article class="card reveal"><div class="ph timber"></div><div class="txt"><h3>Timber Fencing</h3><p>Classic, durable timber fences for backyards and boundaries.</p></div></article>
-        <article class="card reveal"><div class="ph colorbond"></div><div class="txt"><h3>Colorbond Fencing</h3><p>Low-maintenance steel fencing in a range of colours.</p></div></article>
-        <article class="card reveal"><div class="ph front"></div><div class="txt"><h3>Front Fencing</h3><p>Modern slat and feature fences that lift your street appeal.</p></div></article>
-        <article class="card reveal"><div class="ph retaining"></div><div class="txt"><h3>Retaining Walls</h3><p>Strong timber retaining walls for sloped and landscaped yards.</p></div></article>
+<!-- PICK YOUR FENCE -->
+<section class="s" id="styles" style="padding-top:0">
+  <div class="wrap">
+    <div class="pick reveal" id="pick">
+      <div class="sv" id="pickSv"></div>
+      <h2 class="serif">Pick your <em style="color:var(--gold)">fence.</em></h2>
+      <div class="pills" id="pickPills"></div>
+      <div class="fcard">
+        <div class="t"><h3 id="fName"></h3><div class="pr"><span id="fPrice"></span><small>PER METRE INSTALLED*</small></div></div>
+        <p id="fDesc"></p>
+        <div class="meters">
+          <div>PRIVACY<div class="bar" id="mPriv"></div></div>
+          <div>LOW UPKEEP<div class="bar" id="mUp"></div></div>
+          <div>LIFESPAN<b id="mLife"></b></div>
+        </div>
+        <div class="best" id="fBest"></div>
+        <div class="foot"><button class="btn sm" id="priceThis">Price this fence</button><small>*Demo ranges</small></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="why" id="why">
-    <div class="wrap">
-      <div class="title reveal"><h2>Why Choose Best Fencing?</h2><div class="bar"></div></div>
-      <div class="why-grid">
-        <div class="why-item reveal"><div class="ic">&#10003;</div><h3>Quality Workmanship</h3><p>Professional attention to detail on every job.</p></div>
-        <div class="why-item reveal"><div class="ic">&#9201;</div><h3>Reliable Service</h3><p>Clear communication and scheduling from start to finish.</p></div>
-        <div class="why-item reveal"><div class="ic">&#8962;</div><h3>Every Property</h3><p>Solutions for homes, new builds and commercial sites.</p></div>
-        <div class="why-item reveal"><div class="ic">&#9998;</div><h3>Easy Quotes</h3><p>Simple, fast enquiries for your next project.</p></div>
+<!-- PRICE IN TWENTY SECONDS -->
+<section class="s pricing" id="pricing">
+  <div class="wrap">
+    <div class="reveal"><p class="eyebrow">Instant ballpark</p><h2 class="serif">Price your fence<br>in <em>twenty seconds.</em></h2></div>
+    <div class="pr-grid">
+      <div class="pr-left reveal">
+        <div class="prev" id="prev"></div>
+        <label>Style</label><div class="pills" id="estPills"></div>
+        <label>Fence length</label>
+        <div class="len"><b id="lenV">45 m</b></div>
+        <input type="range" id="len" min="5" max="120" value="45">
+        <label>Gates</label>
+        <div class="stepper"><button id="gm">&minus;</button><span id="gN">1</span><button id="gp">+</button></div>
+      </div>
+      <div class="res reveal">
+        <div class="k" id="rK"></div>
+        <div class="big" id="rBig"></div>
+        <div class="sub">Typical installed range, materials + labour</div>
+        <div class="stats"><div><b id="rPosts"></b><span>Posts</span></div><div><b id="rGates"></b><span>Gates</span></div><div><b id="rDays"></b><span>Days on site</span></div></div>
+        <div class="blurb" id="rBlurb"></div>
+        <a href="#quote" class="btn">Lock in a free on-site measure</a>
+        <small>Demo pricing. Real quotes come after a free measure: slopes, rock and permits change the number.</small>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="process">
-    <div class="wrap">
-      <div class="title reveal"><h2>How It Works</h2><div class="bar"></div></div>
-      <div class="steps">
-        <div class="step reveal"><h3>Enquire</h3><p>Call or send the quote form below.</p></div>
-        <div class="step reveal"><h3>Free Quote</h3><p>We measure up and give you clear pricing.</p></div>
-        <div class="step reveal"><h3>We Build</h3><p>Professional installation, on schedule.</p></div>
-        <div class="step reveal"><h3>Enjoy</h3><p>A fence that's built strong and built to last.</p></div>
-      </div>
+<!-- QUOTE -->
+<section class="s quote" id="quote">
+  <div class="wrap grid">
+    <div class="reveal">
+      <h2 class="serif">Let's build your <em>new fence.</em></h2>
+      <p class="lead">Tell us about your yard. We'll measure up on site and give you a written price. No pressure.</p>
+      <div class="contact">Call or text<a href="tel:0400000000">0400 000 000</a><a href="mailto:info@bestfencing.com.au" style="font-size:.95rem">info@bestfencing.com.au</a></div>
     </div>
-  </section>
-
-  <section class="ba" id="work">
-    <div class="wrap">
-      <div class="title reveal"><h2>Our Work</h2><p>Before and after transformations. Replace these panels with your real project photos.</p><div class="bar"></div></div>
-      <div class="ba-grid reveal">
-        <div class="before"><span>Before</span></div>
-        <div class="after"><span>After</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="quote" id="quote">
-    <div class="wrap">
-      <h2>Let's build your new fence</h2>
-      <p>Contact Best Fencing today to discuss your project.</p>
-      <form id="quoteForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="tel" name="phone" placeholder="Phone number" required>
-        <input type="email" name="email" placeholder="Email" class="full" required>
-        <select name="type" class="full">
-          <option>Timber Fencing</option>
-          <option>Colorbond Fencing</option>
-          <option>Front Fencing</option>
-          <option>Retaining Walls</option>
-          <option>Other</option>
-        </select>
-        <textarea name="msg" class="full" placeholder="Tell us about your project (suburb, length, fence type)"></textarea>
-        <button class="btn full" type="submit">Request a Free Quote</button>
-        <p class="note">Opens your email app with the details filled in.</p>
-      </form>
-    </div>
-  </section>
+    <form id="qf" class="reveal">
+      <input name="name" placeholder="Your name" required>
+      <input name="phone" type="tel" placeholder="Phone" required>
+      <input name="email" type="email" placeholder="Email" class="full" required>
+      <input name="suburb" placeholder="Suburb" class="full">
+      <select name="type" class="full" id="qType"></select>
+      <textarea name="msg" class="full" placeholder="Length, gates, anything we should know"></textarea>
+      <button class="btn full" type="submit">Request a free estimate</button>
+      <p class="note">Opens your email app with the details filled in.</p>
+    </form>
+  </div>
+</section>
 </main>
 
 <footer>
   <div class="wrap">
     <img src="images/logo.png" alt="Best Fencing">
-    <div>
-      <a href="tel:0400000000">0400 000 000</a> &middot;
-      <a href="mailto:info@bestfencing.com.au">info@bestfencing.com.au</a><br>
-      Servicing Melbourne &amp; surrounds
-    </div>
-    <div>&copy; <span id="yr"></span> Best Fencing. All rights reserved.</div>
+    <div>Servicing Melbourne &amp; surrounds<br><a href="tel:0400000000">0400 000 000</a> · <a href="mailto:info@bestfencing.com.au">info@bestfencing.com.au</a></div>
+    <div>&copy; <span id="yr"></span> Best Fencing</div>
   </div>
 </footer>
 
-<div class="callbar">
-  <a href="tel:0400000000">Call Now</a>
-  <a href="#quote">Free Quote</a>
-</div>
-
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-var menu=document.getElementById('menu');
-document.getElementById('menuBtn').onclick=function(){menu.classList.toggle('open')};
-menu.addEventListener('click',function(){menu.classList.remove('open')});
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s), clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+$('#yr').textContent=new Date().getFullYear();
+$('#burger').onclick=()=>$('#menu').classList.toggle('open');
+$('#menu').onclick=()=>$('#menu').classList.remove('open');
 
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+/* ---------- illustrated scene (swap for real photos any time) ---------- */
+const B=x=>800-x*.12, H=x=>250-x*.09, T=x=>B(x)-H(x);
+const XS=[];for(let x=40;x<=1560;x+=150)XS.push(x);
+const poly=pts=>pts.map(p=>p.join(',')).join(' ');
+const C={
+  wood:{post:'#9a6a3c',board:'#c97c36',line:'rgba(60,30,5,.35)',rail:'#a9733d',cap:'#8a5a2e'},
+  vinyl:{post:'#ececea',board:'#f6f6f3',line:'rgba(0,0,0,.12)',rail:'#e4e4e0',cap:'#dcdcd8'},
+  cb:{post:'#2e3438',board:'#3f464b',line:'rgba(255,255,255,.14)',rail:'#2e3438',cap:'#252a2e'},
+  rail:{post:'#232323',board:'',line:'',rail:'#2b2b2b',cap:'#232323'},
+  chain:{post:'#a6abae',board:'',line:'',rail:'#b9bec1',cap:'#a6abae'}
+};
+function fenceParts(kind,weather){
+  const c=C[kind]; let posts='',rails='',boards='',cap='';
+  XS.forEach(x=>{const w=17-x*.006;
+    posts+=`<rect x="${x-w/2}" y="${T(x)-10}" width="${w}" height="${H(x)+22}" fill="${c.post}"/>`+
+      (kind==='wood'||kind==='vinyl'?`<ellipse cx="${x}" cy="${B(x)+14}" rx="${w*1.1}" ry="${w*.35}" fill="#bdb9b0"/>`:'');});
+  for(let i=0;i<XS.length-1;i++){
+    const a=XS[i],b=XS[i+1],tilt=weather&&weather[i]||0;
+    const q=[[a,T(a)],[b,T(b)],[b,B(b)],[a,B(a)]];
+    const g=(inner)=>tilt?`<g transform="rotate(${tilt} ${a} ${B(a)})">${inner}</g>`:inner;
+    if(kind==='rail'){[.18,.5,.82].forEach(f=>{rails+=`<polygon fill="${c.rail}" points="${poly([[a,T(a)+H(a)*f-7],[b,T(b)+H(b)*f-7],[b,T(b)+H(b)*f+7],[a,T(a)+H(a)*f+7]])}"/>`})}
+    else if(kind==='chain'){boards+=`<polygon fill="url(#mesh)" opacity=".9" points="${poly(q)}"/>`;
+      rails+=`<polygon fill="${c.rail}" points="${poly([[a,T(a)],[b,T(b)],[b,T(b)+6],[a,T(a)+6]])}"/>`;}
+    else{
+      let s=`<polygon fill="${c.board}" points="${poly(q)}"/>`;
+      const step=kind==='vinyl'?30:13;
+      for(let x=a+step;x<b;x+=step)s+=`<line x1="${x}" y1="${T(x)}" x2="${x}" y2="${B(x)}" stroke="${c.line}" stroke-width="2"/>`;
+      boards+=g(s);
+      if(kind==='wood'){[.2,.78].forEach(f=>{rails+=`<polygon fill="${c.rail}" points="${poly([[a,T(a)+H(a)*f-6],[b,T(b)+H(b)*f-6],[b,T(b)+H(b)*f+6],[a,T(a)+H(a)*f+6]])}"/>`})}
+    }
+    if(kind!=='rail'&&kind!=='chain')cap+=`<polygon fill="${c.cap}" points="${poly([[a,T(a)-12],[b,T(b)-12],[b,T(b)],[a,T(a)]])}"/>`;
+  }
+  return{posts,rails,boards,cap};
+}
+function lawn(){
+  let s=`<rect y="540" width="1600" height="2400" fill="url(#gr)"/>`;
+  for(let i=-3;i<12;i++)s+=`<polygon fill="rgba(255,255,255,.045)" points="${poly([[i*180,540],[i*180+90,540],[i*180-120,900],[i*180-300,900]])}"/>`;
+  return s;
+}
+function backdrop(house){
+  let t='';
+  [[60,520,90],[190,505,110],[330,525,80],[1020,510,100],[1160,500,120],[1320,515,95],[1470,505,110],[1580,520,80]].forEach(([x,y,r])=>t+=`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.8}" fill="#2f5a2a"/>`);
+  let h='';
+  if(house)h=`<g transform="translate(430 330)"><rect width="440" height="190" fill="#a4482f"/><polygon points="-20,0 220,-90 460,0" fill="#5b3a30"/>
+   ${[40,150,260,350].map(x=>`<rect x="${x}" y="40" width="46" height="62" fill="#e9eef0"/><rect x="${x+4}" y="44" width="38" height="54" fill="#6e8794"/>`).join('')}
+   <rect x="190" y="110" width="62" height="80" fill="#f1f1ee"/><rect x="0" y="190" width="440" height="14" fill="#f3f3f0"/></g>`;
+  return `<defs><linearGradient id="sk" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="560"><stop offset="0" stop-color="#8dbbe6"/><stop offset="1" stop-color="#f6dcb6"/></linearGradient>
+   <linearGradient id="gr" gradientUnits="userSpaceOnUse" x1="0" y1="540" x2="0" y2="900"><stop offset="0" stop-color="#7bb23f"/><stop offset="1" stop-color="#3d7822"/></linearGradient>
+   <pattern id="mesh" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H14M0 0V14" stroke="#9aa0a3" stroke-width="1.6" fill="none"/></pattern></defs>
+   <rect y="-2500" width="1600" height="3060" fill="url(#sk)"/>${t}${h}`;
+}
+const svg=(inner,id)=>`<svg ${id?`id="${id}"`:''} viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">${inner}</svg>`;
+function sceneFence(kind,house=true,weather){const p=fenceParts(kind,weather);return svg(backdrop(house)+lawn()+p.boards+p.rails+p.posts+p.cap)}
 
-document.getElementById('quoteForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  var f=new FormData(e.target);
-  var body='Name: '+f.get('name')+'\nPhone: '+f.get('phone')+'\nEmail: '+f.get('email')+'\nService: '+f.get('type')+'\n\n'+f.get('msg');
-  location.href='mailto:info@bestfencing.com.au?subject='+encodeURIComponent('Free quote request')+'&body='+encodeURIComponent(body);
-});
+/* ---------- HERO scroll build ---------- */
+const wp=fenceParts('wood');
+function stakes(){let s='';[[200,840],[420,800],[640,770],[860,745],[1080,725],[1300,705],[1500,690]].forEach(([x,y],i)=>
+  s+=`<rect x="${x}" y="${y-60}" width="7" height="60" fill="#d8c9a0"/><polygon fill="${i%2?'#ffcf2e':'#ff5a3c'}" points="${x+7},${y-60} ${x+44},${y-48} ${x+7},${y-36}"/>`);return s}
+$('#heroSvg').innerHTML=svg(backdrop(true)+lawn()+
+ `<g id="gSt">${stakes()}</g>
+  <clipPath id="c1"><rect id="r1" width="0" height="900"/></clipPath><clipPath id="c2"><rect id="r2" width="0" height="900"/></clipPath>
+  <clipPath id="c3"><rect id="r3" width="0" height="900"/></clipPath><clipPath id="c4"><rect id="r4" width="0" height="900"/></clipPath>
+  <g clip-path="url(#c3)">${wp.boards}</g><g clip-path="url(#c2)">${wp.rails}</g><g clip-path="url(#c1)">${wp.posts}</g><g clip-path="url(#c4)">${wp.cap}</g>`);
+if(innerWidth<640){const hs=document.querySelector('#heroSvg svg');hs.setAttribute('preserveAspectRatio','xMidYMid meet');hs.setAttribute('viewBox','0 -140 1600 1180')}
+const stages=[
+ ['Good fences, <em>built right.</em>','Professional fencing for Melbourne homes and businesses. Scroll to watch one go up.','Day 1'],
+ ['Deep, plumb, <em>in concrete.</em>','Every post is set deep and checked plumb before a single rail goes on.','Day 1'],
+ ['Straight <em>as a string.</em>','Rails run level and fastened, so the line holds for years.','Day 2'],
+ ['No gaps. <em>Ever.</em>','Boards fixed tight and true, with a clean cap rail to finish.','Day 2'],
+ ['Your yard, <em>finished.</em>','Cleaned up, walked through with you, and backed by a written warranty.','Day 3']];
+let curStage=-1;
+const hero=$('.hero'),steps=[...document.querySelectorAll('#steps li')];
+function setStage(k){
+  if(k===curStage)return;curStage=k;
+  const t=$('#hTitle'),s=$('#hSub');t.classList.add('swap');s.classList.add('swap');
+  setTimeout(()=>{t.innerHTML=stages[k][0];s.textContent=stages[k][1];$('#dayT').textContent=stages[k][2];t.classList.remove('swap');s.classList.remove('swap')},180);
+  steps.forEach((li,i)=>{li.className=i<k?'done':i===k?'on':''});
+}
+function heroTick(){
+  const r=hero.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight));
+  const seg=(a,b)=>clamp((p-a)/(b-a))*1600;
+  $('#r1').setAttribute('width',seg(.12,.38));$('#r2').setAttribute('width',seg(.34,.58));
+  $('#r3').setAttribute('width',seg(.54,.82));$('#r4').setAttribute('width',seg(.8,.97));
+  $('#gSt').style.opacity=1-clamp((p-.1)/.3);
+  $('#ftN').textContent=Math.round(p*45);
+  setStage(Math.min(4,Math.floor(p*5)));
+}
+
+/* ---------- DRAG THE LINE ---------- */
+const brokenTilt=[0,0,-14,0,11,0,0,0,0,0];
+const ba={repair:{before:()=>sceneFence('wood',false,brokenTilt).replace(/#c97c36/g,'#8d867b').replace(/#9a6a3c/g,'#6f6a60').replace(/#a9733d/g,'#7a746a').replace(/#8a5a2e/g,'#625d54'),after:()=>sceneFence('wood',false),label:'AFTER THE STORM'},
+  new:{before:()=>svg(backdrop(false)+lawn()+stakes()),after:()=>sceneFence('wood',false),label:'BARE YARD'}};
+let baMode='repair';
+function baRender(){$('#baBefore').innerHTML=ba[baMode].before();$('#baAfter').innerHTML=ba[baMode].after();$('#baL').textContent=ba[baMode].label}
+baRender();
+document.querySelectorAll('#baToggle button').forEach(b=>b.onclick=()=>{baMode=b.dataset.m;document.querySelectorAll('#baToggle button').forEach(x=>x.classList.toggle('on',x===b));baRender()});
+function baSet(pct){pct=clamp(pct,2,98);$('#baAfter').style.clipPath=`inset(0 0 0 ${pct}%)`;$('#baHandle').style.left=pct+'%'}
+let drag=false;const baEl=$('#ba');
+const baMove=e=>{if(!drag)return;const r=baEl.getBoundingClientRect(),x=(e.touches?e.touches[0].clientX:e.clientX);baSet((x-r.left)/r.width*100)};
+baEl.addEventListener('mousedown',e=>{drag=true;baMove(e)});addEventListener('mouseup',()=>drag=false);addEventListener('mousemove',baMove);
+baEl.addEventListener('touchstart',e=>{drag=true;baMove(e)},{passive:true});addEventListener('touchend',()=>drag=false);addEventListener('touchmove',baMove,{passive:true});
+
+/* ---------- FENCE STYLES ---------- */
+const STY=[
+ {id:'wood',  name:'Timber paling',  lo:110,hi:170,desc:'Classic treated-pine paling with a cap rail. The Melbourne backyard standard.',priv:5,up:3,life:'15+ yrs',best:'Backyards, side boundaries, privacy.'},
+ {id:'cb',    name:'Colorbond',      lo:130,hi:210,desc:'Steel panels in a range of colours. Tough, straight and nearly maintenance-free.',priv:5,up:5,life:'30+ yrs',best:'Low upkeep, bushfire areas, clean modern look.'},
+ {id:'vinyl', name:'Vinyl & picket', lo:150,hi:240,desc:'Bright white panels that never need painting. Great kerb appeal out the front.',priv:4,up:5,life:'25+ yrs',best:'Front fences, kerb appeal.'},
+ {id:'rail',  name:'Post & rail',    lo:70, hi:120,desc:'Open black rails that frame the property without closing it off.',priv:1,up:4,life:'20+ yrs',best:'Acreage, driveways, boundaries.'},
+ {id:'chain', name:'Chain wire',     lo:55, hi:95, desc:'Tough, affordable, and keeps the view. Black vinyl-coated options disappear against the lawn.',priv:1,up:4,life:'20+ yrs',best:'Kids and pets on a budget, big runs, side yards.'}
+];
+let cur=STY[0],estCur=STY[0];
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-AU');
+const meter=(el,n)=>{el.innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')};
+function pickRender(){
+  $('#pickSv').style.opacity=0;
+  setTimeout(()=>{$('#pickSv').innerHTML=sceneFence(cur.id);$('#pickSv').style.opacity=1},160);
+  $('#fName').textContent=cur.name;$('#fPrice').textContent=`$${cur.lo}–${cur.hi}`;$('#fDesc').textContent=cur.desc;
+  meter($('#mPriv'),cur.priv);meter($('#mUp'),cur.up);$('#mLife').textContent=cur.life;$('#fBest').innerHTML='<b>Best for:</b> '+cur.best;
+  document.querySelectorAll('#pickPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===cur.id));
+}
+$('#pickPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
+$('#pickPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;cur=STY.find(s=>s.id===b.dataset.id);pickRender()};
+$('#pickSv').innerHTML=sceneFence(cur.id);pickRender();
+
+/* ---------- ESTIMATOR ---------- */
+let gates=1;
+$('#estPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
+function est(){
+  const L=+$('#len').value,s=estCur;
+  $('#lenV').textContent=L+' m';$('#gN').textContent=gates;
+  const lo=L*s.lo+gates*450,hi=L*s.hi+gates*900;
+  $('#rK').textContent=`${s.name.toUpperCase()} · 1.8 M`;
+  $('#rBig').textContent=`${fmt(lo)} – ${fmt(hi)}`;
+  $('#rPosts').textContent=Math.ceil(L/2.4)+1;$('#rGates').textContent=gates;$('#rDays').textContent=Math.max(1,Math.ceil(L/30))+(L>30?'–'+Math.ceil(L/30+1):'');
+  $('#rBlurb').textContent=s.best;
+  $('#prev').innerHTML=sceneFence(s.id,false);
+  document.querySelectorAll('#estPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===s.id));
+}
+$('#estPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;estCur=STY.find(s=>s.id===b.dataset.id);est()};
+$('#len').oninput=est;
+$('#gm').onclick=()=>{gates=Math.max(0,gates-1);est()};$('#gp').onclick=()=>{gates=Math.min(6,gates+1);est()};
+$('#priceThis').onclick=()=>{estCur=cur;est();$('#pricing').scrollIntoView({behavior:'smooth'})};
+est();
+
+/* ---------- QUOTE ---------- */
+$('#qType').innerHTML=STY.map(s=>`<option>${s.name}</option>`).join('')+'<option>Retaining wall</option><option>Gate</option><option>Repair</option>';
+$('#qf').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
+  const body=`Name: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nSuburb: ${f.get('suburb')}\nService: ${f.get('type')}\n\n${f.get('msg')}`;
+  location.href='mailto:info@bestfencing.com.au?subject='+encodeURIComponent('Free estimate request')+'&body='+encodeURIComponent(body)});
+
+/* ---------- reveal + scroll ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{heroTick();tick=false})}},{passive:true});
+addEventListener('resize',heroTick);heroTick();
 </script>
 </body>
 </html>
