@@ -105,7 +105,7 @@ h2.serif{font-size:clamp(2.2rem,5vw,3.6rem)}
 .fcard{position:absolute;left:28px;bottom:28px;width:320px;background:rgba(23,25,27,.82);backdrop-filter:blur(14px);color:#fff;border-radius:16px;padding:18px 20px;z-index:3}
 .fcard .t{display:flex;justify-content:space-between;gap:12px}
 .fcard h3{font-family:var(--serif);font-size:1.6rem;line-height:1.05}
-.fcard .pr{text-align:right;font-family:var(--serif);font-size:1.5rem}
+.fcard .pr{white-space:nowrap;text-align:right;font-family:var(--serif);font-size:1.5rem}
 .fcard .pr small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;color:#bbb}
 .fcard p{font-size:.85rem;color:#ddd;margin:8px 0 12px}
 .meters{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;font-size:.58rem;letter-spacing:.14em;color:#aaa}
@@ -117,6 +117,10 @@ h2.serif{font-size:clamp(2.2rem,5vw,3.6rem)}
 .fcard .foot{display:flex;align-items:center;gap:12px}
 .fcard .foot small{color:#999;font-size:.7rem}
 
+.pill.add{background:rgba(255,255,255,.14);color:#fff;border:1px dashed rgba(255,255,255,.5)}
+.pill.add.on{background:var(--gold);color:var(--charcoal);border-style:solid;border-color:var(--gold)}
+.pill.addon small{font-weight:500;opacity:.7;margin-left:6px}
+.pill:disabled{opacity:.4;cursor:not-allowed}
 /* ESTIMATOR */
 .pricing{background:#fff}
 .pr-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;margin-top:40px;align-items:stretch}
@@ -292,6 +296,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
           <div>LIFESPAN<b id="mLife"></b></div>
         </div>
         <div class="best" id="fBest"></div>
+        <div id="pkAdd" style="margin-bottom:14px"><button class="pill add" id="pkLat">+ Add lattice top</button></div>
         <div class="foot"><button class="btn sm" id="priceThis">Price this fence</button><small>*Demo ranges</small></div>
       </div>
     </div>
@@ -311,6 +316,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
         <input type="range" id="len" min="5" max="120" value="45">
         <label>Gates</label>
         <div class="stepper"><button id="gm">&minus;</button><span id="gN">1</span><button id="gp">+</button></div>
+        <label>Add-ons</label><button class="pill addon" id="latBtn">+ Lattice top</button>
       </div>
       <div class="res reveal">
         <div class="k" id="rK"></div>
@@ -479,8 +485,11 @@ baEl.addEventListener('mousedown',e=>{drag=true;baMove(e)});addEventListener('mo
 baEl.addEventListener('touchstart',e=>{drag=true;baMove(e)},{passive:true});addEventListener('touchend',()=>drag=false);addEventListener('touchmove',baMove,{passive:true});
 
 /* ---------- FENCE STYLES ---------- */
+const PH_LAT='images/timber-paling-lattice.jpg';
+let lat=false;const effLat=id=>lat&&id==='wood';
+const LAT_LO=45,LAT_HI=70;
 const PH={wood:'images/timber-paling.jpg',picket:'images/timber-picket.jpg',slat:'images/horizontal-slat.jpg',cb:'images/colorbond.jpg'};
-const photo=(k,pos)=>`<img src="${PH[k]}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos||'center'}">`;
+const photo=k=>`<img src="${effLat(k)?PH_LAT:PH[k]}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover">`;
 const STY=[
  {id:'wood',   name:'Timber paling',   lo:110,hi:170,desc:'Classic treated-pine paling with capped posts. The Melbourne backyard standard.',priv:5,up:3,life:'15+ yrs',best:'Backyards, side boundaries, privacy.'},
  {id:'cb',     name:'Colorbond',       lo:130,hi:210,desc:'Steel panels in a range of colours. Tough, straight and nearly maintenance-free.',priv:5,up:5,life:'30+ yrs',best:'Low upkeep, bushfire areas, clean modern look.'},
@@ -493,11 +502,13 @@ const meter=(el,n)=>{el.innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"
 function pickRender(){
   $('#pickSv').style.opacity=0;
   setTimeout(()=>{$('#pickSv').innerHTML=photo(cur.id);$('#pickSv').style.opacity=1},160);
-  $('#fName').textContent=cur.name;$('#fPrice').textContent=`$${cur.lo}–${cur.hi}`;$('#fDesc').textContent=cur.desc;
+  const el=effLat(cur.id);$('#fName').textContent=cur.name+(el?' + lattice':'');$('#fPrice').textContent=`$${cur.lo+(el?LAT_LO:0)}–${cur.hi+(el?LAT_HI:0)}`;
+  $('#pkAdd').style.display=cur.id==='wood'?'block':'none';$('#pkLat').classList.toggle('on',lat);$('#pkLat').textContent=lat?'✓ Lattice top added':'+ Add lattice top';$('#fDesc').textContent=cur.desc;
   meter($('#mPriv'),cur.priv);meter($('#mUp'),cur.up);$('#mLife').textContent=cur.life;$('#fBest').innerHTML='<b>Best for:</b> '+cur.best;
   document.querySelectorAll('#pickPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===cur.id));
 }
 $('#pickPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
+$('#pkLat').onclick=()=>{lat=!lat;pickRender();est()};
 $('#pickPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;cur=STY.find(s=>s.id===b.dataset.id);pickRender()};
 $('#pickSv').innerHTML=photo(cur.id);pickRender();
 
@@ -507,22 +518,24 @@ $('#estPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.
 function est(){
   const L=+$('#len').value,s=estCur;
   $('#lenV').textContent=L+' m';$('#gN').textContent=gates;
-  const lo=L*s.lo+gates*450,hi=L*s.hi+gates*900;
-  $('#rK').textContent=`${s.name.toUpperCase()} · 1.8 M`;
+  const el=effLat(s.id),lo=L*(s.lo+(el?LAT_LO:0))+gates*450,hi=L*(s.hi+(el?LAT_HI:0))+gates*900;
+  $('#rK').textContent=`${s.name.toUpperCase()}${el?' + LATTICE TOP':''} · 1.8 M`;
+  const lb=$('#latBtn');lb.disabled=s.id!=='wood';lb.classList.toggle('on',el);lb.innerHTML=(el?'✓ Lattice top added':'+ Lattice top')+` <small>+$${LAT_LO}–${LAT_HI}/m · timber paling</small>`;
   $('#rBig').textContent=`${fmt(lo)} – ${fmt(hi)}`;
   $('#rPosts').textContent=Math.ceil(L/2.4)+1;$('#rGates').textContent=gates;$('#rDays').textContent=Math.max(1,Math.ceil(L/30))+(L>30?'–'+Math.ceil(L/30+1):'');
-  $('#rBlurb').textContent=s.best;
+  $('#rBlurb').textContent=el?'Timber paling with a lattice topper: extra height, airflow and a softer finish.':s.best;
   $('#prev').innerHTML=photo(s.id);
   document.querySelectorAll('#estPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===s.id));
 }
 $('#estPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;estCur=STY.find(s=>s.id===b.dataset.id);est()};
 $('#len').oninput=est;
+$('#latBtn').onclick=()=>{lat=!lat;est();pickRender()};
 $('#gm').onclick=()=>{gates=Math.max(0,gates-1);est()};$('#gp').onclick=()=>{gates=Math.min(6,gates+1);est()};
 $('#priceThis').onclick=()=>{estCur=cur;est();$('#pricing').scrollIntoView({behavior:'smooth'})};
 est();
 
 /* ---------- QUOTE ---------- */
-$('#qType').innerHTML=STY.map(s=>`<option>${s.name}</option>`).join('')+'<option>Retaining wall</option><option>Gate</option><option>Repair</option>';
+$('#qType').innerHTML=STY.map(s=>`<option>${s.name}</option>`).join('')+'<option>Timber paling + lattice top</option><option>Retaining wall</option><option>Gate</option><option>Repair</option>';
 $('#qf').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
   const body=`Name: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nSuburb: ${f.get('suburb')}\nService: ${f.get('type')}\n\n${f.get('msg')}`;
   location.href='mailto:info@bestfencing.com.au?subject='+encodeURIComponent('Free estimate request')+'&body='+encodeURIComponent(body)});
