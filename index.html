@@ -89,6 +89,11 @@ h2.serif{font-size:clamp(2.2rem,5vw,3.6rem)}
 .ba{position:relative;aspect-ratio:16/8.6;border-radius:22px;overflow:hidden;user-select:none;touch-action:pan-y;cursor:ew-resize;box-shadow:0 24px 60px rgba(0,0,0,.18)}
 .ba .layer{position:absolute;inset:0}
 .ba .after{clip-path:inset(0 0 0 50%)}
+.ba-row{display:block}
+.ba-row.photo{display:grid;grid-template-columns:1fr 520px;gap:60px;align-items:center}
+.ba-row:not(.photo) .ba-side{display:none}
+.ba.photo{aspect-ratio:3/4}
+@media(max-width:900px){.ba-row.photo{grid-template-columns:1fr;gap:30px}.ba.photo{max-width:520px;width:100%;margin:0 auto}.ba-side{order:2}}
 .ba .lbl{position:absolute;top:16px;background:rgba(0,0,0,.6);color:#fff;font-size:.65rem;letter-spacing:.18em;padding:6px 10px;border-radius:6px;font-weight:700}
 .ba .lbl.l{left:16px}.ba .lbl.r{right:16px;background:var(--gold);color:var(--charcoal)}
 .ba .handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.4)}
@@ -289,13 +294,21 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
   <div class="wrap">
     <div class="dl-head reveal">
       <div><p class="eyebrow">Before &amp; after</p><h2 class="serif">Drag the <em>line.</em></h2></div>
-      <div class="toggle" id="baToggle"><button data-m="new">New install</button><button data-m="repair" class="on">Repair</button></div>
+      <div class="toggle" id="baToggle"><button data-m="new" class="on">Real job</button><button data-m="repair">Storm repair</button></div>
+    </div>
+    <div class="ba-row photo" id="baRow">
+    <div class="ba-side" id="baSide">
+      <p class="eyebrow">Same job, start to finish</p>
+      <h3 class="serif" style="font-size:clamp(2rem,4vw,3rem)">Posts in. <em>Fence done.</em></h3>
+      <p class="lead2">Posts set deep on a concrete sleeper wall, then capped timber paling fixed tight and true. Drag the line to see the difference.</p>
+      <a href="#quote" class="btn">Get a free estimate</a>
     </div>
     <div class="ba reveal" id="ba">
       <div class="layer" id="baBefore"></div>
       <div class="layer after" id="baAfter"></div>
       <span class="lbl l" id="baL">AFTER THE STORM</span><span class="lbl r">BEST FENCING</span>
       <div class="handle" id="baHandle"><i>&#8596;</i></div>
+    </div>
     </div>
   </div>
 </section>
@@ -524,9 +537,10 @@ function heroTick(){
 /* ---------- DRAG THE LINE ---------- */
 const brokenTilt=[0,0,-14,0,11,0,0,0,0,0];
 const ba={repair:{before:()=>sceneFence('wood',false,brokenTilt).replace(/#c97c36/g,'#8d867b').replace(/#9a6a3c/g,'#6f6a60').replace(/#a9733d/g,'#7a746a').replace(/#8a5a2e/g,'#625d54'),after:()=>sceneFence('wood',false),label:'AFTER THE STORM'},
-  new:{before:()=>svg(backdrop(false)+lawn()+stakes()),after:()=>sceneFence('wood',false),label:'BARE YARD'}};
-let baMode='repair';
-function baRender(){$('#baBefore').innerHTML=ba[baMode].before();$('#baAfter').innerHTML=ba[baMode].after();$('#baL').textContent=ba[baMode].label}
+  new:{before:()=>jobImg('images/before-posts.jpg'),after:()=>jobImg('images/after-fence.jpg'),label:'POSTS IN',photo:true}};
+const jobImg=u=>`<img src="${u}" alt="" style="width:100%;height:100%;object-fit:cover">`;
+let baMode='new';
+function baRender(){$('#baBefore').innerHTML=ba[baMode].before();$('#baAfter').innerHTML=ba[baMode].after();$('#baL').textContent=ba[baMode].label;$('#ba').classList.toggle('photo',!!ba[baMode].photo);$('#baRow').classList.toggle('photo',!!ba[baMode].photo)}
 baRender();
 document.querySelectorAll('#baToggle button').forEach(b=>b.onclick=()=>{baMode=b.dataset.m;document.querySelectorAll('#baToggle button').forEach(x=>x.classList.toggle('on',x===b));baRender()});
 function baSet(pct){pct=clamp(pct,2,98);$('#baAfter').style.clipPath=`inset(0 0 0 ${pct}%)`;$('#baHandle').style.left=pct+'%'}
