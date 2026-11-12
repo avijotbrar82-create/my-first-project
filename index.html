@@ -155,6 +155,14 @@ input[type=range]{width:100%;accent-color:var(--gold-dark);margin-top:6px}
 .gal figure:hover img{transform:scale(1.05)}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-weight:700;font-size:.85rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
 @media(max-width:640px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal .g1{grid-column:span 2;grid-row:span 2}.gal .g3{grid-column:span 2}}
+.sub{font-size:clamp(1.6rem,3vw,2.2rem);margin:56px 0 0}
+.gal2{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px}
+.gal2 figure{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;background:#222}
+.gal2 img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gal2 figure:hover img{transform:scale(1.06)}
+.gal2 figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;color:#fff;font-weight:700;font-size:.8rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
+@media(max-width:900px){.gal2{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.gal2{grid-template-columns:1fr 1fr}.gal2 figure:last-child{grid-column:span 2;aspect-ratio:2/1}}
 /* QUOTE */
 .quote{background:var(--charcoal);color:#fff}
 .quote .grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
@@ -341,6 +349,14 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
       <figure class="g2"><img src="images/horizontal-slat.jpg" alt="Horizontal slat fence" loading="lazy"><figcaption>Horizontal slat</figcaption></figure>
       <figure class="g2"><img src="images/timber-picket.jpg" alt="Timber picket fence" loading="lazy"><figcaption>Timber picket</figcaption></figure>
       <figure class="g2"><img src="images/retaining-wall.jpg" alt="Timber retaining wall" loading="lazy"><figcaption>Retaining wall</figcaption></figure>
+    </div>
+    <h3 class="serif sub reveal">Straight from the <em>job site.</em></h3>
+    <div class="gal2 reveal">
+      <figure><img src="images/slat-gate.jpg" alt="Horizontal slat gate" loading="lazy"><figcaption>Slat gate</figcaption></figure>
+      <figure><img src="images/front-fence.jpg" alt="Timber front fence with capped posts" loading="lazy"><figcaption>Front fence</figcaption></figure>
+      <figure><img src="images/slat-panel.jpg" alt="Horizontal slat fence panel" loading="lazy"><figcaption>Slat panel</figcaption></figure>
+      <figure><img src="images/lattice-panel.jpg" alt="Timber lattice panel" loading="lazy"><figcaption>Lattice panel</figcaption></figure>
+      <figure><img src="images/new-build-fence.jpg" alt="New build timber paling fence" loading="lazy"><figcaption>New build paling</figcaption></figure>
     </div>
   </div>
 </section>
