@@ -47,9 +47,9 @@ svg{display:block;width:100%;height:100%}
 /* HERO (scroll-scrubbed build) */
 .hero{height:520vh;position:relative}
 .hero .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a2a12}
-.hero .stick>svg,#heroSvg{position:absolute;inset:0}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;background:#2d4a1e}
 .hero::after{content:"";position:absolute}
-.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 55%,rgba(0,0,0,.55));pointer-events:none}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 28%,rgba(0,0,0,.15) 45%,rgba(0,0,0,.72));pointer-events:none}
 .card-day{position:absolute;left:28px;top:96px;width:290px;background:rgba(23,25,27,.58);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.15);
   color:#fff;border-radius:16px;padding:16px 18px}
 .card-day .top{display:flex;justify-content:space-between;align-items:baseline;font-size:.65rem;letter-spacing:.18em;color:#ddd}
@@ -259,8 +259,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
 <!-- HERO: scroll to build the fence -->
 <section class="hero" id="install">
   <div class="stick">
-    <div id="heroSvg"></div>
-    <img id="heroPhoto" src="images/timber-paling.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0">
+    <canvas id="heroCv"></canvas>
     <div class="shade"></div>
     <div class="card-day">
       <div class="top"><span>JOB LOG</span><span><b id="ftN">0</b> m of 45 built</span></div>
@@ -500,16 +499,12 @@ function backdrop(house){
 const svg=(inner,id)=>`<svg ${id?`id="${id}"`:''} viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">${inner}</svg>`;
 function sceneFence(kind,house=true,weather){const p=fenceParts(kind,weather);return svg(backdrop(house)+lawn()+p.boards+p.rails+p.posts+p.cap)}
 
-/* ---------- HERO scroll build ---------- */
-const wp=fenceParts('wood');
-function stakes(){let s='';[[200,840],[420,800],[640,770],[860,745],[1080,725],[1300,705],[1500,690]].forEach(([x,y],i)=>
-  s+=`<rect x="${x}" y="${y-60}" width="7" height="60" fill="#d8c9a0"/><polygon fill="${i%2?'#ffcf2e':'#ff5a3c'}" points="${x+7},${y-60} ${x+44},${y-48} ${x+7},${y-36}"/>`);return s}
-$('#heroSvg').innerHTML=svg(backdrop(true)+lawn()+
- `<g id="gSt">${stakes()}</g>
-  <clipPath id="c1"><rect id="r1" width="0" height="900"/></clipPath><clipPath id="c2"><rect id="r2" width="0" height="900"/></clipPath>
-  <clipPath id="c3"><rect id="r3" width="0" height="900"/></clipPath><clipPath id="c4"><rect id="r4" width="0" height="900"/></clipPath>
-  <g clip-path="url(#c3)">${wp.boards}</g><g clip-path="url(#c2)">${wp.rails}</g><g clip-path="url(#c1)">${wp.posts}</g><g clip-path="url(#c4)">${wp.cap}</g>`);
-if(innerWidth<640){const hs=document.querySelector('#heroSvg svg');hs.setAttribute('preserveAspectRatio','xMidYMid meet');hs.setAttribute('viewBox','0 -140 1600 1180')}
+/* ---------- HERO scroll build (video frames scrubbed by scroll) ---------- */
+const NF=91,frames=new Array(NF),cv=$('#heroCv'),cx=cv.getContext('2d');let hf=0;
+function paint(im){const cw=cv.width,ch=cv.height,k=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h)}
+function draw(i){for(let d=0;d<NF;d++){for(const j of [i-d,i+d]){const im=frames[j];if(im&&im.complete&&im.naturalWidth)return paint(im)}}}
+function fit(){const r=Math.min(devicePixelRatio||1,2);cv.width=cv.clientWidth*r;cv.height=cv.clientHeight*r;draw(hf)}
+for(let i=0;i<NF;i++){const im=new Image();im.onload=()=>{if(Math.abs(i-hf)<2)draw(hf)};im.src='images/hero/f'+String(i+1).padStart(3,'0')+'.webp';frames[i]=im}
 const stages=[
  ['Good fences, <em>built right.</em>','Professional fencing for Melbourne homes and businesses. Scroll to watch one go up.','Day 1'],
  ['Deep, plumb, <em>in concrete.</em>','Every post is set deep and checked plumb before a single rail goes on.','Day 1'],
@@ -525,14 +520,11 @@ function setStage(k){
   steps.forEach((li,i)=>{li.className=i<k?'done':i===k?'on':''});
 }
 function heroTick(){
-  const r=hero.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight));
-  const seg=(a,b)=>clamp((p-a)/(b-a))*1600;
-  $('#r1').setAttribute('width',seg(.12,.38));$('#r2').setAttribute('width',seg(.34,.58));
-  $('#r3').setAttribute('width',seg(.54,.82));$('#r4').setAttribute('width',seg(.8,.97));
-  $('#gSt').style.opacity=1-clamp((p-.1)/.3);
-  $('#ftN').textContent=Math.round(p*45);
-  $('#heroPhoto').style.opacity=clamp((p-.9)/.08);
-  setStage(Math.min(4,Math.floor(p*5)));
+  const r=hero.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight)),v=clamp(p/.85),idx=Math.round(v*(NF-1));
+  if(idx!==hf){hf=idx;draw(hf)}
+  const t=v*15;
+  $('#ftN').textContent=Math.round(v*45);
+  setStage(t<2?0:t<4.8?1:t<7.5?2:t<11.3?3:4);
 }
 
 /* ---------- DRAG THE LINE ---------- */
@@ -617,7 +609,7 @@ $('#qf').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{heroTick();tick=false})}},{passive:true});
-addEventListener('resize',heroTick);heroTick();
+addEventListener('resize',()=>{fit();heroTick()});fit();heroTick();
 </script>
 </body>
 </html>
