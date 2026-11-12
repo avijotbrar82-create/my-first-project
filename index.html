@@ -161,13 +161,13 @@ input[type=range]{width:100%;accent-color:var(--gold-dark);margin-top:6px}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-weight:700;font-size:.85rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
 @media(max-width:640px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal .g1{grid-column:span 2;grid-row:span 2}.gal .g3{grid-column:span 2}}
 .sub{font-size:clamp(1.6rem,3vw,2.2rem);margin:56px 0 0}
-.gal2{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px}
+.gal2{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:22px}
 .gal2 figure{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;background:#222}
 .gal2 img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .gal2 figure:hover img{transform:scale(1.06)}
 .gal2 figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;color:#fff;font-weight:700;font-size:.8rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
 @media(max-width:900px){.gal2{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.gal2{grid-template-columns:1fr 1fr}.gal2 figure:last-child{grid-column:span 2;aspect-ratio:2/1}}
+@media(max-width:640px){.gal2{grid-template-columns:1fr 1fr}}
 .callus{color:#fff;font-weight:700;margin-left:6px;border-bottom:2px solid var(--gold);padding-bottom:2px}
 .about{background:#fff}
 .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
@@ -382,6 +382,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
       <figure><img src="images/slat-panel.jpg" alt="Horizontal slat fence panel" loading="lazy"><figcaption>Slat panel</figcaption></figure>
       <figure><img src="images/lattice-panel.jpg" alt="Timber lattice panel" loading="lazy"><figcaption>Lattice panel</figcaption></figure>
       <figure><img src="images/new-build-fence.jpg" alt="New build timber paling fence" loading="lazy"><figcaption>New build paling</figcaption></figure>
+      <figure><img src="images/decking.jpg" alt="Composite decking beside Colorbond fence" loading="lazy"><figcaption>Decking</figcaption></figure>
     </div>
   </div>
 </section>
@@ -561,7 +562,7 @@ const STY=[
  {id:'picket', name:'Timber picket',   lo:100,hi:160,desc:'Spaced pickets with post caps. Lets light and air through while still marking the boundary.',priv:3,up:3,life:'15+ yrs',best:'Front yards, garden borders, kerb appeal.'},
  {id:'slat',   name:'Horizontal slat', lo:180,hi:280,desc:'Modern horizontal slats in a rich timber finish. A feature fence that lifts the whole yard.',priv:4,up:3,life:'20+ yrs',best:'Feature fences, modern homes, front fencing.'},
  {id:'retain', name:'Retaining wall',  lo:180,hi:320,h:'0.6–1.2 M HIGH',desc:'Treated-timber sleeper walls with steel posts. Level your yard, stop erosion and make usable space on a slope.',priv:1,up:4,life:'20+ yrs',best:'Sloping yards, garden beds, levelling for a new fence.'},
- {id:'deck',   name:'Timber decking',  unit:'m²',lo:250,hi:450,h:'DECKS & STEPS',desc:'Hardwood and treated-pine decks, landings and entry steps, built to suit your home.',priv:1,up:3,life:'15+ yrs',best:'Entry steps, front landings, backyard entertaining.'}
+ {id:'deck',   name:'Decking',         unit:'m²',lo:250,hi:450,h:'DECKS & STEPS',desc:'Timber and composite decks, landings and entry steps, built to suit your home.',priv:1,up:3,life:'15+ yrs',best:'Entry steps, front landings, backyard entertaining.'}
 ];
 let cur=STY[0],estCur=STY[0];
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-AU');
