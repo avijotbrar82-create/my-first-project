@@ -97,6 +97,7 @@ h2.serif{font-size:clamp(2.2rem,5vw,3.6rem)}
 /* PICK YOUR FENCE */
 .pick{position:relative;aspect-ratio:16/9;min-height:520px;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.2);background:#222}
 .pick .sv{position:absolute;inset:0;transition:opacity .4s}
+.pick::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 35%,rgba(0,0,0,.25));pointer-events:none;z-index:2}
 .pick .pills{position:absolute;left:28px;top:84px;display:flex;gap:8px;flex-wrap:wrap;z-index:3;max-width:90%}
 .pick h2{position:absolute;left:28px;top:24px;color:#fff;z-index:3;font-size:clamp(2rem,4vw,3rem);text-shadow:0 2px 20px rgba(0,0,0,.4)}
 .pill{border:0;border-radius:999px;padding:8px 16px;font-size:.82rem;font-weight:700;background:rgba(40,44,48,.78);color:#eee;backdrop-filter:blur(8px)}
@@ -141,6 +142,15 @@ input[type=range]{width:100%;accent-color:var(--gold-dark);margin-top:6px}
 .res .btn{text-align:center;width:100%}
 .res small{display:block;margin-top:14px;font-size:.72rem;color:#8e9296}
 
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:14px;margin-top:34px}
+.gal figure{position:relative;border-radius:16px;overflow:hidden;background:#222}
+.gal .g1{grid-column:span 2;grid-row:span 2}
+.gal .g2{grid-column:span 2}
+.gal .g3{grid-column:span 4}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gal figure:hover img{transform:scale(1.05)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-weight:700;font-size:.85rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
+@media(max-width:640px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal .g1{grid-column:span 2;grid-row:span 2}.gal .g3{grid-column:span 2}}
 /* QUOTE */
 .quote{background:var(--charcoal);color:#fff}
 .quote .grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
@@ -202,6 +212,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
     <li><a href="#styles">Styles</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#repairs">Repairs</a></li>
+    <li><a href="#work">Our Work</a></li>
   </ul>
   <div class="right">
     <a href="#quote" class="btn line sm">Free Estimate</a>
@@ -220,6 +231,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
 <section class="hero" id="install">
   <div class="stick">
     <div id="heroSvg"></div>
+    <img id="heroPhoto" src="images/timber-paling.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0">
     <div class="shade"></div>
     <div class="card-day">
       <div class="top"><span>JOB LOG</span><span><b id="ftN">0</b> m of 45 built</span></div>
@@ -309,6 +321,20 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
         <a href="#quote" class="btn">Lock in a free on-site measure</a>
         <small>Demo pricing. Real quotes come after a free measure: slopes, rock and permits change the number.</small>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="s" id="work">
+  <div class="wrap">
+    <div class="reveal"><p class="eyebrow">Recent work</p><h2 class="serif">Built to <em>last.</em></h2></div>
+    <div class="gal reveal">
+      <figure class="g1"><img src="images/timber-paling.jpg" alt="Timber paling fence" loading="lazy"><figcaption>Timber paling</figcaption></figure>
+      <figure><img src="images/colorbond.jpg" alt="Colorbond fence" loading="lazy"><figcaption>Colorbond</figcaption></figure>
+      <figure><img src="images/lattice-top.jpg" alt="Lattice top timber fence" loading="lazy"><figcaption>Lattice top</figcaption></figure>
+      <figure class="g2"><img src="images/horizontal-slat.jpg" alt="Horizontal slat fence" loading="lazy"><figcaption>Horizontal slat</figcaption></figure>
+      <figure class="g3"><img src="images/timber-picket.jpg" alt="Timber picket fence" loading="lazy"><figcaption>Timber picket</figcaption></figure>
     </div>
   </div>
 </section>
@@ -435,6 +461,7 @@ function heroTick(){
   $('#r3').setAttribute('width',seg(.54,.82));$('#r4').setAttribute('width',seg(.8,.97));
   $('#gSt').style.opacity=1-clamp((p-.1)/.3);
   $('#ftN').textContent=Math.round(p*45);
+  $('#heroPhoto').style.opacity=clamp((p-.9)/.08);
   setStage(Math.min(4,Math.floor(p*5)));
 }
 
@@ -453,26 +480,28 @@ baEl.addEventListener('mousedown',e=>{drag=true;baMove(e)});addEventListener('mo
 baEl.addEventListener('touchstart',e=>{drag=true;baMove(e)},{passive:true});addEventListener('touchend',()=>drag=false);addEventListener('touchmove',baMove,{passive:true});
 
 /* ---------- FENCE STYLES ---------- */
+const PH={wood:'images/timber-paling.jpg',picket:'images/timber-picket.jpg',slat:'images/horizontal-slat.jpg',cb:'images/colorbond.jpg',lattice:'images/lattice-top.jpg'};
+const photo=(k,pos)=>`<img src="${PH[k]}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos||'center'}">`;
 const STY=[
- {id:'wood',  name:'Timber paling',  lo:110,hi:170,desc:'Classic treated-pine paling with a cap rail. The Melbourne backyard standard.',priv:5,up:3,life:'15+ yrs',best:'Backyards, side boundaries, privacy.'},
- {id:'cb',    name:'Colorbond',      lo:130,hi:210,desc:'Steel panels in a range of colours. Tough, straight and nearly maintenance-free.',priv:5,up:5,life:'30+ yrs',best:'Low upkeep, bushfire areas, clean modern look.'},
- {id:'vinyl', name:'Vinyl & picket', lo:150,hi:240,desc:'Bright white panels that never need painting. Great kerb appeal out the front.',priv:4,up:5,life:'25+ yrs',best:'Front fences, kerb appeal.'},
- {id:'rail',  name:'Post & rail',    lo:70, hi:120,desc:'Open black rails that frame the property without closing it off.',priv:1,up:4,life:'20+ yrs',best:'Acreage, driveways, boundaries.'},
- {id:'chain', name:'Chain wire',     lo:55, hi:95, desc:'Tough, affordable, and keeps the view. Black vinyl-coated options disappear against the lawn.',priv:1,up:4,life:'20+ yrs',best:'Kids and pets on a budget, big runs, side yards.'}
+ {id:'wood',   name:'Timber paling',   lo:110,hi:170,desc:'Classic treated-pine paling with capped posts. The Melbourne backyard standard.',priv:5,up:3,life:'15+ yrs',best:'Backyards, side boundaries, privacy.'},
+ {id:'cb',     name:'Colorbond',       lo:130,hi:210,desc:'Steel panels in a range of colours. Tough, straight and nearly maintenance-free.',priv:5,up:5,life:'30+ yrs',best:'Low upkeep, bushfire areas, clean modern look.'},
+ {id:'picket', name:'Timber picket',   lo:100,hi:160,desc:'Spaced pickets with post caps. Lets light and air through while still marking the boundary.',priv:3,up:3,life:'15+ yrs',best:'Front yards, garden borders, kerb appeal.'},
+ {id:'slat',   name:'Horizontal slat', lo:180,hi:280,desc:'Modern horizontal slats in a rich timber finish. A feature fence that lifts the whole yard.',priv:4,up:3,life:'20+ yrs',best:'Feature fences, modern homes, front fencing.'},
+ {id:'lattice',name:'Lattice top',     lo:150,hi:230,desc:'Timber paling with a lattice topper for height, airflow and a softer finish.',priv:4,up:3,life:'15+ yrs',best:'Raising a boundary, neighbours overlooking, retaining.'}
 ];
 let cur=STY[0],estCur=STY[0];
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-AU');
 const meter=(el,n)=>{el.innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')};
 function pickRender(){
   $('#pickSv').style.opacity=0;
-  setTimeout(()=>{$('#pickSv').innerHTML=sceneFence(cur.id);$('#pickSv').style.opacity=1},160);
+  setTimeout(()=>{$('#pickSv').innerHTML=photo(cur.id);$('#pickSv').style.opacity=1},160);
   $('#fName').textContent=cur.name;$('#fPrice').textContent=`$${cur.lo}–${cur.hi}`;$('#fDesc').textContent=cur.desc;
   meter($('#mPriv'),cur.priv);meter($('#mUp'),cur.up);$('#mLife').textContent=cur.life;$('#fBest').innerHTML='<b>Best for:</b> '+cur.best;
   document.querySelectorAll('#pickPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===cur.id));
 }
 $('#pickPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
 $('#pickPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;cur=STY.find(s=>s.id===b.dataset.id);pickRender()};
-$('#pickSv').innerHTML=sceneFence(cur.id);pickRender();
+$('#pickSv').innerHTML=photo(cur.id);pickRender();
 
 /* ---------- ESTIMATOR ---------- */
 let gates=1;
@@ -485,7 +514,7 @@ function est(){
   $('#rBig').textContent=`${fmt(lo)} – ${fmt(hi)}`;
   $('#rPosts').textContent=Math.ceil(L/2.4)+1;$('#rGates').textContent=gates;$('#rDays').textContent=Math.max(1,Math.ceil(L/30))+(L>30?'–'+Math.ceil(L/30+1):'');
   $('#rBlurb').textContent=s.best;
-  $('#prev').innerHTML=sceneFence(s.id,false);
+  $('#prev').innerHTML=photo(s.id);
   document.querySelectorAll('#estPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===s.id));
 }
 $('#estPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;estCur=STY.find(s=>s.id===b.dataset.id);est()};
