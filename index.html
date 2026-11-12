@@ -331,8 +331,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
     <div class="reveal"><p class="eyebrow">Recent work</p><h2 class="serif">Built to <em>last.</em></h2></div>
     <div class="gal reveal">
       <figure class="g1"><img src="images/timber-paling.jpg" alt="Timber paling fence" loading="lazy"><figcaption>Timber paling</figcaption></figure>
-      <figure><img src="images/colorbond.jpg" alt="Colorbond fence" loading="lazy"><figcaption>Colorbond</figcaption></figure>
-      <figure><img src="images/lattice-top.jpg" alt="Lattice top timber fence" loading="lazy"><figcaption>Lattice top</figcaption></figure>
+      <figure class="g2"><img src="images/colorbond.jpg" alt="Colorbond fence" loading="lazy"><figcaption>Colorbond</figcaption></figure>
       <figure class="g2"><img src="images/horizontal-slat.jpg" alt="Horizontal slat fence" loading="lazy"><figcaption>Horizontal slat</figcaption></figure>
       <figure class="g3"><img src="images/timber-picket.jpg" alt="Timber picket fence" loading="lazy"><figcaption>Timber picket</figcaption></figure>
     </div>
@@ -480,14 +479,13 @@ baEl.addEventListener('mousedown',e=>{drag=true;baMove(e)});addEventListener('mo
 baEl.addEventListener('touchstart',e=>{drag=true;baMove(e)},{passive:true});addEventListener('touchend',()=>drag=false);addEventListener('touchmove',baMove,{passive:true});
 
 /* ---------- FENCE STYLES ---------- */
-const PH={wood:'images/timber-paling.jpg',picket:'images/timber-picket.jpg',slat:'images/horizontal-slat.jpg',cb:'images/colorbond.jpg',lattice:'images/lattice-top.jpg'};
+const PH={wood:'images/timber-paling.jpg',picket:'images/timber-picket.jpg',slat:'images/horizontal-slat.jpg',cb:'images/colorbond.jpg'};
 const photo=(k,pos)=>`<img src="${PH[k]}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${pos||'center'}">`;
 const STY=[
  {id:'wood',   name:'Timber paling',   lo:110,hi:170,desc:'Classic treated-pine paling with capped posts. The Melbourne backyard standard.',priv:5,up:3,life:'15+ yrs',best:'Backyards, side boundaries, privacy.'},
  {id:'cb',     name:'Colorbond',       lo:130,hi:210,desc:'Steel panels in a range of colours. Tough, straight and nearly maintenance-free.',priv:5,up:5,life:'30+ yrs',best:'Low upkeep, bushfire areas, clean modern look.'},
  {id:'picket', name:'Timber picket',   lo:100,hi:160,desc:'Spaced pickets with post caps. Lets light and air through while still marking the boundary.',priv:3,up:3,life:'15+ yrs',best:'Front yards, garden borders, kerb appeal.'},
- {id:'slat',   name:'Horizontal slat', lo:180,hi:280,desc:'Modern horizontal slats in a rich timber finish. A feature fence that lifts the whole yard.',priv:4,up:3,life:'20+ yrs',best:'Feature fences, modern homes, front fencing.'},
- {id:'lattice',name:'Lattice top',     lo:150,hi:230,desc:'Timber paling with a lattice topper for height, airflow and a softer finish.',priv:4,up:3,life:'15+ yrs',best:'Raising a boundary, neighbours overlooking, retaining.'}
+ {id:'slat',   name:'Horizontal slat', lo:180,hi:280,desc:'Modern horizontal slats in a rich timber finish. A feature fence that lifts the whole yard.',priv:4,up:3,life:'20+ yrs',best:'Feature fences, modern homes, front fencing.'}
 ];
 let cur=STY[0],estCur=STY[0];
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-AU');
