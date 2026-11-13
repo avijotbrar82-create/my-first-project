@@ -500,11 +500,12 @@ const svg=(inner,id)=>`<svg ${id?`id="${id}"`:''} viewBox="0 0 1600 900" preserv
 function sceneFence(kind,house=true,weather){const p=fenceParts(kind,weather);return svg(backdrop(house)+lawn()+p.boards+p.rails+p.posts+p.cap)}
 
 /* ---------- HERO scroll build (video frames scrubbed by scroll) ---------- */
-const NF=91,frames=new Array(NF),cv=$('#heroCv'),cx=cv.getContext('2d');let hf=0;
-function paint(im){const cw=cv.width,ch=cv.height,k=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h)}
+const NF=151,frames=new Array(NF),cv=$('#heroCv'),cx=cv.getContext('2d');let hf=0;
+function paint(im){cx.imageSmoothingQuality='high';const cw=cv.width,ch=cv.height,k=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h)}
 function draw(i){for(let d=0;d<NF;d++){for(const j of [i-d,i+d]){const im=frames[j];if(im&&im.complete&&im.naturalWidth)return paint(im)}}}
 function fit(){const r=Math.min(devicePixelRatio||1,2);cv.width=cv.clientWidth*r;cv.height=cv.clientHeight*r;draw(hf)}
-for(let i=0;i<NF;i++){const im=new Image();im.onload=()=>{if(Math.abs(i-hf)<2)draw(hf)};im.src='images/hero/f'+String(i+1).padStart(3,'0')+'.webp';frames[i]=im}
+function loadF(i){if(frames[i])return;const im=new Image();im.onload=()=>{if(Math.abs(i-hf)<9)draw(hf)};im.src='images/hero/f'+String(i+1).padStart(3,'0')+'.webp';frames[i]=im}
+loadF(0);for(const st of [8,4,2,1])for(let i=0;i<NF;i+=st)loadF(i);
 const stages=[
  ['Good fences, <em>built right.</em>','Professional fencing for Melbourne homes and businesses. Scroll to watch one go up.','Day 1'],
  ['Deep, plumb, <em>in concrete.</em>','Every post is set deep and checked plumb before a single rail goes on.','Day 1'],
