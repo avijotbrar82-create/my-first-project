@@ -168,7 +168,9 @@ input[type=range]{width:100%;accent-color:var(--gold-dark);margin-top:6px}
 .gal2 figure:hover img{transform:scale(1.06)}
 .gal2 figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;color:#fff;font-weight:700;font-size:.8rem;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
 @media(max-width:900px){.gal2{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.gal2{grid-template-columns:1fr 1fr}}
+.gal2 .wide{grid-column:span 2;aspect-ratio:auto}
+.gal2 .wide img{position:absolute;inset:0}
+@media(max-width:640px){.gal2{grid-template-columns:1fr 1fr}.gal2 .wide{aspect-ratio:2/1}}
 .callus{color:#fff;font-weight:700;margin-left:6px;border-bottom:2px solid var(--gold);padding-bottom:2px}
 .about{background:#fff}
 .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
@@ -398,6 +400,11 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
       <figure><img src="images/lattice-panel.jpg" alt="Timber lattice trellis panel" loading="lazy"><figcaption>Lattice trellis</figcaption></figure>
       <figure><img src="images/new-build-fence.jpg" alt="New build timber paling fence" loading="lazy"><figcaption>New build paling</figcaption></figure>
       <figure><img src="images/decking.jpg" alt="Composite decking beside Colorbond fence" loading="lazy"><figcaption>Decking</figcaption></figure>
+      <figure><img src="images/paling-long-run.jpg" alt="Long run of timber paling fence" loading="lazy"><figcaption>Paling fence</figcaption></figure>
+      <figure><img src="images/paling-on-sleepers.jpg" alt="Paling fence on timber sleeper retaining wall" loading="lazy"><figcaption>Paling on sleepers</figcaption></figure>
+      <figure><img src="images/merbau-on-stone.jpg" alt="Merbau slat fence on stone wall" loading="lazy"><figcaption>Merbau on stone</figcaption></figure>
+      <figure><img src="images/driveway-gates.jpg" alt="Timber driveway gates" loading="lazy"><figcaption>Driveway gates</figcaption></figure>
+      <figure class="wide"><img src="images/merbau-front-fence.jpg" alt="Merbau front fence" loading="lazy"><figcaption>Merbau front fence</figcaption></figure>
     </div>
   </div>
 </section>
