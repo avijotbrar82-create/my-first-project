@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Best Fencing | Quality Fencing Melbourne</title>
-<meta name="description" content="Best Fencing – timber, Colorbond, front fencing and retaining walls for Melbourne homes and businesses. Price your fence in twenty seconds and book a free on-site estimate.">
+<meta name="description" content="Best Fencing – timber, Colorbond, front fencing and retaining walls for Melbourne homes and businesses. Contact Taj for a free on-site quote.">
 <style>
 :root{
   --charcoal:#17191B; --ink:#0f1112; --white:#fff; --gold:#E7AA32; --gold-dark:#c98f1c;
@@ -239,7 +239,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
   <ul id="menu">
     <li><a href="#install">Install</a></li>
     <li><a href="#styles">Styles</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#quote">Quote</a></li>
     <li><a href="#repairs">Repairs</a></li>
     <li><a href="#work">Our Work</a></li>
     <li><a href="#about">About</a></li>
@@ -276,7 +276,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
     <div class="headline">
       <h1 class="serif" id="hTitle">Good fences, <em>built right.</em></h1>
       <p id="hSub">Professional fencing for Melbourne homes and businesses. Scroll to watch one go up.</p>
-      <div class="row"><a href="#pricing" class="btn">Price your fence</a><a href="#quote" class="btn line">Free estimate</a><a href="tel:0425237500" class="callus">Call Taj · 0425 237 500</a></div>
+      <div class="row"><a href="#quote" class="btn">Get a free quote</a><a href="tel:0425237500" class="callus">Call Taj · 0425 237 500</a></div>
     </div>
     <div class="scrollhint">Scroll to build</div>
   </div>
@@ -321,7 +321,7 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
       <h2 class="serif">Pick your <em style="color:var(--gold)">fence.</em></h2>
       <div class="pills" id="pickPills"></div>
       <div class="fcard">
-        <div class="t"><h3 id="fName"></h3><div class="pr"><span id="fPrice"></span><small id="unitLbl">PER METRE INSTALLED*</small></div></div>
+        <div class="t"><h3 id="fName"></h3></div>
         <p id="fDesc"></p>
         <div class="meters">
           <div>PRIVACY<div class="bar" id="mPriv"></div></div>
@@ -330,37 +330,30 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
         </div>
         <div class="best" id="fBest"></div>
         <div id="pkAdd" style="margin-bottom:14px"><button class="pill add" id="pkLat">+ Add lattice top</button></div>
-        <div class="foot"><button class="btn sm" id="priceThis">Price this fence</button><small>*Demo ranges</small></div>
+        <div class="foot"><button class="btn sm" id="priceThis">Get a quote for this</button></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICE IN TWENTY SECONDS -->
-<section class="s pricing" id="pricing">
-  <div class="wrap">
-    <div class="reveal"><p class="eyebrow">Instant ballpark</p><h2 class="serif">Price your fence<br>in <em>twenty seconds.</em></h2></div>
-    <div class="pr-grid">
-      <div class="pr-left reveal">
-        <div class="prev" id="prev"></div>
-        <label>Style</label><div class="pills" id="estPills"></div>
-        <label id="lblLen">Fence length</label>
-        <div class="len"><b id="lenV">45 m</b></div>
-        <input type="range" id="len" min="5" max="120" value="45">
-        <label id="lblGate">Gates</label>
-        <div class="stepper"><button id="gm">&minus;</button><span id="gN">1</span><button id="gp">+</button></div>
-        <label>Add-ons</label><button class="pill addon" id="latBtn">+ Lattice top</button>
-      </div>
-      <div class="res reveal">
-        <div class="k" id="rK"></div>
-        <div class="big" id="rBig"></div>
-        <div class="sub">Typical installed range, materials + labour</div>
-        <div class="stats"><div><b id="rPosts"></b><span id="sPosts">Posts</span></div><div><b id="rGates"></b><span id="sGates">Gates</span></div><div><b id="rDays"></b><span>Days on site</span></div></div>
-        <div class="blurb" id="rBlurb"></div>
-        <a href="#quote" class="btn">Lock in a free on-site measure</a>
-        <small>Demo pricing. Real quotes come after a free measure: slopes, rock and permits change the number.</small>
-      </div>
+<!-- QUOTE -->
+<section class="s quote" id="quote">
+  <div class="wrap grid">
+    <div class="reveal">
+      <h2 class="serif">Let's build your <em>new fence.</em></h2>
+      <p class="lead">Tell us about your yard. We'll measure up on site and give you a written price. No pressure.</p>
+      <div class="contact">Call or text Taj<a href="tel:0425237500">0425 237 500</a><a href="mailto:fence.best@yahoo.com.au" style="font-size:.95rem">fence.best@yahoo.com.au</a></div>
     </div>
+    <form id="qf" class="reveal">
+      <input name="name" placeholder="Your name" required>
+      <input name="phone" type="tel" placeholder="Phone" required>
+      <input name="email" type="email" placeholder="Email" class="full" required>
+      <input name="suburb" placeholder="Suburb" class="full">
+      <select name="type" class="full" id="qType"></select>
+      <textarea name="msg" class="full" placeholder="Length, gates, anything we should know"></textarea>
+      <button class="btn full" type="submit">Request a free estimate</button>
+      <p class="note">Opens your email app with the details filled in.</p>
+    </form>
   </div>
 </section>
 
@@ -406,27 +399,6 @@ footer img{height:56px;filter:invert(1);mix-blend-mode:screen}
       </div>
       <a href="tel:0425237500" class="btn">Call Taj · 0425 237 500</a>
     </div>
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section class="s quote" id="quote">
-  <div class="wrap grid">
-    <div class="reveal">
-      <h2 class="serif">Let's build your <em>new fence.</em></h2>
-      <p class="lead">Tell us about your yard. We'll measure up on site and give you a written price. No pressure.</p>
-      <div class="contact">Call or text Taj<a href="tel:0425237500">0425 237 500</a><a href="mailto:fence.best@yahoo.com.au" style="font-size:.95rem">fence.best@yahoo.com.au</a></div>
-    </div>
-    <form id="qf" class="reveal">
-      <input name="name" placeholder="Your name" required>
-      <input name="phone" type="tel" placeholder="Phone" required>
-      <input name="email" type="email" placeholder="Email" class="full" required>
-      <input name="suburb" placeholder="Suburb" class="full">
-      <select name="type" class="full" id="qType"></select>
-      <textarea name="msg" class="full" placeholder="Length, gates, anything we should know"></textarea>
-      <button class="btn full" type="submit">Request a free estimate</button>
-      <p class="note">Opens your email app with the details filled in.</p>
-    </form>
   </div>
 </section>
 </main>
@@ -558,51 +530,25 @@ const STY=[
  {id:'retain', name:'Retaining wall',  lo:180,hi:320,h:'0.6–1.2 M HIGH',desc:'Treated-timber sleeper walls with steel posts. Level your yard, stop erosion and make usable space on a slope.',priv:1,up:4,life:'20+ yrs',best:'Sloping yards, garden beds, levelling for a new fence.'},
  {id:'deck',   name:'Decking',         unit:'m²',lo:250,hi:450,h:'DECKS & STEPS',desc:'Timber and composite decks, landings and entry steps, built to suit your home.',priv:1,up:3,life:'15+ yrs',best:'Entry steps, front landings, backyard entertaining.'}
 ];
-let cur=STY[0],estCur=STY[0];
+let cur=STY[0];
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-AU');
 const meter=(el,n)=>{el.innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')};
 function pickRender(){
   $('#pickSv').style.opacity=0;
   setTimeout(()=>{$('#pickSv').innerHTML=photo(cur.id);$('#pickSv').style.opacity=1},160);
-  const el=effLat(cur.id);$('#fName').textContent=cur.name+(el?' + lattice':'');$('#fPrice').textContent=`$${cur.lo+(el?LAT_LO:0)}–${cur.hi+(el?LAT_HI:0)}`;$('#unitLbl').textContent=cur.unit==='m²'?'PER M² INSTALLED*':'PER METRE INSTALLED*';
+  const el=effLat(cur.id);$('#fName').textContent=cur.name+(el?' + lattice':'');
   $('#pkAdd').style.display=cur.id==='wood'?'block':'none';$('#pkLat').classList.toggle('on',lat);$('#pkLat').textContent=lat?'✓ Lattice top added':'+ Add lattice top';$('#fDesc').textContent=cur.desc;
   meter($('#mPriv'),cur.priv);meter($('#mUp'),cur.up);$('#mLife').textContent=cur.life;$('#fBest').innerHTML='<b>Best for:</b> '+cur.best;
   document.querySelectorAll('#pickPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===cur.id));
 }
 $('#pickPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
-$('#pkLat').onclick=()=>{lat=!lat;pickRender();est()};
+$('#pkLat').onclick=()=>{lat=!lat;pickRender()};
 $('#pickPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;cur=STY.find(s=>s.id===b.dataset.id);pickRender()};
 $('#pickSv').innerHTML=photo(cur.id);pickRender();
 
-/* ---------- ESTIMATOR ---------- */
-let gates=1;
-$('#estPills').innerHTML=STY.map(s=>`<button class="pill" data-id="${s.id}">${s.name}</button>`).join('');
-let lastDk=false;
-function est(){
-  const s=estCur,dk=s.id==='deck',len=$('#len');
-  if(dk!==lastDk){len.max=dk?80:120;len.value=dk?20:45;lastDk=dk}
-  const L=+len.value;
-  $('#lenV').textContent=L+(dk?' m²':' m');$('#gN').textContent=gates;
-  $('#lblLen').textContent=dk?'Deck area':'Fence length';$('#lblGate').textContent=dk?'Steps':'Gates';
-  $('#sPosts').textContent=dk?'Area':'Posts';$('#sGates').textContent=dk?'Steps':'Gates';
-  const el=effLat(s.id),lo=L*(s.lo+(el?LAT_LO:0))+gates*(dk?300:450),hi=L*(s.hi+(el?LAT_HI:0))+gates*(dk?500:900);
-  $('#rK').textContent=`${s.name.toUpperCase()}${el?' + LATTICE TOP':''} · ${s.h||'1.8 M'}`;
-  const lb=$('#latBtn');lb.disabled=s.id!=='wood';lb.classList.toggle('on',el);lb.innerHTML=(el?'✓ Lattice top added':'+ Lattice top')+` <small>+$${LAT_LO}–${LAT_HI}/m · timber paling</small>`;
-  $('#rBig').textContent=`${fmt(lo)} – ${fmt(hi)}`;
-  $('#rPosts').textContent=dk?L+' m²':Math.ceil(L/2.4)+1;$('#rGates').textContent=gates;{const per=dk?12:30;$('#rDays').textContent=Math.max(1,Math.ceil(L/per))+(L>per?'–'+Math.ceil(L/per+1):'')}
-  $('#rBlurb').textContent=el?'Timber paling with a lattice topper: extra height, airflow and a softer finish.':s.best;
-  $('#prev').innerHTML=photo(s.id);
-  document.querySelectorAll('#estPills .pill').forEach(p=>p.classList.toggle('on',p.dataset.id===s.id));
-}
-$('#estPills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;estCur=STY.find(s=>s.id===b.dataset.id);est()};
-$('#len').oninput=est;
-$('#latBtn').onclick=()=>{lat=!lat;est();pickRender()};
-$('#gm').onclick=()=>{gates=Math.max(0,gates-1);est()};$('#gp').onclick=()=>{gates=Math.min(6,gates+1);est()};
-$('#priceThis').onclick=()=>{estCur=cur;est();$('#pricing').scrollIntoView({behavior:'smooth'})};
-est();
-
 /* ---------- QUOTE ---------- */
 $('#qType').innerHTML=STY.map(s=>`<option>${s.name}</option>`).join('')+'<option>Timber paling + lattice top</option><option>Gate</option><option>Repair</option>';
+$('#priceThis').onclick=()=>{$('#qType').value=effLat(cur.id)?'Timber paling + lattice top':cur.name;$('#quote').scrollIntoView({behavior:'smooth'})};
 $('#qf').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
   const body=`Name: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nSuburb: ${f.get('suburb')}\nService: ${f.get('type')}\n\n${f.get('msg')}`;
   location.href='mailto:fence.best@yahoo.com.au?subject='+encodeURIComponent('Free estimate request')+'&body='+encodeURIComponent(body)});
